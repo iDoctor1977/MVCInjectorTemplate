@@ -39,14 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\ABaseOperator.cs" />
+    <Compile Include="BusinessLayer\DataModel.cs" />
     <Compile Include="BusinessSupplier\BusinessSupplier.cs" />
-    <Compile Include="BusinessLayer\InjectorOperator.cs" />
+    <Compile Include="BusinessLayer\BusinessOperator.cs" />
+    <Compile Include="BusinessInjector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Injector.Common\Injector.Common.csproj">
       <Project>{873301DC-34CD-40B4-B89B-66A5F021FA37}</Project>
       <Name>Injector.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Injector.Data\Injector.Data.csproj">
+      <Project>{dbf8ff8b-15b5-4576-8433-bc3cff1fddba}</Project>
+      <Name>Injector.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

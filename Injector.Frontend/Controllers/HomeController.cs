@@ -6,7 +6,7 @@ namespace Injector.Frontend.Controllers
     {
         public ActionResult Index()
         {
-            string model = businessOperator.InjectorToString();
+            string model = businessOperator.ToStringOperator();
 
             return View(model);
         }
