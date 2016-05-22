@@ -7,7 +7,7 @@ namespace Injector.Business
     {
         public static IDataSupplier GetDataSupplier(IDataSupplier dataSupplier)
         {
-            if (ReferenceEquals(dataSupplier, null))
+            if (dataSupplier == null)
             {
                 return new DataSupplier();
             }

@@ -7,7 +7,7 @@ namespace Injector.Frontend
     {
         public static IBusinessSupplier GetBusinessSupplier(IBusinessSupplier businessSupplier)
         {
-            if (ReferenceEquals(businessSupplier, null))
+            if (businessSupplier == null)
             {
                 return new BusinessSupplier();
             }

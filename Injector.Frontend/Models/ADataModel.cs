@@ -3,7 +3,7 @@ using Injector.Common.IModel;
 
 namespace Injector.Frontend.Models
 {
-    public class AFrontendModel :IDataModel
+    public class ADataModel :IDataModel
     {
         public int Id { get; set; }
 

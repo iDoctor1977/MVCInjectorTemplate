@@ -22,16 +22,19 @@ namespace Injector.Data.DataLayer
         public void AddEntity(IDataEntity entity)
         {
             GetContainer().DataEntities.Add(entity as DataEntity);
+            Commit();
         }
 
         public void EditEntity(IDataEntity entity)
         {
             GetContainer().DataEntities.AddOrUpdate(entity as DataEntity);
+            Commit();
         }
 
         public void DeleteEntity(IDataEntity entity)
         {
             GetContainer().DataEntities.Remove(entity as DataEntity);
+            Commit();
         }
 
         public string ToStringRepository()

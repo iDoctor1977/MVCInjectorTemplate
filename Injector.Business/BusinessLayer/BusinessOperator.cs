@@ -1,4 +1,3 @@
-using System;
 using Injector.Common.IEntity;
 using Injector.Common.IModel;
 using Injector.Common.IOperator;
@@ -31,7 +30,7 @@ namespace Injector.Business.BusinessLayer
             dataRepository.DeleteEntity(entity);
         }
 
-        public String ToStringOperator()
+        public string ToStringOperator()
         {
             return "Welcome in BusinessOperator!";
         }

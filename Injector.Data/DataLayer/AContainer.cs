@@ -4,15 +4,15 @@ namespace Injector.Data.DataLayer
 {
     public abstract class AContainer
     {
-        private static DataDbContext _container;
+        private static DataDbContext container;
 
         public static DataDbContext GetContainer()
         {
-            if (ReferenceEquals(_container, null))
+            if (container == null)
             {
-                _container = new DataDbContext();
+                container = new DataDbContext();
             }
-            return _container;
+            return container;
         }
     }
 }

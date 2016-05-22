@@ -7,6 +7,14 @@ namespace Injector.Business.BusinessLayer
     {
         private IDataSupplier dataSupplier;
 
+        // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
+        // solo nel momento in cui viene espressamente richiesta e non
+        // all'istanziamento della classe che eredita l'astrazione.
+        public IDataRepository dataRepository
+        {
+            get { return dataSupplier.GenerateDataRepository(); }
+        }
+
         protected ABaseOperator()
         {
             dataSupplier = BusinessInjector.GetDataSupplier(null);
@@ -15,14 +23,6 @@ namespace Injector.Business.BusinessLayer
         protected ABaseOperator(IDataSupplier dataSupplier)
         {
             this.dataSupplier = BusinessInjector.GetDataSupplier(dataSupplier);
-        }
-
-        // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
-        // solo nel momento in cui viene espressamente richiesta e non
-        // all'istanziamento della classe che eredita l'astrazione.
-        public IDataRepository dataRepository
-        {
-            get { return dataSupplier.GenerateDataRepository(); }
         }
     }
 }

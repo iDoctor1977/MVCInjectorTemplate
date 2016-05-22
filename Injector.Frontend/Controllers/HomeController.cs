@@ -25,6 +25,7 @@ namespace Injector.Frontend.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             IDataModel model = new FrontendModel
@@ -40,7 +41,7 @@ namespace Injector.Frontend.Controllers
 
             businessOperator.ToStringOperator();
 
-            return View(model);
+            return View(model as FrontendModel);
         }
     }
 }
