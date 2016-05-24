@@ -7,33 +7,33 @@ using Injector.Data.ADOModel;
 
 namespace Injector.Data.DataLayer
 {
-    internal class DataRepository : AContainer, IDataRepository
+    internal class RepositoryA : AContainer, IRepositoryA
     {
         public void Commit()
         {
             GetContainer().SaveChanges();
         }
 
-        public IDataEntity GetEntity(int id)
+        public IEntityA GetEntity(int id)
         {
-            return GetContainer().DataEntities.Single(entity => entity.Id.Equals(id));
+            return GetContainer().EntitiesA.Single(entity => entity.Id.Equals(id));
         }
 
-        public void AddEntity(IDataEntity entity)
+        public void AddEntity(IEntityA entity)
         {
-            GetContainer().DataEntities.Add(entity as DataEntity);
+            GetContainer().EntitiesA.Add(entity as EntityA);
             Commit();
         }
 
-        public void EditEntity(IDataEntity entity)
+        public void EditEntity(IEntityA entity)
         {
-            GetContainer().DataEntities.AddOrUpdate(entity as DataEntity);
+            GetContainer().EntitiesA.AddOrUpdate(entity as EntityA);
             Commit();
         }
 
-        public void DeleteEntity(IDataEntity entity)
+        public void DeleteEntity(IEntityA entity)
         {
-            GetContainer().DataEntities.Remove(entity as DataEntity);
+            GetContainer().EntitiesA.Remove(entity as EntityA);
             Commit();
         }
 
@@ -42,9 +42,9 @@ namespace Injector.Data.DataLayer
             return "Welcome in DataRepository!";
         }
 
-        public IDataEntity ConvertToDataEntity(IDataModel model)
+        public IEntityA ConvertToDataEntity(IModelA model)
         {
-            return new DataEntity
+            return new EntityA
             {
                 Id = model.Id,
                 Name = model.Name,

@@ -4,6 +4,7 @@ namespace Injector.Common.ISupplier
 {
     public interface IBusinessSupplier
     {
-        IBusinessOperator GenerateBusinessOperator();
+        IOperatorA GenerateOperatorA();
+        IOperatorB GenerateOperatorB();
     }
 }

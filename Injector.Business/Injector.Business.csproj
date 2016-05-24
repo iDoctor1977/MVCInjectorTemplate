@@ -40,9 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\ABaseOperator.cs" />
-    <Compile Include="BusinessLayer\DataModel.cs" />
+    <Compile Include="BusinessLayer\ModelB.cs" />
+    <Compile Include="BusinessLayer\ModelA.cs" />
+    <Compile Include="BusinessLayer\OperatorB.cs" />
     <Compile Include="BusinessSupplier\BusinessSupplier.cs" />
-    <Compile Include="BusinessLayer\BusinessOperator.cs" />
+    <Compile Include="BusinessLayer\OperatorA.cs" />
     <Compile Include="BusinessInjector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

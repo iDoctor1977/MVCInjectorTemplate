@@ -112,13 +112,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ABaseController.cs" />
+    <Compile Include="Controllers\ControllerB.cs" />
+    <Compile Include="Controllers\ControllerA.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="FrontendInjector.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AFrontendModel.cs" />
-    <Compile Include="Models\FrontendModel.cs" />
+    <Compile Include="Models\ViewModelsA\AViewModelA.cs" />
+    <Compile Include="Models\ViewModelsA\ControllerViewModelA.cs" />
+    <Compile Include="Models\ViewModelsB\AViewModelB.cs" />
+    <Compile Include="Models\ViewModelsB\ControllerViewModelB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +165,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\ControllerB\TestB.cshtml" />
+    <Content Include="Views\ControllerA\TestA.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

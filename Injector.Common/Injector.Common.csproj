@@ -39,12 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEntity\IDataEntity.cs" />
-    <Compile Include="IRepository\IDataRepository.cs" />
+    <Compile Include="IEntity\IEntityB.cs" />
+    <Compile Include="IEntity\IEntityA.cs" />
+    <Compile Include="IModel\IModelB.cs" />
+    <Compile Include="IOperator\IOperatorB.cs" />
+    <Compile Include="IRepository\IRepositoryB.cs" />
+    <Compile Include="IRepository\IRepositoryA.cs" />
     <Compile Include="ISupplier\IDataSupplier.cs" />
-    <Compile Include="IModel\IDataModel.cs" />
+    <Compile Include="IModel\IModelA.cs" />
     <Compile Include="ISupplier\IBusinessSupplier.cs" />
-    <Compile Include="IOperator\IBusinessOperator.cs" />
+    <Compile Include="IOperator\IOperatorA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

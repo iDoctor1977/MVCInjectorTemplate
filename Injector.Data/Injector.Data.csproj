@@ -49,9 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADOModel\DataDbContext.cs" />
-    <Compile Include="ADOModel\DataEntity.cs" />
+    <Compile Include="ADOModel\EntityB.cs" />
+    <Compile Include="ADOModel\EntityA.cs" />
     <Compile Include="DataLayer\AContainer.cs" />
-    <Compile Include="DataLayer\DataRepository.cs" />
+    <Compile Include="DataLayer\RepositoryB.cs" />
+    <Compile Include="DataLayer\RepositoryA.cs" />
     <Compile Include="DataSupplier\DataSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

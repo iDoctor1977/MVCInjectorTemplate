@@ -2,7 +2,7 @@
 
 namespace Injector.Business.BusinessLayer
 {
-    class DataModel : IDataModel
+    class ModelA : IModelA
     {
         public int Id { get; set; }
         public string Name { get; set; }
