@@ -6,7 +6,7 @@ namespace Injector.Frontend.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("TestA", "A");
         }
 
         public ActionResult About()

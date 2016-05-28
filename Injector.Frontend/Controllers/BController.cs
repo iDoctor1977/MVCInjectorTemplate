@@ -3,7 +3,7 @@ using Injector.Frontend.Models.ViewModelsB;
 
 namespace Injector.Frontend.Controllers
 {
-    public class ControllerB : ABaseController
+    public class BController : ABaseController
     {
         public ActionResult Index()
         {

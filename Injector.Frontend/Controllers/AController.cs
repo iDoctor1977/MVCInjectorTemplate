@@ -3,14 +3,13 @@ using Injector.Frontend.Models.ViewModelsA;
 
 namespace Injector.Frontend.Controllers
 {
-    public class ControllerA : ABaseController
+    public class AController : ABaseController
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
         public ActionResult TestA()
         {
             ControllerViewModelA model = new ControllerViewModelA
