@@ -1,6 +1,6 @@
-namespace Injector.Common.IEntity
+﻿namespace Injector.Common.IModel
 {
-    public interface IDataEntity
+    public interface IModelA
     {
         int Id { get; set; }
         string Name { get; set; }

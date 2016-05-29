@@ -1,14 +1,12 @@
 ﻿using System.Web.Mvc;
-using Injector.Common.IModel;
-using Injector.Frontend.Models;
 
 namespace Injector.Frontend.Controllers
 {
-    public class HomeController : ABaseController
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("TestA", "A");
         }
 
         public ActionResult About()
@@ -23,25 +21,6 @@ namespace Injector.Frontend.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            IDataModel model = new FrontendModel
-            {
-                Id = 1,
-                Name = "Filippo",
-                Surname = "Foglia",
-                Username = "IDoctor"
-            };
-
-            businessOperator.AddModel(model);
-            model = businessOperator.GetModel(1);
-
-            businessOperator.ToStringOperator();
-
-            return View(model as FrontendModel);
         }
     }
 }

@@ -3,7 +3,7 @@ using Injector.Common.IEntity;
 
 namespace Injector.Data.ADOModel
 {
-    public class DataEntity : IDataEntity
+    public class EntityA : IEntityA
     {
         [Key]
         public int Id { get; set; }

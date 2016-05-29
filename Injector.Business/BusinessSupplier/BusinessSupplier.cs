@@ -6,11 +6,17 @@ namespace Injector.Business.BusinessSupplier
 {
     public class BusinessSupplier : IBusinessSupplier
     {
-        private IBusinessOperator businessOperator;
+        private IOperatorA operatorA;
+        private IOperatorB operatorB;
 
-        public IBusinessOperator GenerateBusinessOperator()
+        public IOperatorA GenerateOperatorA()
         {
-            return businessOperator ?? (businessOperator = new BusinessOperator());
+            return operatorA ?? (operatorA = new OperatorA());
+        }
+
+        public IOperatorB GenerateOperatorB()
+        {
+            return operatorB ?? (operatorB = new OperatorB());
         }
     }
 }

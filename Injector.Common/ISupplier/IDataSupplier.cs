@@ -4,6 +4,7 @@ namespace Injector.Common.ISupplier
 {
     public interface IDataSupplier
     {
-        IDataRepository GenerateDataRepository();
+        IRepositoryA GenerateRepositoryA();
+        IRepositoryB GenerateRepositoryB();
     }
 }

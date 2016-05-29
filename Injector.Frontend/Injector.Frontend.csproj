@@ -39,10 +39,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -112,13 +122,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ABaseController.cs" />
+    <Compile Include="Controllers\BController.cs" />
+    <Compile Include="Controllers\AController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="FrontendInjector.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AFrontendModel.cs" />
-    <Compile Include="Models\FrontendModel.cs" />
+    <Compile Include="Models\ViewModelsA\AViewModelA.cs" />
+    <Compile Include="Models\ViewModelsA\ControllerViewModelA.cs" />
+    <Compile Include="Models\ViewModelsB\AViewModelB.cs" />
+    <Compile Include="Models\ViewModelsB\ControllerViewModelB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +175,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\ControllerB\TestB.cshtml" />
+    <Content Include="Views\ControllerA\TestA.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

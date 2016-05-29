@@ -10,9 +10,13 @@ namespace Injector.Business.BusinessLayer
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
         // all'istanziamento della classe che eredita l'astrazione.
-        public IDataRepository dataRepository
+        public IRepositoryA repositoryA
         {
-            get { return dataSupplier.GenerateDataRepository(); }
+            get { return dataSupplier.GenerateRepositoryA(); }
+        }
+        public IRepositoryB repositoryB
+        {
+            get { return dataSupplier.GenerateRepositoryB(); }
         }
 
         protected ABaseOperator()

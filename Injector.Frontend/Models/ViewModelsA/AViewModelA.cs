@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Injector.Common.IModel;
 
-namespace Injector.Frontend.Models
+namespace Injector.Frontend.Models.ViewModelsA
 {
-    public class ADataModel :IDataModel
+    public class AViewModelA : IModelA
     {
         public int Id { get; set; }
 

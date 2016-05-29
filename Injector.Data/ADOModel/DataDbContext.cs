@@ -4,8 +4,16 @@ namespace Injector.Data.ADOModel
 {
     public class DataDbContext : DbContext
     {
-        public DataDbContext() : base("name=InjectorUnitContainer") { }
+        public DataDbContext() : base("name=InjectorContainer") { }
 
-        public DbSet<DataEntity> DataEntities { get; set; }
+        public DbSet<EntityA> EntitiesA { get; set; }
+        public DbSet<EntityB> EntitiesB { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EntityA>().ToTable("EntitiesA");
+            modelBuilder.Entity<EntityB>().ToTable("EntitiesB");
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

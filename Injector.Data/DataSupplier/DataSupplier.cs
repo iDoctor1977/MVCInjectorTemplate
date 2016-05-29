@@ -6,11 +6,17 @@ namespace Injector.Data.DataSupplier
 {
     public class DataSupplier : IDataSupplier
     {
-        private IDataRepository dataRepository;
+        private IRepositoryA RepositoryA;
+        private IRepositoryB RepositoryB;
 
-        public IDataRepository GenerateDataRepository()
+        public IRepositoryA GenerateRepositoryA()
         {
-            return dataRepository ?? (dataRepository = new DataRepository());
+            return RepositoryA ?? (RepositoryA = new RepositoryA());
+        }
+
+        public IRepositoryB GenerateRepositoryB()
+        {
+            return RepositoryB ?? (RepositoryB = new RepositoryB());
         }
     }
 }
