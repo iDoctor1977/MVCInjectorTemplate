@@ -124,15 +124,15 @@
     <Compile Include="Controllers\ABaseController.cs" />
     <Compile Include="Controllers\BController.cs" />
     <Compile Include="Controllers\AController.cs" />
+    <Compile Include="FrontendStore.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="FrontendInjector.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModelsA\AViewModelA.cs" />
-    <Compile Include="Models\ViewModelsA\ControllerViewModelA.cs" />
+    <Compile Include="Models\ViewModelsA\CreateViewModelA.cs" />
     <Compile Include="Models\ViewModelsB\AViewModelB.cs" />
-    <Compile Include="Models\ViewModelsB\ControllerViewModelB.cs" />
+    <Compile Include="Models\ViewModelsB\CreateViewModelB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +176,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\ControllerB\TestB.cshtml" />
-    <Content Include="Views\ControllerA\TestA.cshtml" />
+    <Content Include="Views\A\Create.cshtml" />
+    <Content Include="Views\A\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

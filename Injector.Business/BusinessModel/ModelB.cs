@@ -1,6 +1,6 @@
-﻿using Injector.Common.IModel;
+using Injector.Common.IModel;
 
-namespace Injector.Business.BusinessLayer
+namespace Injector.Business.BusinessModel
 {
     class ModelB : IModelB
     {

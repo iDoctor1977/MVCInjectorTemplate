@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Common", "Injector
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Data", "Injector.Data\Injector.Data.csproj", "{DBF8FF8B-15B5-4576-8433-BC3CFF1FDDBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InjectorUnitTest", "InjectorUnitTest\InjectorUnitTest.csproj", "{0D511ACA-1024-490D-B3A8-218D3426684F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DBF8FF8B-15B5-4576-8433-BC3CFF1FDDBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBF8FF8B-15B5-4576-8433-BC3CFF1FDDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF8FF8B-15B5-4576-8433-BC3CFF1FDDBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D511ACA-1024-490D-B3A8-218D3426684F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D511ACA-1024-490D-B3A8-218D3426684F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D511ACA-1024-490D-B3A8-218D3426684F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D511ACA-1024-490D-B3A8-218D3426684F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,11 +2,11 @@
 
 namespace Injector.Frontend.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ABaseController
     {
         public ActionResult Index()
         {
-            return RedirectToAction("TestA", "A");
+            return RedirectToAction("Create", "A");
         }
 
         public ActionResult About()

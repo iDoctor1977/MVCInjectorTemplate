@@ -1,7 +1,7 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Injector.Common.IEntity;
-using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Data.ADOModel;
 
@@ -9,47 +9,63 @@ namespace Injector.Data.DataLayer
 {
     internal class RepositoryA : AContainer, IRepositoryA
     {
+        public IEntityA ReadEntity(int IdA)
+        {
+            EntityA entityA = GetContainer().EntitiesA.Single(item => item.Id.Equals(IdA));
+            return entityA;
+        }
+
+        public IEntityA ReadEntityByName(string name)
+        {
+            EntityA entityA = GetContainer().EntitiesA.Single(item => item.Name.Equals(name));
+            return entityA;
+        }
+
+        public void CreateEntity(IEntityA entityA)
+        {
+            GetContainer().EntitiesA.Add(mappingEntityA(entityA));
+            Commit();
+        }
+
+        public void UpdateEntity(IEntityA entityA)
+        {
+            GetContainer().EntitiesA.AddOrUpdate(mappingEntityA(entityA));
+            Commit();
+        }
+
+        public void DeleteEntity(IEntityA entityA)
+        {
+            GetContainer().EntitiesA.Remove(mappingEntityA(entityA));
+            Commit();
+        }
+
         public void Commit()
         {
             GetContainer().SaveChanges();
-        }
-
-        public IEntityA GetEntity(int id)
-        {
-            return GetContainer().EntitiesA.Single(entity => entity.Id.Equals(id));
-        }
-
-        public void AddEntity(IEntityA entity)
-        {
-            GetContainer().EntitiesA.Add(entity as EntityA);
-            Commit();
-        }
-
-        public void EditEntity(IEntityA entity)
-        {
-            GetContainer().EntitiesA.AddOrUpdate(entity as EntityA);
-            Commit();
-        }
-
-        public void DeleteEntity(IEntityA entity)
-        {
-            GetContainer().EntitiesA.Remove(entity as EntityA);
-            Commit();
         }
 
         public string ToStringRepository()
         {
             return "Welcome in DataRepository!";
         }
-
-        public IEntityA ConvertToDataEntity(IModelA model)
+         
+        public IEntityA GetConcreteEntityA()
         {
-            return new EntityA
+            return new EntityA();
+        }
+
+        private EntityA mappingEntityA(IEntityA entityA)
+        {
+            if (GetContainer().Entry(entityA).State != EntityState.Detached)
             {
-                Id = model.Id,
-                Name = model.Name,
-                Surname = model.Surname
-            };
+                return new EntityA
+                {
+                    Id = entityA.Id,
+                    Name = entityA.Name,
+                    Surname = entityA.Surname,
+                };
+            }
+            return entityA as EntityA;
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Injector.Common.IRepository;
 using Injector.Common.ISupplier;
+using Injector.Data.DataSupplier;
 
 namespace Injector.Business.BusinessLayer
 {
     public abstract class ABaseOperator
     {
-        private IDataSupplier dataSupplier;
+        private readonly IDataSupplier dataSupplier;
 
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
@@ -21,12 +22,12 @@ namespace Injector.Business.BusinessLayer
 
         protected ABaseOperator()
         {
-            dataSupplier = BusinessInjector.GetDataSupplier(null);
+            dataSupplier = new DataSupplier();
         }
 
         protected ABaseOperator(IDataSupplier dataSupplier)
         {
-            this.dataSupplier = BusinessInjector.GetDataSupplier(dataSupplier);
+            this.dataSupplier = dataSupplier;
         }
     }
 }

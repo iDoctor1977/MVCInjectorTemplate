@@ -12,7 +12,7 @@ namespace Injector.Frontend.Models.ViewModelsB
         public string Username { get; set; }
 
         [Display(Name = "Email")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 }

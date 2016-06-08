@@ -11,6 +11,7 @@ namespace Injector.Business.BusinessSupplier
 
         public IOperatorA GenerateOperatorA()
         {
+
             return operatorA ?? (operatorA = new OperatorA());
         }
 

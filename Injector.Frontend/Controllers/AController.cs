@@ -1,33 +1,42 @@
 ﻿using System.Web.Mvc;
 using Injector.Frontend.Models.ViewModelsA;
+using Injector.Frontend.Models.ViewModelsB;
 
 namespace Injector.Frontend.Controllers
 {
     public class AController : ABaseController
     {
+        public AController() { }
+
+        public AController(IFrontendStore frontendStore) : base(frontendStore) { }
+
         public ActionResult Index()
         {
-            return View();
+            CreateViewModelA viewModelA = GetIstanceOfCreateViewModelA;
+            operatorA.CreateModel(viewModelA);
+            viewModelA = (CreateViewModelA) operatorA.ReadModel(1);
+
+            return View(viewModelA);
         }
 
-        public ActionResult TestA()
+        public ActionResult Create(CreateViewModelA model)
         {
-            ControllerViewModelA model = new ControllerViewModelA
-            {
-                Id = 1,
-                Name = "Filippo",
-                Surname = "Foglia",
-                TelNumber = "3315787943",
-                ModelB = operatorB.GetModel(1)
-            };
+            CreateViewModelA viewModelA = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA();
+            viewModelA.Name = "Filippo";
+            viewModelA.Surname = "Foglia";
+            viewModelA.TelNumber = "3315787943";
 
-            operatorA.AddModel(model);
-            model = (ControllerViewModelA) operatorA.GetModel(1);
+            CreateViewModelB viewModelB = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB();
+            viewModelB.Username = "iDoctor";
+            viewModelB.Email = "filippo.foglia@gmail.com";
+            viewModelB.Birth = "18/07/1977";
 
-            operatorA.ToStringOperator();
+            operatorA.CreateModel(viewModelA);
+            operatorB.CreateModel(viewModelB);
 
-            return View(model);
+            viewModelA.ColCreateViewModelB.Add((CreateViewModelB) operatorB.ReadModelByUsername("iDoctor"));
+
+            return View(viewModelA);
         }
-
     }
 }

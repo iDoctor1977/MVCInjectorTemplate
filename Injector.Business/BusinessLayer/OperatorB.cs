@@ -1,32 +1,43 @@
+using Injector.Business.BusinessModel;
 using Injector.Common.IEntity;
 using Injector.Common.IModel;
 using Injector.Common.IOperator;
+using Injector.Common.ISupplier;
 
 namespace Injector.Business.BusinessLayer
 {
     public class OperatorB : ABaseOperator, IOperatorB
     {
-        public IModelB GetModel(int id)
+        public OperatorB() { }
+        public OperatorB(IDataSupplier dataSupplier) : base(dataSupplier) { }
+
+        public IModelB ReadModel(int id)
         {
-            IEntityB entity = repositoryB.GetEntity(id);
-            return ConvertToModelB(entity);
+            IEntityB entity = repositoryB.ReadEntity(id);
+            return ConvertEntityBToModelB(entity);
         }
 
-        public void AddModel(IModelB model)
+        public IModelB ReadModelByUsername(string username)
         {
-            IEntityB entity = repositoryB.ConvertToDataEntity(model);
-            repositoryB.AddEntity(entity);
+            IEntityB entityB = repositoryB.ReadEntityByUsername(username);
+            return ConvertEntityBToModelB(entityB);
         }
 
-        public void EditModel(IModelB model)
+        public void CreateModel(IModelB modelB)
         {
-            IEntityB entity = repositoryB.ConvertToDataEntity(model);
-            repositoryB.EditEntity(entity);
+            IEntityB entity = repositoryB.GetConcreteEntityB();
+            repositoryB.CreateEntity(entity);
         }
 
-        public void DeleteModel(IModelB model)
+        public void UpdateModel(IModelB modelB)
         {
-            IEntityB entity = repositoryB.ConvertToDataEntity(model);
+            IEntityB entity = repositoryB.GetConcreteEntityB();
+            repositoryB.UpdateEntity(entity);
+        }
+
+        public void DeleteModel(IModelB modelB)
+        {
+            IEntityB entity = repositoryB.GetConcreteEntityB();
             repositoryB.DeleteEntity(entity);
         }
 
@@ -35,14 +46,23 @@ namespace Injector.Business.BusinessLayer
             return "Welcome in BusinessOperator!";
         }
 
-        public IModelB ConvertToModelB(IEntityB entity)
+        public IModelB ConvertEntityBToModelB(IEntityB entityB)
         {
-            return new ModelB()
+            return new ModelB
             {
-                Id = entity.Id,
-                Username = entity.Username,
-                Email = entity.Email
+                Id = entityB.Id,
+                Username = entityB.Username,
+                Email = entityB.Email,
             };
+        }
+
+        public IEntityB ConvertModelBToEntityB(IModelB modelB)
+        {
+            IEntityB entityB = repositoryB.GetConcreteEntityB();
+            entityB.Id = modelB.Id;
+            entityB.Username = modelB.Username;
+            entityB.Email = modelB.Email;
+            return entityB;
         }
     }
 }

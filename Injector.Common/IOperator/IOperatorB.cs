@@ -5,11 +5,13 @@ namespace Injector.Common.IOperator
 {
     public interface IOperatorB
     {
-        IModelB GetModel(int id);
-        void AddModel(IModelB model);
-        void EditModel(IModelB model);
-        void DeleteModel(IModelB model);
+        void CreateModel(IModelB modelB);
+        IModelB ReadModel(int id);
+        IModelB ReadModelByUsername(string username);
+        void UpdateModel(IModelB modelB);
+        void DeleteModel(IModelB modelB);
         string ToStringOperator();
-        IModelB ConvertToModelB(IEntityB entity);
+        IModelB ConvertEntityBToModelB(IEntityB entityB);
+        IEntityB ConvertModelBToEntityB(IModelB modelB);
     }
 }

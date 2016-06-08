@@ -1,33 +1,44 @@
 ﻿using System.Web.Mvc;
+using Injector.Common.IModel;
 using Injector.Common.IOperator;
 using Injector.Common.ISupplier;
+using Injector.Frontend.Models.ViewModelsA;
+using Injector.Frontend.Models.ViewModelsB;
 
 namespace Injector.Frontend.Controllers
 {
     public abstract class ABaseController : Controller
     {
-        private IBusinessSupplier businessSupplier;
-
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
         // all'istanziamento della classe che eredita l'astrazione.
         public IOperatorA operatorA
         {
-            get { return businessSupplier.GenerateOperatorA(); }
+            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorA(); }
         }
+
         public IOperatorB operatorB
         {
-            get { return businessSupplier.GenerateOperatorB(); }
+            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorB(); }
         }
 
-        protected ABaseController()
+        public CreateViewModelA GetIstanceOfCreateViewModelA
         {
-            businessSupplier = FrontendInjector.GetBusinessSupplier(null);
+            get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA(); }
         }
 
-        protected ABaseController(IBusinessSupplier businessSupplier)
+        public CreateViewModelB GetIstanceOfCreateViewModelB
         {
-            this.businessSupplier = FrontendInjector.GetBusinessSupplier(businessSupplier);
+            get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB(); }
         }
+
+        protected ABaseController() { }
+
+        protected ABaseController(IFrontendStore frontend)
+        {
+            FrontendStore.InstanceOfFrontendStore = frontend;
+        }
+
+
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Injector.Common.IEntity;
-using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Data.ADOModel;
 
@@ -14,26 +14,33 @@ namespace Injector.Data.DataLayer
             GetContainer().SaveChanges();
         }
 
-        public IEntityB GetEntity(int id)
+        public IEntityB ReadEntity(int id)
         {
-            return GetContainer().EntitiesB.Single(entity => entity.Id.Equals(id));
+            EntityB entityB = GetContainer().EntitiesB.Single(entity => entity.Id.Equals(id));
+            return entityB;
         }
 
-        public void AddEntity(IEntityB entity)
+        public IEntityB ReadEntityByUsername(string username)
         {
-            GetContainer().EntitiesB.Add(entity as EntityB);
+            EntityB entityB = GetContainer().EntitiesB.Single(item => item.Username.Equals(username));
+            return entityB;
+        }
+
+        public void CreateEntity(IEntityB entityB)
+        {
+            GetContainer().EntitiesB.Add(mappingEntityB(entityB));
             Commit();
         }
 
-        public void EditEntity(IEntityB entity)
+        public void UpdateEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.AddOrUpdate(entity as EntityB);
+            GetContainer().EntitiesB.AddOrUpdate(mappingEntityB(entityB));
             Commit();
         }
 
-        public void DeleteEntity(IEntityB entity)
+        public void DeleteEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.Remove(entity as EntityB);
+            GetContainer().EntitiesB.Remove(mappingEntityB(entityB));
             Commit();
         }
 
@@ -42,14 +49,23 @@ namespace Injector.Data.DataLayer
             return "Welcome in DataRepository!";
         }
 
-        public IEntityB ConvertToDataEntity(IModelB model)
+        public IEntityB GetConcreteEntityB()
         {
-            return new EntityB
+            return new EntityB();
+        }
+
+        private EntityB mappingEntityB(IEntityB entityB)
+        {
+            if (GetContainer().Entry(entityB).State != EntityState.Detached)
             {
-                Id = model.Id,
-                Username = model.Username,
-                Email = model.Email
-            };
+                return new EntityB
+                {
+                    Id = entityB.Id,
+                    Username = entityB.Username,
+                    Email = entityB.Email,
+                };
+            }
+            return entityB as EntityB;
         }
     }
 }

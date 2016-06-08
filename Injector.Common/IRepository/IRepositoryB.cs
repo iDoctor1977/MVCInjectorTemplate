@@ -1,16 +1,16 @@
 ﻿using Injector.Common.IEntity;
-using Injector.Common.IModel;
 
 namespace Injector.Common.IRepository
 {
     public interface IRepositoryB
     {
+        IEntityB ReadEntity(int id);
+        IEntityB ReadEntityByUsername(string username);
+        void CreateEntity(IEntityB entityB);
+        void UpdateEntity(IEntityB entityB);
+        void DeleteEntity(IEntityB entityB);
         void Commit();
-        IEntityB GetEntity(int id);
-        void AddEntity(IEntityB entity);
-        void EditEntity(IEntityB entity);
-        void DeleteEntity(IEntityB entity);
+        IEntityB GetConcreteEntityB();
         string ToStringRepository();
-        IEntityB ConvertToDataEntity(IModelB model);
     }
 }
