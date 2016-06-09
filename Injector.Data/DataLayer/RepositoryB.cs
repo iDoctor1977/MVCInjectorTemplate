@@ -14,7 +14,7 @@ namespace Injector.Data.DataLayer
             GetContainer().SaveChanges();
         }
 
-        public IEntityB ReadEntity(int id)
+        public IEntityB ReadEntityById(int id)
         {
             EntityB entityB = GetContainer().EntitiesB.Single(entity => entity.Id.Equals(id));
             return entityB;
@@ -28,19 +28,19 @@ namespace Injector.Data.DataLayer
 
         public void CreateEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.Add(mappingEntityB(entityB));
+            GetContainer().EntitiesB.Add(MappingEntityB(entityB));
             Commit();
         }
 
         public void UpdateEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.AddOrUpdate(mappingEntityB(entityB));
+            GetContainer().EntitiesB.AddOrUpdate(MappingEntityB(entityB));
             Commit();
         }
 
         public void DeleteEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.Remove(mappingEntityB(entityB));
+            GetContainer().EntitiesB.Remove(MappingEntityB(entityB));
             Commit();
         }
 
@@ -54,7 +54,7 @@ namespace Injector.Data.DataLayer
             return new EntityB();
         }
 
-        private EntityB mappingEntityB(IEntityB entityB)
+        private EntityB MappingEntityB(IEntityB entityB)
         {
             if (GetContainer().Entry(entityB).State != EntityState.Detached)
             {

@@ -43,8 +43,9 @@
     <Compile Include="BusinessModel\ModelA.cs" />
     <Compile Include="BusinessModel\ModelB.cs" />
     <Compile Include="BusinessLayer\OperatorB.cs" />
-    <Compile Include="BusinessSupplier\BusinessSupplier.cs" />
+    <Compile Include="BusinessSupplier.cs" />
     <Compile Include="BusinessLayer\OperatorA.cs" />
+    <Compile Include="BusinessStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

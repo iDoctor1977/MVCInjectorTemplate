@@ -1,33 +1,38 @@
-﻿using Injector.Common.IRepository;
-using Injector.Common.ISupplier;
-using Injector.Data.DataSupplier;
+﻿using Injector.Business.BusinessModel;
+using Injector.Common.IRepository;
 
 namespace Injector.Business.BusinessLayer
 {
     public abstract class ABaseOperator
     {
-        private readonly IDataSupplier dataSupplier;
-
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
         // all'istanziamento della classe che eredita l'astrazione.
-        public IRepositoryA repositoryA
+        public IRepositoryA GetIstanceOfRepositoryA
         {
-            get { return dataSupplier.GenerateRepositoryA(); }
-        }
-        public IRepositoryB repositoryB
-        {
-            get { return dataSupplier.GenerateRepositoryB(); }
+            get { return BusinessStore.InstanceOfBusinessStore.GetDataSupplier().GenerateRepositoryA(); }
         }
 
-        protected ABaseOperator()
+        public IRepositoryB GetIstanceOfRepositoryB
         {
-            dataSupplier = new DataSupplier();
+            get { return BusinessStore.InstanceOfBusinessStore.GetDataSupplier().GenerateRepositoryB(); }
         }
 
-        protected ABaseOperator(IDataSupplier dataSupplier)
+        public ModelA GetConcreteModelA
         {
-            this.dataSupplier = dataSupplier;
+            get { return BusinessStore.InstanceOfBusinessStore.GetModelA(); }
+        }
+
+        public ModelB GetConcreteModelB
+        {
+            get { return BusinessStore.InstanceOfBusinessStore.GetModelB(); }
+        }
+
+        protected ABaseOperator() { }
+
+        protected ABaseOperator(IBusinessStore businessStore)
+        {
+            BusinessStore.InstanceOfBusinessStore = businessStore;
         }
     }
 }

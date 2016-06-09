@@ -26,10 +26,10 @@ namespace Injector.Frontend.Controllers
                 Birth = "18/07/1977"
             };
 
-            operatorB.CreateModel(model);
-            model = (CreateViewModelB) operatorB.ReadModel(1);
+            GetIstanceOfOperatorB.CreateModel(model);
+            model = (CreateViewModelB) GetIstanceOfOperatorB.ReadModel(1);
 
-            operatorB.ToStringOperator();
+            GetIstanceOfOperatorB.ToStringOperator();
 
             return View(model);
         }

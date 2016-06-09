@@ -1,4 +1,4 @@
-﻿using Injector.Business.BusinessSupplier;
+﻿using Injector.Business;
 using Injector.Common.ISupplier;
 using Injector.Frontend.Models.ViewModelsA;
 using Injector.Frontend.Models.ViewModelsB;

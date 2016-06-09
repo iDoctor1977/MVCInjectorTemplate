@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
-using Injector.Common.IModel;
 using Injector.Common.IOperator;
-using Injector.Common.ISupplier;
 using Injector.Frontend.Models.ViewModelsA;
 using Injector.Frontend.Models.ViewModelsB;
 
@@ -12,12 +10,12 @@ namespace Injector.Frontend.Controllers
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
         // all'istanziamento della classe che eredita l'astrazione.
-        public IOperatorA operatorA
+        public IOperatorA GetIstanceOfOperatorA
         {
             get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorA(); }
         }
 
-        public IOperatorB operatorB
+        public IOperatorB GetIstanceOfOperatorB
         {
             get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorB(); }
         }

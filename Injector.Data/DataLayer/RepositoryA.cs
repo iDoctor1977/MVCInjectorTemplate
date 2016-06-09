@@ -9,7 +9,7 @@ namespace Injector.Data.DataLayer
 {
     internal class RepositoryA : AContainer, IRepositoryA
     {
-        public IEntityA ReadEntity(int IdA)
+        public IEntityA ReadEntityById(int IdA)
         {
             EntityA entityA = GetContainer().EntitiesA.Single(item => item.Id.Equals(IdA));
             return entityA;
@@ -23,19 +23,19 @@ namespace Injector.Data.DataLayer
 
         public void CreateEntity(IEntityA entityA)
         {
-            GetContainer().EntitiesA.Add(mappingEntityA(entityA));
+            GetContainer().EntitiesA.Add(MappingEntityA(entityA));
             Commit();
         }
 
         public void UpdateEntity(IEntityA entityA)
         {
-            GetContainer().EntitiesA.AddOrUpdate(mappingEntityA(entityA));
+            GetContainer().EntitiesA.AddOrUpdate(MappingEntityA(entityA));
             Commit();
         }
 
         public void DeleteEntity(IEntityA entityA)
         {
-            GetContainer().EntitiesA.Remove(mappingEntityA(entityA));
+            GetContainer().EntitiesA.Remove(MappingEntityA(entityA));
             Commit();
         }
 
@@ -54,7 +54,7 @@ namespace Injector.Data.DataLayer
             return new EntityA();
         }
 
-        private EntityA mappingEntityA(IEntityA entityA)
+        private EntityA MappingEntityA(IEntityA entityA)
         {
             if (GetContainer().Entry(entityA).State != EntityState.Detached)
             {

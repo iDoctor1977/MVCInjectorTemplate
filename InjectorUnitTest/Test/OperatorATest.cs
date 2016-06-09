@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using Injector.Business;
+using Injector.Business.BusinessLayer;
+using Injector.Business.BusinessModel;
 using Injector.Common.IEntity;
 using Injector.Common.IModel;
 using Injector.Common.IOperator;
@@ -16,6 +19,40 @@ namespace InjectorUnitTest.Test
     [TestFixture]
     public class OperatorATest
     {
+        [Test]
+        public void CreateEntityWithValidInput()
+        {
+            IEntityA entityA = new EntityAMock
+            {
+                Id = 1,
+                Name = "Pippo",
+                Surname = "Poppi"
+            };
+
+            IModelA modelA = new ModelA();
+            modelA.Id = 1;
+            modelA.Name = "Pippo";
+            modelA.Surname = "Poppi";
+
+            IRepositoryA repositoryASubstitute = Substitute.For<IRepositoryA>();
+            repositoryASubstitute.CreateEntity(entityA);
+            repositoryASubstitute.ReadEntityById(Arg.Any<int>()).Returns(entityA);
+
+            IDataSupplier dataSupplierSubstitute = Substitute.For<IDataSupplier>();
+            dataSupplierSubstitute.GenerateRepositoryA().Returns(repositoryASubstitute);
+
+            IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
+            businessStoreSubstitute.GetDataSupplier().Returns(dataSupplierSubstitute);
+            businessStoreSubstitute.GetModelA().Returns(new ModelA());
+
+            OperatorA operatorA = new OperatorA(businessStoreSubstitute);
+            operatorA.CreateModel(modelA);
+            var result = operatorA.ReadModel(1);
+
+            Assert.IsInstanceOf<IModelA>(result as ModelA);
+            Assert.AreEqual(modelA.Id, result.Id);
+        }
+
         [Test]
         //[TestCase(ExpectedResult = "Pluto")]
         public void CreateWithValidInput()
@@ -37,6 +74,9 @@ namespace InjectorUnitTest.Test
             IOperatorA operatorASubstitute = Substitute.For<IOperatorA>();
             operatorASubstitute.ReadModel(Arg.Any<int>()).Returns(viewModelA);
             operatorASubstitute.CreateModel(viewModelA);
+
+            //IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
+            //businessStoreSubstitute.GetOperatorA().Returns(operatorASubstitute);
 
             IBusinessSupplier businessSupplierSubstitute = Substitute.For<IBusinessSupplier>();
             businessSupplierSubstitute.GenerateOperatorA().Returns(operatorASubstitute);
@@ -154,7 +194,7 @@ namespace InjectorUnitTest.Test
 
     public class RepositoryAMock : IRepositoryA
     {
-        public IEntityA ReadEntity(int IdA)
+        public IEntityA ReadEntityById(int IdA)
         {
             return new EntityAMock
             {

@@ -4,7 +4,7 @@ namespace Injector.Common.IRepository
 {
     public interface IRepositoryA
     {
-        IEntityA ReadEntity(int IdA);
+        IEntityA ReadEntityById(int IdA);
         IEntityA ReadEntityByName(string name);
         void CreateEntity(IEntityA entityA);
         void UpdateEntity(IEntityA entityA);

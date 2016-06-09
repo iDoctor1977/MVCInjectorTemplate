@@ -13,8 +13,8 @@ namespace Injector.Frontend.Controllers
         public ActionResult Index()
         {
             CreateViewModelA viewModelA = GetIstanceOfCreateViewModelA;
-            operatorA.CreateModel(viewModelA);
-            viewModelA = (CreateViewModelA) operatorA.ReadModel(1);
+            GetIstanceOfOperatorA.CreateModel(viewModelA);
+            viewModelA = (CreateViewModelA) GetIstanceOfOperatorA.ReadModel(1);
 
             return View(viewModelA);
         }
@@ -31,10 +31,10 @@ namespace Injector.Frontend.Controllers
             viewModelB.Email = "filippo.foglia@gmail.com";
             viewModelB.Birth = "18/07/1977";
 
-            operatorA.CreateModel(viewModelA);
-            operatorB.CreateModel(viewModelB);
+            GetIstanceOfOperatorA.CreateModel(viewModelA);
+            GetIstanceOfOperatorB.CreateModel(viewModelB);
 
-            viewModelA.ColCreateViewModelB.Add((CreateViewModelB) operatorB.ReadModelByUsername("iDoctor"));
+            viewModelA.ColCreateViewModelB.Add((CreateViewModelB) GetIstanceOfOperatorB.ReadModelByUsername("iDoctor"));
 
             return View(viewModelA);
         }
