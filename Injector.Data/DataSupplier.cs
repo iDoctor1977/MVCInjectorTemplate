@@ -2,7 +2,7 @@
 using Injector.Common.ISupplier;
 using Injector.Data.DataLayer;
 
-namespace Injector.Data.DataSupplier
+namespace Injector.Data
 {
     public class DataSupplier : IDataSupplier
     {

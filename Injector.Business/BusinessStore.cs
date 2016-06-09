@@ -1,7 +1,7 @@
 ﻿using Injector.Business.BusinessLayer;
 using Injector.Business.BusinessModel;
 using Injector.Common.ISupplier;
-using Injector.Data.DataSupplier;
+using Injector.Data;
 
 namespace Injector.Business
 {

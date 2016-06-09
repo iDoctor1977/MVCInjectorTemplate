@@ -7,40 +7,40 @@ using Injector.Data.ADOModel;
 
 namespace Injector.Data.DataLayer
 {
-    internal class RepositoryB : AContainer, IRepositoryB
+    public class RepositoryB : ABaseRepository, IRepositoryB
     {
         public void Commit()
         {
-            GetContainer().SaveChanges();
+            GetIstanceOfDataDbContext.SaveChanges();
         }
 
         public IEntityB ReadEntityById(int id)
         {
-            EntityB entityB = GetContainer().EntitiesB.Single(entity => entity.Id.Equals(id));
+            EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(entity => entity.Id.Equals(id));
             return entityB;
         }
 
         public IEntityB ReadEntityByUsername(string username)
         {
-            EntityB entityB = GetContainer().EntitiesB.Single(item => item.Username.Equals(username));
+            EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(item => item.Username.Equals(username));
             return entityB;
         }
 
         public void CreateEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.Add(MappingEntityB(entityB));
+            GetIstanceOfDataDbContext.EntitiesB.Add(MappingEntityB(entityB));
             Commit();
         }
 
         public void UpdateEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.AddOrUpdate(MappingEntityB(entityB));
+            GetIstanceOfDataDbContext.EntitiesB.AddOrUpdate(MappingEntityB(entityB));
             Commit();
         }
 
         public void DeleteEntity(IEntityB entityB)
         {
-            GetContainer().EntitiesB.Remove(MappingEntityB(entityB));
+            GetIstanceOfDataDbContext.EntitiesB.Remove(MappingEntityB(entityB));
             Commit();
         }
 
@@ -51,19 +51,18 @@ namespace Injector.Data.DataLayer
 
         public IEntityB GetConcreteEntityB()
         {
-            return new EntityB();
+            return GetIstanceOfEntityB;
         }
 
         private EntityB MappingEntityB(IEntityB entityB)
         {
-            if (GetContainer().Entry(entityB).State != EntityState.Detached)
+            if (GetIstanceOfDataDbContext.Entry(entityB).State != EntityState.Detached)
             {
-                return new EntityB
-                {
-                    Id = entityB.Id,
-                    Username = entityB.Username,
-                    Email = entityB.Email,
-                };
+                EntityB concreteEntityB = GetIstanceOfEntityB;
+                concreteEntityB.Id = entityB.Id;
+                concreteEntityB.Username = entityB.Username;
+                concreteEntityB.Email = entityB.Email;
+                return concreteEntityB;
             }
             return entityB as EntityB;
         }

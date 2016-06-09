@@ -9,8 +9,8 @@ namespace Injector.Common.IRepository
         void CreateEntity(IEntityB entityB);
         void UpdateEntity(IEntityB entityB);
         void DeleteEntity(IEntityB entityB);
-        void Commit();
         IEntityB GetConcreteEntityB();
+        void Commit();
         string ToStringRepository();
     }
 }
