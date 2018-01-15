@@ -46,11 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -65,14 +65,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADOModel\DataDbContext.cs" />
+    <Compile Include="ADOModel\ProjectDbContext.cs" />
     <Compile Include="ADOModel\EntityB.cs" />
     <Compile Include="ADOModel\EntityA.cs" />
     <Compile Include="DataStore.cs" />
-    <Compile Include="DataLayer\ABaseRepository.cs" />
-    <Compile Include="DataLayer\RepositoryB.cs" />
-    <Compile Include="DataLayer\RepositoryA.cs" />
+    <Compile Include="Layer\ABaseRepository.cs" />
+    <Compile Include="Layer\RepositoryB.cs" />
+    <Compile Include="Layer\RepositoryA.cs" />
     <Compile Include="DataSupplier.cs" />
+    <Compile Include="ICommonSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

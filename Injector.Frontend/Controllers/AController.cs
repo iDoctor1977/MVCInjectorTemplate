@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
-using Injector.Frontend.Models.ViewModelsA;
-using Injector.Frontend.Models.ViewModelsB;
+using Injector.Frontend.Models;
 
 namespace Injector.Frontend.Controllers
 {
@@ -12,21 +11,21 @@ namespace Injector.Frontend.Controllers
 
         public ActionResult Index()
         {
-            CreateViewModelA viewModelA = GetIstanceOfCreateViewModelA;
+            VMCreateA viewModelA = GetIstanceOfCreateViewModelA;
             GetIstanceOfOperatorA.CreateModel(viewModelA);
-            viewModelA = (CreateViewModelA) GetIstanceOfOperatorA.ReadModel(1);
+            viewModelA = (VMCreateA) GetIstanceOfOperatorA.ReadModel(1);
 
             return View(viewModelA);
         }
 
-        public ActionResult Create(CreateViewModelA model)
+        public ActionResult Create(VMCreateA model)
         {
-            CreateViewModelA viewModelA = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA();
+            VMCreateA viewModelA = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA();
             viewModelA.Name = "Filippo";
             viewModelA.Surname = "Foglia";
             viewModelA.TelNumber = "3315787943";
 
-            CreateViewModelB viewModelB = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB();
+            VMCreateB viewModelB = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB();
             viewModelB.Username = "iDoctor";
             viewModelB.Email = "filippo.foglia@gmail.com";
             viewModelB.Birth = "18/07/1977";
@@ -34,7 +33,7 @@ namespace Injector.Frontend.Controllers
             GetIstanceOfOperatorA.CreateModel(viewModelA);
             GetIstanceOfOperatorB.CreateModel(viewModelB);
 
-            viewModelA.ColCreateViewModelB.Add((CreateViewModelB) GetIstanceOfOperatorB.ReadModelByUsername("iDoctor"));
+            viewModelA.ColCreateViewModelB.Add((VMCreateB)GetIstanceOfOperatorB.ReadModelByUsername("iDoctor"));
 
             return View(viewModelA);
         }

@@ -1,15 +1,14 @@
 ﻿using Injector.Business;
 using Injector.Common.ISupplier;
-using Injector.Frontend.Models.ViewModelsA;
-using Injector.Frontend.Models.ViewModelsB;
+using Injector.Frontend.Models;
 
 namespace Injector.Frontend
 {
     public interface IFrontendStore
     {
-        IBusinessSupplier GetBusinessSupplier();
-        CreateViewModelA GetCreateViewModelA();
-        CreateViewModelB GetCreateViewModelB();
+        ICoreSupplier GetBusinessSupplier();
+        VMCreateA GetCreateViewModelA();
+        VMCreateB GetCreateViewModelB();
     }
 
     internal class FrontendStore : IFrontendStore
@@ -22,19 +21,19 @@ namespace Injector.Frontend
             set { frontendStore = value; }
         }
 
-        public IBusinessSupplier GetBusinessSupplier()
+        public ICoreSupplier GetBusinessSupplier()
         {
             return new BusinessSupplier();
         }
 
-        public CreateViewModelA GetCreateViewModelA()
+        public VMCreateA GetCreateViewModelA()
         {
-            return new CreateViewModelA();
+            return new VMCreateA();
         }
 
-        public CreateViewModelB GetCreateViewModelB()
+        public VMCreateB GetCreateViewModelB()
         {
-            return new CreateViewModelB();
+            return new VMCreateB();
         }
     }
 }

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Web.Mvc;
 using Injector.Business;
-using Injector.Business.BusinessLayer;
-using Injector.Business.BusinessModel;
+using Injector.Business.Layer;
+using Injector.Common.DTOModel;
 using Injector.Common.IEntity;
+using Injector.Common.ILogic;
 using Injector.Common.IModel;
-using Injector.Common.IOperator;
 using Injector.Common.IRepository;
 using Injector.Common.ISupplier;
 using Injector.Frontend;
 using Injector.Frontend.Controllers;
-using Injector.Frontend.Models.ViewModelsA;
+using Injector.Frontend.Models;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -78,7 +78,7 @@ namespace InjectorUnitTest.Test
             //IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
             //businessStoreSubstitute.GetOperatorA().Returns(operatorASubstitute);
 
-            IBusinessSupplier businessSupplierSubstitute = Substitute.For<IBusinessSupplier>();
+            ICoreSupplier businessSupplierSubstitute = Substitute.For<ICoreSupplier>();
             businessSupplierSubstitute.GenerateOperatorA().Returns(operatorASubstitute);
 
             IFrontendStore frontendStoreSubstitute = Substitute.For<IFrontendStore>();
@@ -92,7 +92,7 @@ namespace InjectorUnitTest.Test
             // ASSERT
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<IModelA>((result as ViewResult).Model);
-            Assert.AreEqual(viewModelA, ((CreateViewModelA)(result as ViewResult).Model));
+            Assert.AreEqual(viewModelA, ((VMCreateA)(result as ViewResult).Model));
 
             //OperatorA operatorA = new OperatorA(new DataSupplierMock());
 
@@ -110,7 +110,7 @@ namespace InjectorUnitTest.Test
         }
     }
 
-    public class BusinessSupplierMock : IBusinessSupplier
+    public class BusinessSupplierMock : ICoreSupplier
     {
         public IOperatorA GenerateOperatorA()
         {

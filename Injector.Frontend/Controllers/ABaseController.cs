@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using Injector.Common.IOperator;
-using Injector.Frontend.Models.ViewModelsA;
-using Injector.Frontend.Models.ViewModelsB;
+using Injector.Common.ILogic;
+using Injector.Frontend.Models;
 
 namespace Injector.Frontend.Controllers
 {
@@ -20,12 +19,12 @@ namespace Injector.Frontend.Controllers
             get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorB(); }
         }
 
-        public CreateViewModelA GetIstanceOfCreateViewModelA
+        public VMCreateA GetIstanceOfCreateViewModelA
         {
             get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA(); }
         }
 
-        public CreateViewModelB GetIstanceOfCreateViewModelB
+        public VMCreateB GetIstanceOfCreateViewModelB
         {
             get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB(); }
         }

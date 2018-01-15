@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Frontend", "Injector.Frontend\Injector.Frontend.csproj", "{4B230EC9-B6F3-4587-8305-73493FC6A282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Web", "Injector.Frontend\Injector.Web.csproj", "{4B230EC9-B6F3-4587-8305-73493FC6A282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Business", "Injector.Business\Injector.Business.csproj", "{8378BD41-85BE-45C8-95D2-77663D405534}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Core", "Injector.Business\Injector.Core.csproj", "{8378BD41-85BE-45C8-95D2-77663D405534}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Common", "Injector.Common\Injector.Common.csproj", "{873301DC-34CD-40B4-B89B-66A5F021FA37}"
 EndProject

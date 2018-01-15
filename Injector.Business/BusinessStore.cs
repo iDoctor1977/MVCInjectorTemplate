@@ -1,5 +1,5 @@
-﻿using Injector.Business.BusinessLayer;
-using Injector.Business.BusinessModel;
+﻿using Injector.Business.Layer;
+using Injector.Common.DTOModel;
 using Injector.Common.ISupplier;
 using Injector.Data;
 

@@ -1,6 +1,6 @@
 ﻿using Injector.Common.IRepository;
 using Injector.Common.ISupplier;
-using Injector.Data.DataLayer;
+using Injector.Data.Layer;
 
 namespace Injector.Data
 {

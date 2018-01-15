@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Injector.Common.IModel;
 using Injector.Common.ISupplier;
-using Injector.Frontend.Models.ViewModelsB;
+using Injector.Frontend.Models;
 
 namespace Injector.Frontend.Controllers
 {
@@ -19,7 +19,7 @@ namespace Injector.Frontend.Controllers
         [HttpGet]
         public ActionResult TestB()
         {
-            IModelB model = new CreateViewModelB
+            IModelB model = new VMCreateB
             {
                 Username = "Idoctor",
                 Email = "filippo.foglia@gmail.com",
@@ -27,7 +27,7 @@ namespace Injector.Frontend.Controllers
             };
 
             GetIstanceOfOperatorB.CreateModel(model);
-            model = (CreateViewModelB) GetIstanceOfOperatorB.ReadModel(1);
+            model = (VMCreateB) GetIstanceOfOperatorB.ReadModel(1);
 
             GetIstanceOfOperatorB.ToStringOperator();
 

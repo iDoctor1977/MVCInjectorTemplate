@@ -1,9 +1,9 @@
-﻿using Injector.Common.IOperator;
+﻿using Injector.Common.ILogic;
 using Injector.Common.ISupplier;
 
 namespace Injector.Business
 {
-    public class BusinessSupplier : IBusinessSupplier
+    public class BusinessSupplier : ICoreSupplier
     {
         private IOperatorA operatorA;
         private IOperatorB operatorB;
