@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Injector.Common</RootNamespace>
     <AssemblyName>Injector.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,12 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonStore.cs" />
-    <Compile Include="CommonSupplier.cs" />
+    <Compile Include="IABase\IAConvBase.cs" />
+    <Compile Include="SharingStore.cs" />
+    <Compile Include="SharingSupplier.cs" />
     <Compile Include="DTOModel\ModelA.cs" />
     <Compile Include="DTOModel\ModelB.cs" />
-    <Compile Include="IConverter\IConverterEntityA.cs" />
-    <Compile Include="IConverter\IConverterEntityB.cs" />
+    <Compile Include="IConverter\IConverterA.cs" />
+    <Compile Include="IConverter\IConverterB.cs" />
     <Compile Include="IEntity\IEntityB.cs" />
     <Compile Include="IEntity\IEntityA.cs" />
     <Compile Include="IModel\IModelB.cs" />
@@ -61,9 +63,9 @@
     <Compile Include="IDbContext\IProjectDbContext.cs" />
     <Compile Include="IRepository\IRepositoryB.cs" />
     <Compile Include="IRepository\IRepositoryA.cs" />
-    <Compile Include="IStore\ICommonStore.cs" />
+    <Compile Include="IStore\ISharingStore.cs" />
     <Compile Include="IStore\IDataStore.cs" />
-    <Compile Include="ISupplier\ICommonSupplier.cs" />
+    <Compile Include="ISupplier\ISharingSupplier.cs" />
     <Compile Include="ISupplier\IDataSupplier.cs" />
     <Compile Include="IModel\IModelA.cs" />
     <Compile Include="ISupplier\ICoreSupplier.cs" />
@@ -76,9 +78,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IABase\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,11 +4,11 @@ using Injector.Common.IModel;
 
 namespace Injector.Business.Layer
 {
-    public class OperatorB : ABaseOperator, IOperatorB
+    public class LogicalB : ALBase, IOperatorB
     {
-        public OperatorB() { }
+        public LogicalB() { }
 
-        public OperatorB(IBusinessStore businessStore) : base(businessStore) { }
+        public LogicalB(IBusinessStore businessStore) : base(businessStore) { }
 
         public IModelB ReadModel(int id)
         {

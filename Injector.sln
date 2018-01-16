@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Web", "Injector.Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Core", "Injector.Business\Injector.Core.csproj", "{8378BD41-85BE-45C8-95D2-77663D405534}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Common", "Injector.Common\Injector.Common.csproj", "{873301DC-34CD-40B4-B89B-66A5F021FA37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Sharing", "Injector.Common\Injector.Sharing.csproj", "{873301DC-34CD-40B4-B89B-66A5F021FA37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector.Data", "Injector.Data\Injector.Data.csproj", "{DBF8FF8B-15B5-4576-8433-BC3CFF1FDDBA}"
 EndProject

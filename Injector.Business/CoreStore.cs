@@ -8,13 +8,13 @@ namespace Injector.Business
     public interface IBusinessStore
     {
         IDataSupplier GetDataSupplier();
-        OperatorA GetOperatorA();
-        OperatorB GetOperatorB();
+        LogicalA GetOperatorA();
+        LogicalB GetOperatorB();
         ModelA GetModelA();
         ModelB GetModelB();
     }
 
-    internal class BusinessStore : IBusinessStore
+    internal class CoreStore : IBusinessStore
     {
         private static IBusinessStore businessStore;
 
@@ -29,14 +29,14 @@ namespace Injector.Business
             return new DataSupplier();
         }
 
-        public OperatorA GetOperatorA()
+        public LogicalA GetOperatorA()
         {
-            return new OperatorA();
+            return new LogicalA();
         }
 
-        public OperatorB GetOperatorB()
+        public LogicalB GetOperatorB()
         {
-            return new OperatorB();
+            return new LogicalB();
         }
 
         public ModelA GetModelA()

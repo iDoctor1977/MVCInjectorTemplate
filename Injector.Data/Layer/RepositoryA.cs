@@ -1,14 +1,76 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
+﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Reflection;
+using Injector.Common.DTOModel;
 using Injector.Common.IEntity;
+using Injector.Common.IModel;
 using Injector.Common.IRepository;
+using Injector.Common.IStore;
 using Injector.Data.ADOModel;
 
 namespace Injector.Data.Layer
 {
-    public class RepositoryA : ABaseRepository, IRepositoryA
+    public class RepositoryA : ARBase, IRepositoryA
     {
+        #region CONSTRUCTOR
+
+        public RepositoryA()
+        {
+        }
+
+        public RepositoryA(IDataStore dataStore) : base(dataStore)
+        {
+        }
+
+        #endregion
+
+        public Guid CreateEntity(ModelA modelA)
+        {
+            try
+            {
+                EntityA entityA = ARBaseDataStore.NewConverterA.ConvertModelToEntity(modelA) as EntityA;
+
+                Flat flat = ARBaseDataStore.NewConvertFlat.ConvertModelToEntity(mlFlat) as Flat;
+
+                if (flat != null)
+                {
+                    flat.FlatId = Guid.NewGuid();
+                    flat.RecordState = CRecordState.SAVED;
+                    flat.DateOfSaved = DateTime.Now;
+                    ARBaseDbContext().Flats.Add(flat);
+                    Commit();
+
+                    return flat.FlatId;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return Guid.Empty;
+        }
+
+        public int UpdateEntity(ModelA entityA)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        ModelA IRepositoryA.ReadEntityById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        ModelA IRepositoryA.ReadEntityByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int DeleteEntity(ModelA entityA)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEntityA ReadEntityById(int IdA)
         {
             EntityA entityA = GetIstanceOfDataDbContext.EntitiesA.Single(item => item.Id.Equals(IdA));
@@ -39,32 +101,9 @@ namespace Injector.Data.Layer
             Commit();
         }
 
-        public void Commit()
-        {
-            GetIstanceOfDataDbContext.SaveChanges();
-        }
-
-        public string ToStringRepository()
-        {
-            return "Welcome in DataRepository!";
-        }
-
         public IEntityA GetConcreteEntityA()
         {
             return GetIstanceOfEntityA;
-        }
-         
-        private EntityA MappingEntityA(IEntityA entityA)
-        {
-            if (GetIstanceOfDataDbContext.Entry(entityA).State != EntityState.Detached)
-            {
-                EntityA concreteEntityA = GetIstanceOfEntityA;
-                concreteEntityA.Id = entityA.Id;
-                concreteEntityA.Name = entityA.Name;
-                concreteEntityA.Surname = entityA.Surname;
-                return concreteEntityA;
-            }
-            return entityA as EntityA;
         }
     }
 }

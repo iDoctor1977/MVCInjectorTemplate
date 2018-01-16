@@ -124,9 +124,9 @@
       <Project>{8378bd41-85be-45c8-95d2-77663d405534}</Project>
       <Name>Injector.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Injector.Common\Injector.Common.csproj">
+    <ProjectReference Include="..\Injector.Common\Injector.Sharing.csproj">
       <Project>{873301dc-34cd-40b4-b89b-66a5f021fa37}</Project>
-      <Name>Injector.Common</Name>
+      <Name>Injector.Sharing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Injector.Data\Injector.Data.csproj">
       <Project>{dbf8ff8b-15b5-4576-8433-bc3cff1fddba}</Project>

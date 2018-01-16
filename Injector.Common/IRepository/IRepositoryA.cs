@@ -1,16 +1,14 @@
-﻿using Injector.Common.IEntity;
+﻿using System;
+using Injector.Common.DTOModel;
 
 namespace Injector.Common.IRepository
 {
     public interface IRepositoryA
     {
-        IEntityA ReadEntityById(int IdA);
-        IEntityA ReadEntityByName(string name);
-        void CreateEntity(IEntityA entityA);
-        void UpdateEntity(IEntityA entityA);
-        void DeleteEntity(IEntityA entityA);
-        IEntityA GetConcreteEntityA();
-        void Commit();
-        string ToStringRepository();
+        Guid CreateEntity(ModelA modelA);
+        int UpdateEntity(ModelA entityA);
+        ModelA ReadEntityById(int id);
+        ModelA ReadEntityByName(string name);
+        int DeleteEntity(ModelA entityA);
     }
 }

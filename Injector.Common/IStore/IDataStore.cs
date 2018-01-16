@@ -7,20 +7,18 @@ namespace Injector.Common.IStore
 {
     public interface IDataStore
     {
-        string ConnectionStringName { get; set; }
-
-        IProjectDbContext ProjectDbContext { get; set; }
+        string DStoreConnectionStringName { get; set; }
+        IProjectDbContext DStoreProjectDbContext { get; set; }
 
         // DTOModels
-        ICommonSupplier CommonSupplier { get; set; }
+        ISharingSupplier DStoreCommonSupplier { get; set; }
 
         // Entities
-        IEntityA GetEntityA { get; set; }
-        IEntityB GetEntityB { get; set; }
+        IEntityA NewEntityA { get; set; }
+        IEntityB NewEntityB { get; set; }
 
         // Converter Model - Entity - Model
-        IConverterEntityA NewConverterEntityA { get; set; }
-
-        IConverterEntityB NewConverterEntityB { get; set; }
+        IConverterA NewConverterA { get; set; }
+        IConverterB NewConverterB { get; set; }
     }
 }

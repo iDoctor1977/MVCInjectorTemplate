@@ -23,7 +23,7 @@ namespace Injector.Frontend
 
         public ICoreSupplier GetBusinessSupplier()
         {
-            return new BusinessSupplier();
+            return new CoreSupplier();
         }
 
         public VMCreateA GetCreateViewModelA()

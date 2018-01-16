@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Injector.Business</RootNamespace>
     <AssemblyName>Injector.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,17 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Layer\ABaseOperator.cs" />
-    <Compile Include="Layer\OperatorB.cs" />
-    <Compile Include="BusinessSupplier.cs" />
-    <Compile Include="Layer\OperatorA.cs" />
-    <Compile Include="BusinessStore.cs" />
+    <Compile Include="Layer\ALBase.cs" />
+    <Compile Include="Layer\LogicalB.cs" />
+    <Compile Include="CoreSupplier.cs" />
+    <Compile Include="Layer\LogicalA.cs" />
+    <Compile Include="CoreStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Injector.Common\Injector.Common.csproj">
+    <ProjectReference Include="..\Injector.Common\Injector.Sharing.csproj">
       <Project>{873301DC-34CD-40B4-B89B-66A5F021FA37}</Project>
-      <Name>Injector.Common</Name>
+      <Name>Injector.Sharing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Injector.Data\Injector.Data.csproj">
       <Project>{dbf8ff8b-15b5-4576-8433-bc3cff1fddba}</Project>

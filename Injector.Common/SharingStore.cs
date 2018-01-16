@@ -4,11 +4,11 @@ using Injector.Common.IStore;
 
 namespace Injector.Common
 {
-    public class CommonStore : ICommonStore
+    public class SharingStore : ISharingStore
     {
         #region CONSTRUCTOR
 
-        private CommonStore()
+        private SharingStore()
         {
         }
 
@@ -16,11 +16,11 @@ namespace Injector.Common
 
         #region SINGLETON
 
-        private static ICommonStore CommonStoreInstance { get; set; }
+        private static ISharingStore CommonStoreInstance { get; set; }
 
-        public static ICommonStore Instance()
+        public static ISharingStore Instance()
         {
-            CommonStoreInstance = new CommonStore();
+            CommonStoreInstance = new SharingStore();
             return CommonStoreInstance;
         }
 

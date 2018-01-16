@@ -1,44 +1,43 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
+﻿using System;
+using Injector.Common.DTOModel;
 using Injector.Common.IEntity;
 using Injector.Common.IRepository;
 using Injector.Data.ADOModel;
 
 namespace Injector.Data.Layer
 {
-    public class RepositoryB : ABaseRepository, IRepositoryB
+    public class RepositoryB : ARBase, IRepositoryB
     {
         public void Commit()
         {
             GetIstanceOfDataDbContext.SaveChanges();
         }
 
-        public IEntityB ReadEntityById(int id)
+        public ModelB ReadEntityById(int id)
         {
             EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(entity => entity.Id.Equals(id));
             return entityB;
         }
 
-        public IEntityB ReadEntityByUsername(string username)
+        public ModelB ReadEntityByUsername(string username)
         {
             EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(item => item.Username.Equals(username));
             return entityB;
         }
 
-        public void CreateEntity(IEntityB entityB)
+        public Guid CreateEntity(ModelB modelB)
         {
-            GetIstanceOfDataDbContext.EntitiesB.Add(MappingEntityB(entityB));
+            GetIstanceOfDataDbContext.EntitiesB.Add(MappingEntityB(modelB));
             Commit();
         }
 
-        public void UpdateEntity(IEntityB entityB)
+        public int UpdateEntity(ModelB modelB)
         {
-            GetIstanceOfDataDbContext.EntitiesB.AddOrUpdate(MappingEntityB(entityB));
+            GetIstanceOfDataDbContext.EntitiesB.AddOrUpdate(MappingEntityB(modelB));
             Commit();
         }
 
-        public void DeleteEntity(IEntityB entityB)
+        public int DeleteEntity(ModelB entityB)
         {
             GetIstanceOfDataDbContext.EntitiesB.Remove(MappingEntityB(entityB));
             Commit();

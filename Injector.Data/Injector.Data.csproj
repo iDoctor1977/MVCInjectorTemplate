@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Injector.Data</RootNamespace>
     <AssemblyName>Injector.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -26,6 +26,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,28 +69,32 @@
     <Compile Include="ADOModel\ProjectDbContext.cs" />
     <Compile Include="ADOModel\EntityB.cs" />
     <Compile Include="ADOModel\EntityA.cs" />
+    <Compile Include="Converter\AConvBase.cs" />
+    <Compile Include="Converter\ConverterA.cs" />
+    <Compile Include="Converter\ConverterB.cs" />
     <Compile Include="DataStore.cs" />
-    <Compile Include="Layer\ABaseRepository.cs" />
+    <Compile Include="Layer\ARBase.cs" />
     <Compile Include="Layer\RepositoryB.cs" />
     <Compile Include="Layer\RepositoryA.cs" />
     <Compile Include="DataSupplier.cs" />
-    <Compile Include="ICommonSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Injector.Common\Injector.Common.csproj">
+    <ProjectReference Include="..\Injector.Common\Injector.Sharing.csproj">
       <Project>{873301DC-34CD-40B4-B89B-66A5F021FA37}</Project>
-      <Name>Injector.Common</Name>
+      <Name>Injector.Sharing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 e x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -103,13 +108,14 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="App_Data\InjectorMainDb.mdf">
+    <Content Include="App_Data\ProjectDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\InjectorMainDb_log.ldf">
+    <Content Include="App_Data\ProjectDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>InjectorMainDb.mdf</DependentUpon>
+      <DependentUpon>ProjectDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

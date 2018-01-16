@@ -3,9 +3,9 @@ using Injector.Common.IStore;
 
 namespace Injector.Common.ISupplier
 {
-    public interface ICommonSupplier
+    public interface ISharingSupplier
     {
-        ICommonStore CSCommonStore { get; set; }
+        ISharingStore SStoreCommonStore { get; set; }
 
         IModelA GetModelA();
         IModelB GetModelB();

@@ -1,14 +1,15 @@
+using Injector.Common.DTOModel;
 using Injector.Common.IEntity;
 using Injector.Common.ILogic;
 using Injector.Common.IModel;
 
 namespace Injector.Business.Layer
 {
-    public class OperatorA : ABaseOperator, IOperatorA
+    public class LogicalA : ALBase, IOperatorA
     {
-        public OperatorA() { }
+        public LogicalA() { }
 
-        public OperatorA(IBusinessStore businessStore) : base(businessStore) { }
+        public LogicalA(IBusinessStore businessStore) : base(businessStore) { }
 
         public IModelA ReadModel(int id)
         {

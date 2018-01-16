@@ -45,7 +45,7 @@ namespace InjectorUnitTest.Test
             businessStoreSubstitute.GetDataSupplier().Returns(dataSupplierSubstitute);
             businessStoreSubstitute.GetModelA().Returns(new ModelA());
 
-            OperatorA operatorA = new OperatorA(businessStoreSubstitute);
+            LogicalA operatorA = new LogicalA(businessStoreSubstitute);
             operatorA.CreateModel(modelA);
             var result = operatorA.ReadModel(1);
 

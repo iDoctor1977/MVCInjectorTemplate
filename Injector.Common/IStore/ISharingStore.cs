@@ -2,7 +2,7 @@
 
 namespace Injector.Common.IStore
 {
-    public interface ICommonStore
+    public interface ISharingStore
     {
         IModelA NewModelA { get; }
         IModelB NewModelB { get; }
