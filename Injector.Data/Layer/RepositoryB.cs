@@ -1,69 +1,69 @@
 ﻿using System;
 using Injector.Common.DTOModel;
-using Injector.Common.IEntity;
 using Injector.Common.IRepository;
-using Injector.Data.ADOModel;
+using Injector.Common.IStore;
 
 namespace Injector.Data.Layer
 {
-    public class RepositoryB : ARBase, IRepositoryB
+    public class RepositoryB : ABaseRepository, IRepositoryB
     {
-        public void Commit()
+        private static IRepositoryB RepositoryBInstance { get; set; }
+
+        #region CONSTRUCTOR
+
+        private RepositoryB() { }
+
+        private RepositoryB(IDataStore dataStore) : base(dataStore) { }
+
+        #endregion
+
+        #region SINGLETON
+
+        public static IRepositoryB Instance()
         {
-            GetIstanceOfDataDbContext.SaveChanges();
+            if (RepositoryBInstance == null)
+            {
+                RepositoryBInstance = new RepositoryB();
+            }
+
+            return RepositoryBInstance;
         }
 
-        public ModelB ReadEntityById(int id)
+        public static IRepositoryB Instance(IDataStore dataStore)
         {
-            EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(entity => entity.Id.Equals(id));
-            return entityB;
+            if (RepositoryBInstance == null)
+            {
+                RepositoryBInstance = new RepositoryB(dataStore);
+            }
+
+            return RepositoryBInstance;
         }
 
-        public ModelB ReadEntityByUsername(string username)
-        {
-            EntityB entityB = GetIstanceOfDataDbContext.EntitiesB.Single(item => item.Username.Equals(username));
-            return entityB;
-        }
+        #endregion
 
         public Guid CreateEntity(ModelB modelB)
         {
-            GetIstanceOfDataDbContext.EntitiesB.Add(MappingEntityB(modelB));
-            Commit();
+            throw new NotImplementedException();
         }
 
         public int UpdateEntity(ModelB modelB)
         {
-            GetIstanceOfDataDbContext.EntitiesB.AddOrUpdate(MappingEntityB(modelB));
-            Commit();
+            throw new NotImplementedException();
+        }
+
+        public ModelB ReadEntityById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ModelB ReadEntityByUsername(string username)
+        {
+            throw new NotImplementedException();
         }
 
         public int DeleteEntity(ModelB entityB)
         {
-            GetIstanceOfDataDbContext.EntitiesB.Remove(MappingEntityB(entityB));
-            Commit();
-        }
-
-        public string ToStringRepository()
-        {
-            return "Welcome in DataRepository!";
-        }
-
-        public IEntityB GetConcreteEntityB()
-        {
-            return GetIstanceOfEntityB;
-        }
-
-        private EntityB MappingEntityB(IEntityB entityB)
-        {
-            if (GetIstanceOfDataDbContext.Entry(entityB).State != EntityState.Detached)
-            {
-                EntityB concreteEntityB = GetIstanceOfEntityB;
-                concreteEntityB.Id = entityB.Id;
-                concreteEntityB.Username = entityB.Username;
-                concreteEntityB.Email = entityB.Email;
-                return concreteEntityB;
-            }
-            return entityB as EntityB;
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Injector.Data.ADOModel
 
         #endregion
 
-        public DbSet<EntityA> EntitiesA { get; set; }
-        public DbSet<EntityB> EntitiesB { get; set; }
+        public virtual DbSet<EntityA> EntitiesA { get; set; }
+        public virtual DbSet<EntityB> EntitiesB { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

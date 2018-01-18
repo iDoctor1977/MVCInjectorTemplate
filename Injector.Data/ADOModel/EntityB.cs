@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Injector.Common.IEntity;
 
 namespace Injector.Data.ADOModel
 {
-    [Table("EntitiesB")]
     public class EntityB : IEntityB
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
 

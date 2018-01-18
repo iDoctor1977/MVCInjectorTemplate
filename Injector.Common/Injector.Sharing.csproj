@@ -49,13 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IABase\IAConvBase.cs" />
+    <Compile Include="IABase\IABaseConverter.cs" />
+    <Compile Include="IABase\IABaseRepository.cs" />
     <Compile Include="SharingStore.cs" />
     <Compile Include="SharingSupplier.cs" />
     <Compile Include="DTOModel\ModelA.cs" />
     <Compile Include="DTOModel\ModelB.cs" />
-    <Compile Include="IConverter\IConverterA.cs" />
-    <Compile Include="IConverter\IConverterB.cs" />
     <Compile Include="IEntity\IEntityB.cs" />
     <Compile Include="IEntity\IEntityA.cs" />
     <Compile Include="IModel\IModelB.cs" />

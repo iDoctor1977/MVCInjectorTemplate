@@ -5,9 +5,9 @@ namespace Injector.Common.ISupplier
 {
     public interface IDataSupplier
     {
-        IDataStore DSupplierDataStore { get; set; }
+        IDataStore SupplierDataStore { get; set; }
 
-        IRepositoryA GetRepositoryA();
-        IRepositoryB GetRepositoryB();
+        IRepositoryA GetRepositoryA { get; }
+        IRepositoryB GetRepositoryB { get; }
     }
 }

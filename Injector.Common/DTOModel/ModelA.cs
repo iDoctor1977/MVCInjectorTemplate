@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Injector.Common.IModel;
 
 namespace Injector.Common.DTOModel
 {
     public class ModelA : IModelA
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Nome")]
         [DataType(DataType.Text)]

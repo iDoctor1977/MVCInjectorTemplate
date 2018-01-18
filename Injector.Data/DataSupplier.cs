@@ -9,10 +9,10 @@ namespace Injector.Data
     {
         private IDataStore _dataStore;
 
-        private IRepositoryA RepositoryA;
-        private IRepositoryB RepositoryB;
+        private IRepositoryA _repositoryA;
+        private IRepositoryB _repositoryB;
 
-        public IDataStore DSupplierDataStore
+        public IDataStore SupplierDataStore
         {
             get { return _dataStore ?? (_dataStore = DataStore.Instance()); }
             set { _dataStore = value; }
@@ -20,23 +20,9 @@ namespace Injector.Data
 
         #region CONSTRUCTOR
 
-        private DataSupplier()
-        {
-            if (DataSupplierInstance == null)
-            {
-                DataSupplierInstance = this;
-            }
-        }
+        private DataSupplier() { }
 
-        private DataSupplier(IDataStore dataStore)
-        {
-            DSupplierDataStore = dataStore;
-
-            if (DataSupplierInstance == null)
-            {
-                DataSupplierInstance = this;
-            }
-        }
+        private DataSupplier(IDataStore dataStore) { }
 
         #endregion
 
@@ -46,27 +32,31 @@ namespace Injector.Data
 
         public static IDataSupplier Instance()
         {
-            return DataSupplierInstance = new DataSupplier();
+            if (DataSupplierInstance == null)
+            {
+                DataSupplierInstance = new DataSupplier();
+            }
+
+            return DataSupplierInstance;
         }
 
         public static IDataSupplier Instance(IDataStore dataStore)
         {
-            return DataSupplierInstance = new DataSupplier(dataStore);
+            if (DataSupplierInstance == null)
+            {
+                DataSupplierInstance = new DataSupplier(dataStore);
+            }
+
+            return DataSupplierInstance;
         }
 
         #endregion
 
-        #region REPOSITOIES
+        #region REPOSITORIES
 
-        public IRepositoryA GetRepositoryA()
-        {
-            return RepositoryA ?? (RepositoryA = new RepositoryA());
-        }
+        public IRepositoryA GetRepositoryA => _repositoryA ?? (_repositoryA = RepositoryA.Instance(SupplierDataStore)); // new RepositoryA()
 
-        public IRepositoryB GetRepositoryB()
-        {
-            return RepositoryB ?? (RepositoryB = new RepositoryB());
-        }
+        public IRepositoryB GetRepositoryB => _repositoryB ?? (_repositoryB = RepositoryB.Instance(SupplierDataStore)); // new RepositoryB()
 
         #endregion
     }

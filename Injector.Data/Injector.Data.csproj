@@ -69,11 +69,8 @@
     <Compile Include="ADOModel\ProjectDbContext.cs" />
     <Compile Include="ADOModel\EntityB.cs" />
     <Compile Include="ADOModel\EntityA.cs" />
-    <Compile Include="Converter\AConvBase.cs" />
-    <Compile Include="Converter\ConverterA.cs" />
-    <Compile Include="Converter\ConverterB.cs" />
     <Compile Include="DataStore.cs" />
-    <Compile Include="Layer\ARBase.cs" />
+    <Compile Include="Layer\ABaseRepository.cs" />
     <Compile Include="Layer\RepositoryB.cs" />
     <Compile Include="Layer\RepositoryA.cs" />
     <Compile Include="DataSupplier.cs" />

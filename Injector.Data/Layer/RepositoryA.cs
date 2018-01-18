@@ -2,24 +2,44 @@
 using System.Data.Entity.Infrastructure;
 using System.Reflection;
 using Injector.Common.DTOModel;
-using Injector.Common.IEntity;
-using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
 using Injector.Data.ADOModel;
 
 namespace Injector.Data.Layer
 {
-    public class RepositoryA : ARBase, IRepositoryA
+    public class RepositoryA : ABaseRepository, IRepositoryA
     {
+        private static IRepositoryA RepositoryAInstance { get; set; }
+
         #region CONSTRUCTOR
 
-        public RepositoryA()
+        private RepositoryA() { }
+
+        private RepositoryA(IDataStore dataStore) : base(dataStore) { }
+
+        #endregion
+
+        #region SINGLETON
+
+        public static IRepositoryA Instance()
         {
+            if (RepositoryAInstance == null)
+            {
+                RepositoryAInstance = new RepositoryA();
+            }
+
+            return RepositoryAInstance;
         }
 
-        public RepositoryA(IDataStore dataStore) : base(dataStore)
+        public static IRepositoryA Instance(IDataStore dataStore)
         {
+            if (RepositoryAInstance == null)
+            {
+                RepositoryAInstance = new RepositoryA(dataStore);
+            }
+
+            return RepositoryAInstance;
         }
 
         #endregion
@@ -28,19 +48,14 @@ namespace Injector.Data.Layer
         {
             try
             {
-                EntityA entityA = ARBaseDataStore.NewConverterA.ConvertModelToEntity(modelA) as EntityA;
+                EntityA entityA = ConvertAModelToEntity(modelA) as EntityA;
 
-                Flat flat = ARBaseDataStore.NewConvertFlat.ConvertModelToEntity(mlFlat) as Flat;
-
-                if (flat != null)
+                if (entityA != null)
                 {
-                    flat.FlatId = Guid.NewGuid();
-                    flat.RecordState = CRecordState.SAVED;
-                    flat.DateOfSaved = DateTime.Now;
-                    ARBaseDbContext().Flats.Add(flat);
+                    entityA.Id = Guid.NewGuid();
                     Commit();
 
-                    return flat.FlatId;
+                    return entityA.Id;
                 }
             }
             catch (Exception exception)
@@ -51,59 +66,42 @@ namespace Injector.Data.Layer
             return Guid.Empty;
         }
 
-        public int UpdateEntity(ModelA entityA)
+        public int UpdateEntity(ModelA modelA)
         {
-            throw new System.NotImplementedException();
+            EntityA entityA = ABaseDbContext().EntitiesA.Find(modelA.Id);
+
+            try
+            {
+                if (entityA != null)
+                {
+                    entityA.Name = modelA.Name;
+                    entityA.Surname = modelA.Surname;
+                    Commit();
+
+                    return 1;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return -1;
         }
 
-        ModelA IRepositoryA.ReadEntityById(int id)
+        public ModelA ReadEntityById(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        ModelA IRepositoryA.ReadEntityByName(string name)
+        public ModelA ReadEntityByName(string name)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public int DeleteEntity(ModelA entityA)
+        public int DeleteEntity(ModelA modelA)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public IEntityA ReadEntityById(int IdA)
-        {
-            EntityA entityA = GetIstanceOfDataDbContext.EntitiesA.Single(item => item.Id.Equals(IdA));
-            return entityA;
-        }
-
-        public IEntityA ReadEntityByName(string name)
-        {
-            EntityA entityA = GetIstanceOfDataDbContext.EntitiesA.Single(item => item.Name.Equals(name));
-            return entityA;
-        }
-
-        public void CreateEntity(IEntityA entityA)
-        {
-            GetIstanceOfDataDbContext.EntitiesA.Add(MappingEntityA(entityA));
-            Commit();
-        }
-
-        public void UpdateEntity(IEntityA entityA)
-        {
-            GetIstanceOfDataDbContext.EntitiesA.AddOrUpdate(MappingEntityA(entityA));
-            Commit();
-        }
-
-        public void DeleteEntity(IEntityA entityA)
-        {
-            GetIstanceOfDataDbContext.EntitiesA.Remove(MappingEntityA(entityA));
-            Commit();
-        }
-
-        public IEntityA GetConcreteEntityA()
-        {
-            return GetIstanceOfEntityA;
+            throw new NotImplementedException();
         }
     }
 }
