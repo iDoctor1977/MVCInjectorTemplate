@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Reflection;
 using Injector.Common.DTOModel;
 using Injector.Common.IRepository;
@@ -91,17 +92,60 @@ namespace Injector.Data.Layer
 
         public ModelA ReadEntityById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EntityA entityA = ABaseDbContext().EntitiesA.Find(id);
+
+                if (entityA != null)
+                {
+                    return ConvertAEntityToModel(entityA);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return null;
         }
 
         public ModelA ReadEntityByName(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EntityA entityA = ABaseDbContext().EntitiesA.SingleOrDefault(eA => eA.Name == name);
+
+                if (entityA != null)
+                {
+                    return ConvertAEntityToModel(entityA);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return null;
         }
 
         public int DeleteEntity(ModelA modelA)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EntityA entityA = ABaseDbContext().EntitiesA.Find(modelA.Id);
+
+                if (entityA != null)
+                {
+                    ABaseDbContext().EntitiesA.Remove(entityA);
+                    Commit();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return -1;
         }
     }
 }

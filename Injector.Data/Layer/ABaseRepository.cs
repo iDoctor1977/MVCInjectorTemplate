@@ -1,13 +1,8 @@
 ﻿using Injector.Common.DTOModel;
 using Injector.Common.IABase;
-using Injector.Common.IDbContext;
 using Injector.Common.IEntity;
 using Injector.Common.IStore;
 using Injector.Data.ADOModel;
-using System;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 
 namespace Injector.Data.Layer
 {
@@ -44,7 +39,7 @@ namespace Injector.Data.Layer
             ABaseDbContext().SaveChanges();
         }
 
-        #region CONVERTERS
+        #region CONVERTER A
 
         public ModelA ConvertAEntityToModel(IEntityA entityA)
         {
@@ -66,6 +61,10 @@ namespace Injector.Data.Layer
             return entityA;
         }
 
+        #endregion
+
+        #region CONVERTER B
+
         public ModelB ConvertBEntityToModel(IEntityB entityB)
         {
             ModelB modelB = ABaseStore.StoreCommonSupplier.GetModelB() as ModelB;
@@ -78,12 +77,12 @@ namespace Injector.Data.Layer
 
         public IEntityB ConvertBModelToEntity(ModelB modelB)
         {
-            return new ModelB
-            {
-                Id = modelB.Id,
-                Username = modelB.Username,
-                Email = modelB.Email
-            };
+            EntityB entityB = ABaseStore.NewEntityB as EntityB;
+            entityB.Id = modelB.Id;
+            entityB.Username = modelB.Username;
+            entityB.Email = modelB.Email;
+
+            return entityB;
         }
 
         #endregion

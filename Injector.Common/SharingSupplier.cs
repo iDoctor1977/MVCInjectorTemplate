@@ -4,57 +4,50 @@ using Injector.Common.ISupplier;
 
 namespace Injector.Common
 {
-    public class SharingSupplier : ISharingSupplier
+    public class SharingSupplier : ABaseSupplier, ISharingSupplier
     {
-        private ISharingStore _sharingStore;
-
         #region CONSTRUCTOR
 
-        private SharingSupplier()
-        {
-        }
+        private SharingSupplier() { }
 
-        public SharingSupplier(ISharingStore commonStore)
-        {
-            _sharingStore = commonStore;
-            if (CommonSupplierInstance == null)
-            {
-                CommonSupplierInstance = this;
-            }
-        }
+        private SharingSupplier(ISharingStore sharingStore) : base(sharingStore) { }
 
         #endregion
 
         #region SINGLETON
 
-        private static ISharingSupplier CommonSupplierInstance { get; set; }
+        private static ISharingSupplier SharingSupplierInstance { get; set; }
 
         public static ISharingSupplier Instance()
         {
-            return CommonSupplierInstance = new SharingSupplier();
+            if (SharingSupplierInstance == null)
+            {
+                SharingSupplierInstance = new SharingSupplier();
+            }
+
+            return SharingSupplierInstance;
         }
 
-        public static ISharingSupplier Instance(ISharingStore commonStore)
+        public static ISharingSupplier Instance(ISharingStore sharingStore)
         {
-            return CommonSupplierInstance = new SharingSupplier(commonStore);
+            if (SharingSupplierInstance == null)
+            {
+                SharingSupplierInstance = new SharingSupplier(sharingStore);
+            }
+
+            return SharingSupplierInstance;
         }
 
         #endregion
 
-        public ISharingStore SStoreCommonStore
-        {
-            get { return _sharingStore ?? (_sharingStore = SharingStore.Instance()); }
-            set { _sharingStore = value; }
-        }
-
         public IModelA GetModelA()
         {
-            return SStoreCommonStore.NewModelA;
+            return SupplierSharingStore.NewModelA;
         }
 
         public IModelB GetModelB()
         {
-            return SStoreCommonStore.NewModelB;
+            return SupplierSharingStore.NewModelB;
         }
     }
 }

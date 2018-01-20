@@ -16,12 +16,16 @@ namespace Injector.Common
 
         #region SINGLETON
 
-        private static ISharingStore CommonStoreInstance { get; set; }
+        private static ISharingStore SharingStoreInstance { get; set; }
 
         public static ISharingStore Instance()
         {
-            CommonStoreInstance = new SharingStore();
-            return CommonStoreInstance;
+            if (SharingStoreInstance == null)
+            {
+                SharingStoreInstance = new SharingStore();
+            }
+
+            return SharingStoreInstance;
         }
 
         #endregion

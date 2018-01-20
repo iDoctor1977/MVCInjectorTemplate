@@ -22,7 +22,10 @@ namespace Injector.Data
 
         private DataSupplier() { }
 
-        private DataSupplier(IDataStore dataStore) { }
+        private DataSupplier(IDataStore dataStore)
+        {
+            SupplierDataStore = dataStore;
+        }
 
         #endregion
 
