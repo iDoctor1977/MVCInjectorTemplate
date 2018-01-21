@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABaseDataSupplier.cs" />
     <Compile Include="ADOModel\ProjectDbContext.cs" />
     <Compile Include="ADOModel\EntityB.cs" />
     <Compile Include="ADOModel\EntityA.cs" />

@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Injector.Common.IABase;
 using Injector.Common.IStore;
 
 namespace Injector.Common
 {
-    public abstract class ABaseSupplier : IABaseSupplier
+    public abstract class ABaseSharingSupplier : IABaseSharingSupplier
     {
         private ISharingStore _sharingStore;
 
         #region CONSTRUCTOR
 
-        internal ABaseSupplier() { }
+        internal ABaseSharingSupplier() { }
 
-        internal ABaseSupplier(ISharingStore sharingStore)
+        internal ABaseSharingSupplier(ISharingStore sharingStore)
         {
             SupplierSharingStore = sharingStore;
         }
@@ -27,10 +23,5 @@ namespace Injector.Common
             get { return _sharingStore ?? (_sharingStore = SharingStore.Instance()); }
             set { _sharingStore = value; }
         }
-    }
-
-    internal interface IABaseSupplier
-    {
-        ISharingStore SupplierSharingStore { get; set; }
     }
 }

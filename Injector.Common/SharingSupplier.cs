@@ -4,7 +4,7 @@ using Injector.Common.ISupplier;
 
 namespace Injector.Common
 {
-    public class SharingSupplier : ABaseSupplier, ISharingSupplier
+    public class SharingSupplier : ABaseSharingSupplier, ISharingSupplier
     {
         #region CONSTRUCTOR
 

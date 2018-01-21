@@ -5,48 +5,56 @@ using Injector.Data;
 
 namespace Injector.Business
 {
-    public interface IBusinessStore
+    public interface ICoreStore
     {
-        IDataSupplier GetDataSupplier();
-        LogicalA GetOperatorA();
-        LogicalB GetOperatorB();
-        ModelA GetModelA();
-        ModelB GetModelB();
+        IDataSupplier StoreDataSupplier { get; set; }
+        ISharingSupplier StoreSharingSupplier { get; set; }
     }
 
-    internal class CoreStore : IBusinessStore
+    internal class CoreStore : ICoreStore
     {
-        private static IBusinessStore businessStore;
+        private IDataSupplier _dataSupplier;
+        private ISharingSupplier _sharingSupplier;
 
-        public static IBusinessStore InstanceOfBusinessStore
+        #region CONSTRUCTOR
+
+        private CoreStore() { }
+
+        private CoreStore(IDataSupplier dataSupplier)
         {
-            get { return businessStore; }
-            set { businessStore = value; }
+            StoreDataSupplier = dataSupplier;
         }
 
-        public IDataSupplier GetDataSupplier()
+        private CoreStore(ISharingSupplier sharingSupplier)
         {
-            return new DataSupplier();
+            StoreSharingSupplier = sharingSupplier;
         }
 
-        public LogicalA GetOperatorA()
+        private CoreStore(IDataSupplier dataSupplier, ISharingSupplier sharingSupplier)
         {
-            return new LogicalA();
+            StoreDataSupplier = dataSupplier;
+            StoreSharingSupplier = sharingSupplier;
         }
 
-        public LogicalB GetOperatorB()
+        #endregion
+
+        #region SINGLETON
+
+        private static ICoreStore CoreStoreIstance { get; set; }
+
+        public static ICoreStore Instance()
         {
-            return new LogicalB();
+            if (CoreStoreIstance == null)
+            {
+                CoreStoreIstance = new CoreStore();
+            }
+
+            return CoreStoreIstance;
         }
 
-        public ModelA GetModelA()
-        {
-            return new ModelA();
-        }
+        #endregion
 
-        public ModelB GetModelB()
-        {
-            return new ModelB();
-        }
+        public IDataSupplier StoreDataSupplier { get; set; }
+        public ISharingSupplier StoreSharingSupplier { get; set; }
     }
 }

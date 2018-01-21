@@ -5,27 +5,16 @@ using Injector.Data.Layer;
 
 namespace Injector.Data
 {
-    public class DataSupplier : IDataSupplier
+    public class DataSupplier : ABaseDataSupplier, IDataSupplier
     {
-        private IDataStore _dataStore;
-
         private IRepositoryA _repositoryA;
         private IRepositoryB _repositoryB;
-
-        public IDataStore SupplierDataStore
-        {
-            get { return _dataStore ?? (_dataStore = DataStore.Instance()); }
-            set { _dataStore = value; }
-        }
 
         #region CONSTRUCTOR
 
         private DataSupplier() { }
 
-        private DataSupplier(IDataStore dataStore)
-        {
-            SupplierDataStore = dataStore;
-        }
+        private DataSupplier(IDataStore dataStore) : base(dataStore) { }
 
         #endregion
 

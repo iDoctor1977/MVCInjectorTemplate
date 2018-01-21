@@ -9,7 +9,7 @@ namespace Injector.Business.Layer
     {
         public LogicalA() { }
 
-        public LogicalA(IBusinessStore businessStore) : base(businessStore) { }
+        public LogicalA(ICoreStore businessStore) : base(businessStore) { }
 
         public IModelA ReadModel(int id)
         {

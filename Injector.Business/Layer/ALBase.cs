@@ -10,29 +10,29 @@ namespace Injector.Business.Layer
         // all'istanziamento della classe che eredita l'astrazione.
         public IRepositoryA GetIstanceOfRepositoryA
         {
-            get { return CoreStore.InstanceOfBusinessStore.GetDataSupplier().GetRepositoryA(); }
+            get { return CoreStore.CoreStoreInstance.StoreDataSupplier().GetRepositoryA(); }
         }
 
         public IRepositoryB GetIstanceOfRepositoryB
         {
-            get { return CoreStore.InstanceOfBusinessStore.GetDataSupplier().GetRepositoryB(); }
+            get { return CoreStore.CoreStoreInstance.StoreDataSupplier().GetRepositoryB(); }
         }
 
         public ModelA GetConcreteModelA
         {
-            get { return CoreStore.InstanceOfBusinessStore.GetModelA(); }
+            get { return CoreStore.CoreStoreInstance.GetModelA(); }
         }
 
         public ModelB GetConcreteModelB
         {
-            get { return CoreStore.InstanceOfBusinessStore.GetModelB(); }
+            get { return CoreStore.CoreStoreInstance.GetModelB(); }
         }
 
         protected ALBase() { }
 
-        protected ALBase(IBusinessStore businessStore)
+        protected ALBase(ICoreStore businessStore)
         {
-            CoreStore.InstanceOfBusinessStore = businessStore;
+            CoreStore.CoreStoreInstance = businessStore;
         }
     }
 }

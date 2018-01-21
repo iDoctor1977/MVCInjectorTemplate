@@ -10,19 +10,19 @@ namespace Injector.Business
 
         public CoreSupplier() { }
 
-        public CoreSupplier(IBusinessStore businessStore)
+        public CoreSupplier(ICoreStore businessStore)
         {
-            CoreStore.InstanceOfBusinessStore = businessStore;
+            CoreStore.CoreStoreInstance = businessStore;
         }
 
         public IOperatorA GenerateOperatorA()
         {
-            return operatorA ?? (operatorA = CoreStore.InstanceOfBusinessStore.GetOperatorA());
+            return operatorA ?? (operatorA = CoreStore.CoreStoreInstance.GetOperatorA());
         }
 
         public IOperatorB GenerateOperatorB()
         {
-            return operatorB ?? (operatorB = CoreStore.InstanceOfBusinessStore.GetOperatorB());
+            return operatorB ?? (operatorB = CoreStore.CoreStoreInstance.GetOperatorB());
         }
     }
 }
