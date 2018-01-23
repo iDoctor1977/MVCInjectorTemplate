@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
@@ -126,6 +127,26 @@ namespace Injector.Data.Layer
             }
 
             return null;
+        }
+
+        public IEnumerable<ModelB> ReadEntities()
+        {
+            try
+            {
+                IEnumerable<EntityB> entitiesB = ABaseDbContext().EntitiesB.ToList();
+
+                if (entitiesB.Any())
+                {
+                    return entitiesB.Select(ConvertBEntityToModel);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
+            }
+
+            return Enumerable.Empty<ModelB>();
+
         }
 
         public int DeleteEntity(ModelB modelB)

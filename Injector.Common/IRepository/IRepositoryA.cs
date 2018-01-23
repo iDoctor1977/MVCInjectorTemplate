@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Injector.Common.DTOModel;
 
 namespace Injector.Common.IRepository
@@ -7,8 +8,9 @@ namespace Injector.Common.IRepository
     {
         Guid CreateEntity(ModelA modelA);
         int UpdateEntity(ModelA modelA);
-        ModelA ReadEntityById(int id);
+        ModelA ReadEntityById(Guid id);
         ModelA ReadEntityByName(string name);
+        IEnumerable<ModelA> ReadEntities();
         int DeleteEntity(ModelA modelA);
     }
 }

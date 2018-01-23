@@ -6,7 +6,6 @@ namespace Injector.Common.ILogic
 {
     public interface ILogicB
     {
-        IVMCreateB CreateGet(IVMCreateB vmCreateB);
         int CreatePost(IVMCreateB vmCreateB);
         int DeletePost(IVMDeleteB vmDeleteB);
         IVMEditB EditGet(IVMEditB vmEditB);

@@ -40,11 +40,6 @@ namespace Injector.Business.Layer
 
         #endregion
 
-        public IVMCreateB CreateGet(IVMCreateB vmCreateB)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public int CreatePost(IVMCreateB vmCreateB)
         {
             throw new System.NotImplementedException();
