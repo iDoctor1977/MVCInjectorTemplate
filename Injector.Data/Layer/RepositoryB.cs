@@ -91,7 +91,7 @@ namespace Injector.Data.Layer
             return -1;
         }
 
-        public ModelB ReadEntityById(int id)
+        public ModelB ReadEntityById(Guid id)
         {
             try
             {

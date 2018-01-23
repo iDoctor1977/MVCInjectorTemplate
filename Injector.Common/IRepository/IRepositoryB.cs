@@ -9,7 +9,7 @@ namespace Injector.Common.IRepository
     {
         Guid CreateEntity(ModelB modelB);
         int UpdateEntity(ModelB modelB);
-        ModelB ReadEntityById(int id);
+        ModelB ReadEntityById(Guid id);
         ModelB ReadEntityByUsername(string username);
         IEnumerable<ModelB> ReadEntities();
         int DeleteEntity(ModelB entityB);
