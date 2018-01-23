@@ -45,7 +45,7 @@ namespace InjectorUnitTest.Test
             businessStoreSubstitute.GetDataSupplier().Returns(dataSupplierSubstitute);
             businessStoreSubstitute.GetModelA().Returns(new ModelA());
 
-            LogicalA operatorA = new LogicalA(businessStoreSubstitute);
+            LogicA operatorA = new LogicA(businessStoreSubstitute);
             operatorA.CreateModel(modelA);
             var result = operatorA.ReadModel(1);
 
@@ -71,7 +71,7 @@ namespace InjectorUnitTest.Test
             //modelASubstitute.Name = "Pluto";
             //modelASubstitute.Surname = "Paperino";
 
-            IOperatorA operatorASubstitute = Substitute.For<IOperatorA>();
+            ILogicA operatorASubstitute = Substitute.For<ILogicA>();
             operatorASubstitute.ReadModel(Arg.Any<int>()).Returns(viewModelA);
             operatorASubstitute.CreateModel(viewModelA);
 
@@ -112,18 +112,18 @@ namespace InjectorUnitTest.Test
 
     public class BusinessSupplierMock : ICoreSupplier
     {
-        public IOperatorA GenerateOperatorA()
+        public ILogicA GenerateOperatorA()
         {
             return new OperatorAMock();
         }
 
-        public IOperatorB GenerateOperatorB()
+        public ILogicB GenerateOperatorB()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class OperatorAMock : IOperatorA
+    public class OperatorAMock : ILogicA
     {
         public void CreateModel(IModelA modelA)
         {

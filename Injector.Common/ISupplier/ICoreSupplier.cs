@@ -4,7 +4,7 @@ namespace Injector.Common.ISupplier
 {
     public interface ICoreSupplier
     {
-        IOperatorA GenerateOperatorA();
-        IOperatorB GenerateOperatorB();
+        ILogicA GetLogicA();
+        ILogicB GetLogicB();
     }
 }

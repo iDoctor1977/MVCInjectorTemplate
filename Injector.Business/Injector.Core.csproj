@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Layer\ALBase.cs" />
-    <Compile Include="Layer\LogicalB.cs" />
+    <Compile Include="ABaseCoreSupplier.cs" />
+    <Compile Include="Layer\ABaseLogic.cs" />
+    <Compile Include="Layer\LogicB.cs" />
     <Compile Include="CoreSupplier.cs" />
-    <Compile Include="Layer\LogicalA.cs" />
+    <Compile Include="Layer\LogicA.cs" />
     <Compile Include="CoreStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

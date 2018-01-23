@@ -50,10 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ABaseSharingSupplier.cs" />
+    <Compile Include="IABase\IABaseCoreSupplier.cs" />
     <Compile Include="IABase\IABaseDataSupplier.cs" />
+    <Compile Include="IABase\IABaseLogic.cs" />
     <Compile Include="IABase\IABaseSharingSupplier.cs" />
-    <Compile Include="IABase\IABaseConverter.cs" />
     <Compile Include="IABase\IABaseRepository.cs" />
+    <Compile Include="IVModel\IVMDeleteB.cs" />
+    <Compile Include="IVModel\IVMDetailsB.cs" />
+    <Compile Include="IVModel\IVMEditB.cs" />
+    <Compile Include="IVModel\IVMListB.cs" />
+    <Compile Include="IVModel\IVMDeleteA.cs" />
+    <Compile Include="IVModel\IVMDetailsA.cs" />
+    <Compile Include="IVModel\IVMEditA.cs" />
+    <Compile Include="IVModel\IVMListA.cs" />
+    <Compile Include="IStore\ICoreStore.cs" />
     <Compile Include="SharingStore.cs" />
     <Compile Include="SharingSupplier.cs" />
     <Compile Include="DTOModel\ModelA.cs" />
@@ -61,7 +71,7 @@
     <Compile Include="IEntity\IEntityB.cs" />
     <Compile Include="IEntity\IEntityA.cs" />
     <Compile Include="IModel\IModelB.cs" />
-    <Compile Include="ILogic\IOperatorB.cs" />
+    <Compile Include="ILogic\ILogicB.cs" />
     <Compile Include="IDbContext\IProjectDbContext.cs" />
     <Compile Include="IRepository\IRepositoryB.cs" />
     <Compile Include="IRepository\IRepositoryA.cs" />
@@ -71,7 +81,7 @@
     <Compile Include="ISupplier\IDataSupplier.cs" />
     <Compile Include="IModel\IModelA.cs" />
     <Compile Include="ISupplier\ICoreSupplier.cs" />
-    <Compile Include="ILogic\IOperatorA.cs" />
+    <Compile Include="ILogic\ILogicA.cs" />
     <Compile Include="IVModel\IVMCreateA.cs" />
     <Compile Include="IVModel\IVMCreateB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

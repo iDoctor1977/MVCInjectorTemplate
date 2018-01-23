@@ -12,9 +12,7 @@ namespace Injector.Data.Layer
 
         #region CONSTRUCTOR
 
-        protected ABaseRepository()
-        {
-        }
+        protected ABaseRepository() { }
 
         protected ABaseRepository(IDataStore dataStore)
         {

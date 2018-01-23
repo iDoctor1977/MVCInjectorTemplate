@@ -1,28 +1,56 @@
-﻿using Injector.Common.ILogic;
+﻿using Injector.Business.Layer;
+using Injector.Common;
+using Injector.Common.ILogic;
+using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 
 namespace Injector.Business
 {
-    public class CoreSupplier : ICoreSupplier
+    public class CoreSupplier : ABaseCoreSupplier, ICoreSupplier
     {
-        private IOperatorA operatorA;
-        private IOperatorB operatorB;
+        private ILogicA _logicA;
+        private ILogicB _logicB;
+
+        #region CONSTRUCTOR
 
         public CoreSupplier() { }
 
-        public CoreSupplier(ICoreStore businessStore)
+        public CoreSupplier(ICoreStore coreStore) : base(coreStore) { }
+
+        #endregion
+
+        #region SINGLETON
+
+        private static ICoreSupplier CoreSupplierInstance { get; set; }
+
+        public static ICoreSupplier Instance()
         {
-            CoreStore.CoreStoreInstance = businessStore;
+            if (CoreSupplierInstance == null)
+            {
+                CoreSupplierInstance = new CoreSupplier();
+            }
+
+            return CoreSupplierInstance;
         }
 
-        public IOperatorA GenerateOperatorA()
+        public static ICoreSupplier Instance(ICoreStore coreStore)
         {
-            return operatorA ?? (operatorA = CoreStore.CoreStoreInstance.GetOperatorA());
+            if (CoreSupplierInstance == null)
+            {
+                CoreSupplierInstance = new CoreSupplier(coreStore);
+            }
+
+            return CoreSupplierInstance;
         }
 
-        public IOperatorB GenerateOperatorB()
-        {
-            return operatorB ?? (operatorB = CoreStore.CoreStoreInstance.GetOperatorB());
-        }
+        #endregion
+
+        #region LOGICS
+
+        public ILogicA GetLogicA => _logicA ?? (_logicA = LogicA.Instance(SupplierCoreStore)); // new LogicA()
+
+        public ILogicB GetLogicB => _logicB ?? (_logicB = LogicB.Instance(SupplierCoreStore)); // new LogicB()
+
+        #endregion
     }
 }

@@ -1,16 +1,10 @@
-﻿using Injector.Business.Layer;
-using Injector.Common.DTOModel;
+﻿using Injector.Common;
+using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 using Injector.Data;
 
 namespace Injector.Business
 {
-    public interface ICoreStore
-    {
-        IDataSupplier StoreDataSupplier { get; set; }
-        ISharingSupplier StoreSharingSupplier { get; set; }
-    }
-
     internal class CoreStore : ICoreStore
     {
         private IDataSupplier _dataSupplier;
@@ -52,9 +46,47 @@ namespace Injector.Business
             return CoreStoreIstance;
         }
 
+        public static ICoreStore Instance(IDataSupplier dataSupplier)
+        {
+            if (CoreStoreIstance == null)
+            {
+                CoreStoreIstance = new CoreStore(dataSupplier);
+            }
+
+            return CoreStoreIstance;
+        }
+
+        public static ICoreStore Instance(ISharingSupplier sharingSupplier)
+        {
+            if (CoreStoreIstance == null)
+            {
+                CoreStoreIstance = new CoreStore(sharingSupplier);
+            }
+
+            return CoreStoreIstance;
+        }
+
+        public static ICoreStore Instance(IDataSupplier dataSupplier, ISharingSupplier sharingSupplier)
+        {
+            if (CoreStoreIstance == null)
+            {
+                CoreStoreIstance = new CoreStore(dataSupplier, sharingSupplier);
+            }
+
+            return CoreStoreIstance;
+        }
+
         #endregion
 
-        public IDataSupplier StoreDataSupplier { get; set; }
-        public ISharingSupplier StoreSharingSupplier { get; set; }
+        public IDataSupplier StoreDataSupplier
+        {
+            get { return _dataSupplier ?? (_dataSupplier = DataSupplier.Instance()); }
+            set { _dataSupplier = value; }
+        }
+        public ISharingSupplier StoreSharingSupplier
+        {
+            get { return _sharingSupplier ?? (_sharingSupplier = SharingSupplier.Instance()); }
+            set { _sharingSupplier = value; }
+        }
     }
 }

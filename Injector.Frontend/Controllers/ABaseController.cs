@@ -9,14 +9,14 @@ namespace Injector.Frontend.Controllers
         // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
         // solo nel momento in cui viene espressamente richiesta e non
         // all'istanziamento della classe che eredita l'astrazione.
-        public IOperatorA GetIstanceOfOperatorA
+        public ILogicA GetIstanceOfOperatorA
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorA(); }
+            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GetLogicA(); }
         }
 
-        public IOperatorB GetIstanceOfOperatorB
+        public ILogicB GetIstanceOfOperatorB
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GenerateOperatorB(); }
+            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GetLogicB(); }
         }
 
         public VMCreateA GetIstanceOfCreateViewModelA
