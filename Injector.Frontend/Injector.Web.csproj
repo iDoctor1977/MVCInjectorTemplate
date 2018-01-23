@@ -146,11 +146,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ControllerB\TestB.cshtml" />
-    <Content Include="Views\A\Create.cshtml" />
-    <Content Include="Views\A\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\A\Create.cshtml" />
+    <Content Include="Views\A\Delete.cshtml" />
+    <Content Include="Views\A\Edit.cshtml" />
+    <Content Include="Views\A\Details.cshtml" />
+    <Content Include="Views\A\List.cshtml" />
+    <Content Include="Views\B\Create.cshtml" />
+    <Content Include="Views\B\Delete.cshtml" />
+    <Content Include="Views\B\Edit.cshtml" />
+    <Content Include="Views\B\Details.cshtml" />
+    <Content Include="Views\B\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

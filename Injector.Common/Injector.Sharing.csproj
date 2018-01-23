@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ABaseSharingSupplier.cs" />
+    <Compile Include="IABase\IABaseController.cs" />
     <Compile Include="IABase\IABaseCoreSupplier.cs" />
     <Compile Include="IABase\IABaseDataSupplier.cs" />
     <Compile Include="IABase\IABaseLogic.cs" />

@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Injector.Common.IABase;
 using Injector.Common.IStore;
 using log4net;
 
 namespace Injector.Frontend.Controllers
 {
-    public abstract class ABaseController : Controller
+    public abstract class ABaseController : Controller, IABaseController
     {
         private IWebStore _webStore;
-
-        // Set the test mode exception
-        private readonly bool _runTestMode;
 
         private ILog _logger;
         private const int DefaultEntryKey = -1;
@@ -25,20 +22,18 @@ namespace Injector.Frontend.Controllers
 
         protected ABaseController()
         {
-            bool.TryParse(ConfigurationManager.AppSettings["RunTestMode"], out _runTestMode);
             FillRedirectDictionary();
         }
 
         protected ABaseController(IWebStore webStore)
         {
             ABaseStore = webStore;
-            bool.TryParse(ConfigurationManager.AppSettings["RunTestMode"], out _runTestMode);
             FillRedirectDictionary();
         }
 
         #endregion
 
-        protected IWebStore ABaseStore
+        public IWebStore ABaseStore
         {
             get { return _webStore ?? (_webStore = WebStore.Instance()); }
             set { _webStore = value; }
@@ -48,9 +43,6 @@ namespace Injector.Frontend.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (_runTestMode)
-                return;
-
             // Redirect user to error page
             filterContext.ExceptionHandled = true;
             // log the error
