@@ -1,13 +1,18 @@
 ﻿using System.Web.Mvc;
+using Injector.Common.IStore;
 using Injector.Frontend.Models;
 
 namespace Injector.Frontend.Controllers
 {
     public class AController : ABaseController
     {
+        #region CONSTRUCTOR
+
         public AController() { }
 
-        public AController(IFrontendStore frontendStore) : base(frontendStore) { }
+        public AController(IWebStore webStore) : base(webStore) { }
+
+        #endregion
 
         public ActionResult Index()
         {
@@ -20,22 +25,23 @@ namespace Injector.Frontend.Controllers
 
         public ActionResult Create(VMCreateA model)
         {
-            VMCreateA viewModelA = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA();
-            viewModelA.Name = "Filippo";
-            viewModelA.Surname = "Foglia";
-            viewModelA.TelNumber = "3315787943";
+            VMCreateA vmCreateA = ABaseStore.NewVMCreateA as VMCreateA;
 
-            VMCreateB viewModelB = FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB();
-            viewModelB.Username = "iDoctor";
-            viewModelB.Email = "filippo.foglia@gmail.com";
-            viewModelB.Birth = "18/07/1977";
+            vmCreateA.DTOModelA.Name = "Filippo";
+            vmCreateA.DTOModelA.Surname = "Foglia";
+            vmCreateA.TelNumber = "3315787943";
 
-            GetIstanceOfOperatorA.CreateModel(viewModelA);
-            GetIstanceOfOperatorB.CreateModel(viewModelB);
+            VMCreateB vmCreateB = ABaseStore.NewVMCreateB as VMCreateB;
+            vmCreateB.DTOModelB.Username = "iDoctor";
+            vmCreateB.DTOModelB.Email = "filippo.foglia@gmail.com";
+            vmCreateB.Birth = "18/07/1977";
 
-            viewModelA.ColCreateViewModelB.Add((VMCreateB)GetIstanceOfOperatorB.ReadModelByUsername("iDoctor"));
+            GetIstanceOfOperatorA.CreateModel(vmCreateA);
+            GetIstanceOfOperatorB.CreateModel(vmCreateB);
 
-            return View(viewModelA);
+            vmCreateA.ColCreateViewModelB.Add((VMCreateB)GetIstanceOfOperatorB.ReadModelByUsername("iDoctor"));
+
+            return View(vmCreateA);
         }
     }
 }

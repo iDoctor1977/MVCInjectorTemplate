@@ -41,34 +41,29 @@ namespace Injector.Business.Layer
 
         #endregion
 
-        public int CreatePost(IVMCreateB vmCreateB)
+        public bool CreatePost(IVMCreateB vmCreateB)
         {
             vmCreateB.DTOModelB.Id = ABaseStore.StoreDataSupplier.GetRepositoryB.CreateEntity(vmCreateB.DTOModelB);
 
             if (vmCreateB.DTOModelB.Id != Guid.Empty)
             {
-                return 1;
+                return true;
             }
 
-            return -1;
+            return false;
         }
 
         public IVMDeleteB DeleteGet(IVMDeleteB vmDeleteB)
         {
-            vmDeleteB.DTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryA.ReadEntityById(vmDeleteB.DTOModelB.Id);
+            vmDeleteB.DTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryB.ReadEntityById(vmDeleteB.DTOModelB.Id);
 
             return vmDeleteB;
 
         }
 
-        public int DeletePost(IVMDeleteB vmDeleteB)
+        public bool DeletePost(IVMDeleteB vmDeleteB)
         {
-            if (ABaseStore.StoreDataSupplier.GetRepositoryB.DeleteEntity(vmDeleteB.DTOModelB) != -1)
-            {
-                return 1;
-            }
-
-            return -1;
+            return ABaseStore.StoreDataSupplier.GetRepositoryB.DeleteEntity(vmDeleteB.DTOModelB);
         }
 
         public IVMEditB EditGet(IVMEditB vmEditB)
@@ -78,14 +73,9 @@ namespace Injector.Business.Layer
             return vmEditB;
         }
 
-        public int EditPost(IVMEditB vmEditB)
+        public bool EditPost(IVMEditB vmEditB)
         {
-            if (ABaseStore.StoreDataSupplier.GetRepositoryB.UpdateEntity(vmEditB.DTOModelB) != -1)
-            {
-                return 1;
-            }
-
-            return -1;
+            return ABaseStore.StoreDataSupplier.GetRepositoryB.UpdateEntity(vmEditB.DTOModelB);
         }
 
         public IVMDetailsB DetailsGet(IVMDetailsB vmDetailsB)

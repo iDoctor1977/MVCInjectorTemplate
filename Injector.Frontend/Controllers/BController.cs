@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Injector.Common.IModel;
+using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 using Injector.Frontend.Models;
 
@@ -9,7 +10,7 @@ namespace Injector.Frontend.Controllers
     {
         public BController() { }
 
-        public BController(IFrontendStore frontendStore) : base(frontendStore) { }
+        public BController(IWebStore frontendStore) : base(frontendStore) { }
 
         public ActionResult Index()
         {

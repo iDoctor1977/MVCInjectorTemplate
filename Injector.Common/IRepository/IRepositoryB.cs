@@ -8,10 +8,10 @@ namespace Injector.Common.IRepository
     public interface IRepositoryB
     {
         Guid CreateEntity(ModelB modelB);
-        int UpdateEntity(ModelB modelB);
+        bool UpdateEntity(ModelB modelB);
         ModelB ReadEntityById(Guid id);
         ModelB ReadEntityByUsername(string username);
         IEnumerable<ModelB> ReadEntities();
-        int DeleteEntity(ModelB entityB);
+        bool DeleteEntity(ModelB entityB);
     }
 }

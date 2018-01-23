@@ -1,41 +1,111 @@
-﻿using System.Web.Mvc;
-using Injector.Common.ILogic;
-using Injector.Frontend.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Injector.Common.IStore;
+using log4net;
 
 namespace Injector.Frontend.Controllers
 {
     public abstract class ABaseController : Controller
     {
-        // questa funzione scritta così permette di generare la classe di tipo 'Operartor'
-        // solo nel momento in cui viene espressamente richiesta e non
-        // all'istanziamento della classe che eredita l'astrazione.
-        public ILogicA GetIstanceOfOperatorA
+        private IWebStore _webStore;
+
+        // Set the test mode exception
+        private readonly bool _runTestMode;
+
+        private ILog _logger;
+        private const int DefaultEntryKey = -1;
+
+        private readonly Dictionary<int, ActionControllerName> _redirectDictionary = new Dictionary<int, ActionControllerName>();
+
+        #region CONSTRUCTOR
+
+        protected ABaseController()
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GetLogicA(); }
+            bool.TryParse(ConfigurationManager.AppSettings["RunTestMode"], out _runTestMode);
+            FillRedirectDictionary();
         }
 
-        public ILogicB GetIstanceOfOperatorB
+        protected ABaseController(IWebStore webStore)
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetBusinessSupplier().GetLogicB(); }
+            ABaseStore = webStore;
+            bool.TryParse(ConfigurationManager.AppSettings["RunTestMode"], out _runTestMode);
+            FillRedirectDictionary();
         }
 
-        public VMCreateA GetIstanceOfCreateViewModelA
+        #endregion
+
+        protected IWebStore ABaseStore
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelA(); }
+            get { return _webStore ?? (_webStore = WebStore.Instance()); }
+            set { _webStore = value; }
         }
 
-        public VMCreateB GetIstanceOfCreateViewModelB
+        #region EXCEPTIONS HANDLER
+
+        protected override void OnException(ExceptionContext filterContext)
         {
-            get { return FrontendStore.InstanceOfFrontendStore.GetCreateViewModelB(); }
+            if (_runTestMode)
+                return;
+
+            // Redirect user to error page
+            filterContext.ExceptionHandled = true;
+            // log the error
+            LogException(filterContext);
+            // redirect to error view
+            filterContext.Result = GetRedirect(filterContext.Exception);
+
+            base.OnException(filterContext);
         }
 
-        protected ABaseController() { }
-
-        protected ABaseController(IFrontendStore frontend)
+        private void LogException(ExceptionContext exceptionContext)
         {
-            FrontendStore.InstanceOfFrontendStore = frontend;
+            // log file
+            _logger = LogManager.GetLogger(exceptionContext.Controller.GetType());
+            _logger.Error(exceptionContext.Exception.Message, exceptionContext.Exception);
+            _logger.Error(exceptionContext.Exception.Source, exceptionContext.Exception);
+            _logger.Error(exceptionContext.Exception.StackTrace, exceptionContext.Exception);
         }
 
+        private void FillRedirectDictionary()
+        {
+            _redirectDictionary.Add(DefaultEntryKey, new ActionControllerName("Index", "Error"));
+            _redirectDictionary.Add((int)HttpStatusCode.NotFound, new ActionControllerName("PageNotFound", "Error"));
+            _redirectDictionary.Add((int)HttpStatusCode.InternalServerError, new ActionControllerName("ServerError", "Error"));
+            // more to add
+        }
 
+        private RedirectToRouteResult GetRedirect(Exception exception)
+        {
+            var errorCode = DefaultEntryKey;
+            var httpException = exception as HttpException;
+
+            if (httpException != null)
+            {
+                errorCode = httpException.GetHttpCode();
+                if (!_redirectDictionary.ContainsKey(errorCode))
+                    errorCode = DefaultEntryKey;
+            }
+
+            var acn = _redirectDictionary[errorCode];
+            return RedirectToAction(acn.ActionName, acn.ControllerName);
+        }
+
+        private class ActionControllerName
+        {
+            public string ActionName { get; private set; }
+            public string ControllerName { get; private set; }
+
+            public ActionControllerName(string actionName, string controllerName)
+            {
+                ActionName = actionName;
+                ControllerName = controllerName;
+            }
+        }
+
+        #endregion
     }
 }

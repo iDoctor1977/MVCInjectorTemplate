@@ -68,7 +68,7 @@ namespace Injector.Data.Layer
             return Guid.Empty;
         }
 
-        public int UpdateEntity(ModelA modelA)
+        public bool UpdateEntity(ModelA modelA)
         {
             EntityA entityA = ABaseDbContext().EntitiesA.Find(modelA.Id);
 
@@ -80,7 +80,7 @@ namespace Injector.Data.Layer
                     entityA.Surname = modelA.Surname;
                     Commit();
 
-                    return 1;
+                    return true;
                 }
             }
             catch (Exception exception)
@@ -88,7 +88,7 @@ namespace Injector.Data.Layer
                 throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
             }
 
-            return -1;
+            return false;
         }
 
         public ModelA ReadEntityById(Guid id)
@@ -148,7 +148,7 @@ namespace Injector.Data.Layer
             return Enumerable.Empty<ModelA>();
         }
 
-        public int DeleteEntity(ModelA modelA)
+        public bool DeleteEntity(ModelA modelA)
         {
             try
             {
@@ -158,6 +158,8 @@ namespace Injector.Data.Layer
                 {
                     ABaseDbContext().EntitiesA.Remove(entityA);
                     Commit();
+
+                    return true;
                 }
             }
             catch (Exception exception)
@@ -165,7 +167,7 @@ namespace Injector.Data.Layer
                 throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
             }
 
-            return -1;
+            return false;
         }
     }
 }

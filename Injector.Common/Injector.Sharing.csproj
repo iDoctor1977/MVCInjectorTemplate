@@ -55,6 +55,7 @@
     <Compile Include="IABase\IABaseLogic.cs" />
     <Compile Include="IABase\IABaseSharingSupplier.cs" />
     <Compile Include="IABase\IABaseRepository.cs" />
+    <Compile Include="IStore\IWebStore.cs" />
     <Compile Include="IVModel\IVMDeleteB.cs" />
     <Compile Include="IVModel\IVMDetailsB.cs" />
     <Compile Include="IVModel\IVMEditB.cs" />
