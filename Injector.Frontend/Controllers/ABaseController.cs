@@ -12,10 +12,7 @@ namespace Injector.Frontend.Controllers
     public abstract class ABaseController : Controller, IABaseController
     {
         private IWebStore _webStore;
-
-        private ILog _logger;
         private const int DefaultEntryKey = -1;
-
         private readonly Dictionary<int, ActionControllerName> _redirectDictionary = new Dictionary<int, ActionControllerName>();
 
         #region CONSTRUCTOR
@@ -45,21 +42,10 @@ namespace Injector.Frontend.Controllers
         {
             // Redirect user to error page
             filterContext.ExceptionHandled = true;
-            // log the error
-            LogException(filterContext);
             // redirect to error view
             filterContext.Result = GetRedirect(filterContext.Exception);
 
             base.OnException(filterContext);
-        }
-
-        private void LogException(ExceptionContext exceptionContext)
-        {
-            // log file
-            _logger = LogManager.GetLogger(exceptionContext.Controller.GetType());
-            _logger.Error(exceptionContext.Exception.Message, exceptionContext.Exception);
-            _logger.Error(exceptionContext.Exception.Source, exceptionContext.Exception);
-            _logger.Error(exceptionContext.Exception.StackTrace, exceptionContext.Exception);
         }
 
         private void FillRedirectDictionary()

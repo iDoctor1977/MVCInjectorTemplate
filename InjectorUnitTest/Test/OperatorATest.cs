@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using Injector.Business;
-using Injector.Business.Layer;
 using Injector.Common.DTOModel;
+using Injector.Common.IABase;
 using Injector.Common.IEntity;
 using Injector.Common.ILogic;
 using Injector.Common.IModel;
 using Injector.Common.IRepository;
+using Injector.Common.IStore;
 using Injector.Common.ISupplier;
-using Injector.Frontend;
+using Injector.Common.IVModel;
 using Injector.Frontend.Controllers;
 using Injector.Frontend.Models;
 using NSubstitute;
@@ -24,33 +25,41 @@ namespace InjectorUnitTest.Test
         {
             IEntityA entityA = new EntityAMock
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Name = "Pippo",
                 Surname = "Poppi"
             };
 
-            IModelA modelA = new ModelA();
-            modelA.Id = 1;
-            modelA.Name = "Pippo";
-            modelA.Surname = "Poppi";
+            ModelA modelA = new ModelA
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pippo",
+                Surname = "Poppi"
+            };
 
             IRepositoryA repositoryASubstitute = Substitute.For<IRepositoryA>();
-            repositoryASubstitute.CreateEntity(entityA);
-            repositoryASubstitute.ReadEntityById(Arg.Any<int>()).Returns(entityA);
+            repositoryASubstitute.CreateEntity(modelA);
+            repositoryASubstitute.ReadEntityById(Arg.Any<Guid>()).Returns(entityA);
 
             IDataSupplier dataSupplierSubstitute = Substitute.For<IDataSupplier>();
-            dataSupplierSubstitute.GenerateRepositoryA().Returns(repositoryASubstitute);
+            dataSupplierSubstitute.GetRepositoryA.Returns(repositoryASubstitute);
 
-            IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
-            businessStoreSubstitute.GetDataSupplier().Returns(dataSupplierSubstitute);
-            businessStoreSubstitute.GetModelA().Returns(new ModelA());
+            ICoreStore coreStoreSubstitute = Substitute.For<ICoreStore>();
+            coreStoreSubstitute.StoreDataSupplier.Returns(dataSupplierSubstitute);
+            coreStoreSubstitute.StoreSharingSupplier.GetModelA().Returns(new ModelA());
 
-            LogicA operatorA = new LogicA(businessStoreSubstitute);
-            operatorA.CreateModel(modelA);
-            var result = operatorA.ReadModel(1);
+            VMCreateAMock vmCreateAMock = new VMCreateAMock
+            {
+                DTOModelA = modelA
+            };
+            VMDetailsAMock vmDetailsAMock = new VMDetailsAMock();
+
+            LogicAMock logicA = new LogicAMock();
+            logicA.CreatePost(vmCreateAMock);
+            var result = logicA.DetailsGet(vmDetailsAMock);
 
             Assert.IsInstanceOf<IModelA>(result as ModelA);
-            Assert.AreEqual(modelA.Id, result.Id);
+            Assert.AreEqual(modelA.Id, result.DTOModelA.Id);
         }
 
         [Test]
@@ -58,12 +67,14 @@ namespace InjectorUnitTest.Test
         public void CreateWithValidInput()
         {
             // ARANGE
-            IModelA viewModelA = new CreateViewModelA
+            VMDetailsA vmDetailsA = new VMDetailsA
             {
-                Id = 1,
-                Name = "Pippo",
-                Surname = "Foia",
-                TelNumber = "3315787943"
+                DTOModelA = new ModelA
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Pippo",
+                    Surname = "Foia",
+                },
             };
 
             //IModelA modelASubstitute = Substitute.For<IModelA>();
@@ -71,28 +82,27 @@ namespace InjectorUnitTest.Test
             //modelASubstitute.Name = "Pluto";
             //modelASubstitute.Surname = "Paperino";
 
-            ILogicA operatorASubstitute = Substitute.For<ILogicA>();
-            operatorASubstitute.ReadModel(Arg.Any<int>()).Returns(viewModelA);
-            operatorASubstitute.CreateModel(viewModelA);
+            ILogicA logicASubstitute = Substitute.For<ILogicA>();
+            logicASubstitute.DetailsGet(Arg.Any<VMDetailsA>()).Returns(vmDetailsA);
 
             //IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
             //businessStoreSubstitute.GetOperatorA().Returns(operatorASubstitute);
 
-            ICoreSupplier businessSupplierSubstitute = Substitute.For<ICoreSupplier>();
-            businessSupplierSubstitute.GenerateOperatorA().Returns(operatorASubstitute);
+            ICoreSupplier coreSupplierSubstitute = Substitute.For<ICoreSupplier>();
+            coreSupplierSubstitute.GetLogicA.Returns(logicASubstitute);
 
-            IFrontendStore frontendStoreSubstitute = Substitute.For<IFrontendStore>();
-            frontendStoreSubstitute.GetCreateViewModelA().Returns(viewModelA);
-            frontendStoreSubstitute.GetBusinessSupplier().Returns(businessSupplierSubstitute);
+            IWebStore webStoreSubstitute = Substitute.For<IWebStore>();
+            webStoreSubstitute.NewVMDetailsA.Returns(vmDetailsA);
+            webStoreSubstitute.StoreCoreSupplier.Returns(coreSupplierSubstitute);
 
             // ACT
-            var homeController = new AController(frontendStoreSubstitute);
-            ActionResult result = homeController.Index();
+            var homeController = new AController(webStoreSubstitute);
+            ActionResult result = homeController.List();
 
             // ASSERT
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<IModelA>((result as ViewResult).Model);
-            Assert.AreEqual(viewModelA, ((VMCreateA)(result as ViewResult).Model));
+            Assert.AreEqual(vmDetailsA, ((VMCreateA)(result as ViewResult).Model));
 
             //OperatorA operatorA = new OperatorA(new DataSupplierMock());
 
@@ -110,131 +120,138 @@ namespace InjectorUnitTest.Test
         }
     }
 
-    public class BusinessSupplierMock : ICoreSupplier
+    public class VMDetailsAMock : IVMDetailsA
     {
-        public ILogicA GenerateOperatorA()
+        public ModelA DTOModelA { get; set; }
+    }
+
+    public class VMCreateAMock : IVMCreateA
+    {
+        public ModelA DTOModelA { get; set; }
+    }
+
+    public class ABaseCoreSupplierMock : IABaseCoreSupplier
+    {
+        public ICoreStore SupplierCoreStore { get; set; }
+    }
+
+    public class CoreSupplierMock : ICoreSupplier
+    {
+        public ILogicA GetLogicA => new LogicAMock();
+
+        public ILogicB GetLogicB { get; }
+    }
+
+    public class LogicAMock : ILogicA
+    {
+        public bool CreatePost(IVMCreateA vmCreateA)
         {
-            return new OperatorAMock();
+            throw new NotImplementedException();
         }
 
-        public ILogicB GenerateOperatorB()
+        public IVMDeleteA DeleteGet(IVMDeleteA vmDeleteA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePost(IVMDeleteA vmDeleteA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVMEditA EditGet(IVMEditA vmEditA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool EditPost(IVMEditA vmEditA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVMDetailsA DetailsGet(IVMDetailsA vmDetailsA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVMListA ListGet(IVMListA vmListA)
         {
             throw new NotImplementedException();
         }
     }
 
-    public class OperatorAMock : ILogicA
+    public class ABaseDataSupplierMock : IABaseDataSupplier
     {
-        public void CreateModel(IModelA modelA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IModelA ReadModel(int id)
-        {
-            return new ModelAMock
-            {
-                Id = 3,
-                Name = "Pluto",
-                Surname = "Paperino"
-            };
-        }
-
-        public IModelA ReadModelByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateModel(IModelA modelA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteModel(IModelA modelA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ToStringOperator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IModelA ConvertEntityAToModelA(IEntityA entityA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEntityA ConvertModelAToEntityA(IModelA modelA)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ModelAMock : IModelA
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public IDataStore SupplierDataStore { get; set; }
     }
 
     public class DataSupplierMock : IDataSupplier
     {
-        public IRepositoryA GenerateRepositoryA()
+        public IRepositoryA GetRepositoryA => new RepositoryAMock();
+
+        public IRepositoryB GetRepositoryB { get; }
+    }
+
+    public class ABaseRepositoryMock : IABaseRepository
+    {
+        public IDataStore ABaseStore { get; set; }
+
+        public ModelA ConvertAEntityToModel(IEntityA entityA)
         {
-            RepositoryAMock repositoryAMock = new RepositoryAMock();
-            return repositoryAMock;
+            throw new NotImplementedException();
         }
 
-        public IRepositoryB GenerateRepositoryB()
+        public IEntityA ConvertAModelToEntity(ModelA modelA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ModelB ConvertBEntityToModel(IEntityB entityB)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEntityB ConvertBModelToEntity(ModelB modelB)
         {
             throw new NotImplementedException();
         }
     }
 
-    public class RepositoryAMock : IRepositoryA
+    public class RepositoryAMock : ABaseRepositoryMock, IRepositoryA
     {
-        public IEntityA ReadEntityById(int IdA)
+        public Guid CreateEntity(ModelA modelA)
         {
-            return new EntityAMock
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateEntity(ModelA modelA)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ModelA ReadEntityById(Guid id)
+        {
+            EntityAMock entityA = new EntityAMock
             {
-                Id = 3,
+                Id = Guid.NewGuid(),
                 Name = "Pluto",
                 Surname = "Paperino",
             };
+
+            return ConvertAEntityToModel(entityA);
         }
 
-        public IEntityA ReadEntityByName(string name)
+        public ModelA ReadEntityByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateEntity(IEntityA entityA)
+        public IEnumerable<ModelA> ReadEntities()
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateEntity(IEntityA entityA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEntity(IEntityA entityA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Commit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEntityA GetConcreteEntityA()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ToStringRepository()
+        public bool DeleteEntity(ModelA modelA)
         {
             throw new NotImplementedException();
         }
@@ -242,7 +259,7 @@ namespace InjectorUnitTest.Test
 
     public class EntityAMock : IEntityA
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
     }
