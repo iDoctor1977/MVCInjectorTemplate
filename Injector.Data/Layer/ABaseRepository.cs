@@ -41,7 +41,7 @@ namespace Injector.Data.Layer
 
         public ModelA ConvertAEntityToModel(IEntityA entityA)
         {
-            ModelA modelA = ABaseStore.StoreCommonSupplier.GetModelA() as ModelA;
+            ModelA modelA = ABaseStore.StoreSharingSupplier.GetModelA() as ModelA;
             modelA.Id = entityA.Id;
             modelA.Name = entityA.Name;
             modelA.Surname = entityA.Surname;
@@ -65,7 +65,7 @@ namespace Injector.Data.Layer
 
         public ModelB ConvertBEntityToModel(IEntityB entityB)
         {
-            ModelB modelB = ABaseStore.StoreCommonSupplier.GetModelB() as ModelB;
+            ModelB modelB = ABaseStore.StoreSharingSupplier.GetModelB() as ModelB;
             modelB.Id = entityB.Id;
             modelB.Username = entityB.Username;
             modelB.Email = entityB.Email;

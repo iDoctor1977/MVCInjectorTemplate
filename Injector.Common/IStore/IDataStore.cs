@@ -8,7 +8,7 @@ namespace Injector.Common.IStore
     {
         string StoreConnectionStringName { get; set; }
         IProjectDbContext StoreProjectDbContext { get; set; }
-        ISharingSupplier StoreCommonSupplier { get; set; }
+        ISharingSupplier StoreSharingSupplier { get; set; }
 
         // Entities
         IEntityA NewEntityA { get; set; }

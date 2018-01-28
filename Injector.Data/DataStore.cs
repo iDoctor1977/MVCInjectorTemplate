@@ -33,18 +33,18 @@ namespace Injector.Data
 
         private DataStore(ISharingSupplier commonSupplier)
         {
-            StoreCommonSupplier = commonSupplier;
+            StoreSharingSupplier = commonSupplier;
         }
 
         private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext)
         {
-            StoreCommonSupplier = commonSupplier;
+            StoreSharingSupplier = commonSupplier;
             StoreProjectDbContext = dbContext;
         }
 
         private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext, string connectionString)
         {
-            StoreCommonSupplier = commonSupplier;
+            StoreSharingSupplier = commonSupplier;
             StoreProjectDbContext = dbContext;
             StoreConnectionStringName = connectionString;
         }
@@ -129,7 +129,7 @@ namespace Injector.Data
             set { _projectDbContext = value; }
         }
 
-        public ISharingSupplier StoreCommonSupplier
+        public ISharingSupplier StoreSharingSupplier
         {
             get { return _sharingSupplier ?? (_sharingSupplier = SharingSupplier.Instance()); }
             set { _sharingSupplier = value; }

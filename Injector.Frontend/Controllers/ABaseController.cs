@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Injector.Common.IABase;
 using Injector.Common.IStore;
-using log4net;
 
 namespace Injector.Frontend.Controllers
 {
