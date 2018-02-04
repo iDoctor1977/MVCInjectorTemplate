@@ -1,10 +1,18 @@
 ﻿using Injector.Common.DTOModel;
-using Injector.Common.IFeature;
+using Injector.Common.IStore;
 
 namespace Injector.Business.Feature
 {
-    public class ConcreteAStep2 : ABaseStep, IConcreteAStep2
+    public class CreateAConcreteStep3 : ABaseStep
     {
+        #region CONSTRUCTOR
+
+        public CreateAConcreteStep3() { }
+
+        public CreateAConcreteStep3(ICoreStore coreStore) : base(coreStore) { }
+
+        #endregion
+
         public override ModelA HandleStep(ModelA modelA)
         {
             modelA = Read(modelA);

@@ -1,10 +1,18 @@
-﻿using Injector.Common.DTOModel;
-using Injector.Common.IFeature;
+using Injector.Common.DTOModel;
+using Injector.Common.IStore;
 
 namespace Injector.Business.Feature
 {
-    public class ConcreteAStep3 : ABaseStep, IConcreteAStep3
+    public class CreateAConcreteStep1 : ABaseStep
     {
+        #region CONSTRUCTOR
+
+        public CreateAConcreteStep1() { }
+
+        public CreateAConcreteStep1(ICoreStore coreStore) : base(coreStore) { }
+
+        #endregion
+
         public override ModelA HandleStep(ModelA modelA)
         {
             modelA = Read(modelA);
@@ -19,7 +27,7 @@ namespace Injector.Business.Feature
 
             if (Successor != null)
             {
-                Successor.HandleStep(modelA);
+                modelA = Successor.HandleStep(modelA);
             }
 
             return modelA;
@@ -28,7 +36,7 @@ namespace Injector.Business.Feature
         protected override ModelA Read(ModelA modelA)
         {
             // Read from repository data layer
-            return modelA;
+            return ABaseStore.StoreDataSupplier.GetRepositoryA.ReadEntityById(modelA.Id);
         }
 
         protected override void Do(ModelA modelA)
@@ -38,7 +46,7 @@ namespace Injector.Business.Feature
 
         protected override void Write(ModelA modelA)
         {
-            // write on repository data layer
+            ABaseStore.StoreDataSupplier.GetRepositoryA.CreateEntity(modelA);
         }
     }
 }

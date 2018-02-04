@@ -12,10 +12,6 @@ namespace Injector.Business
         private IDataSupplier _dataSupplier;
         private ISharingSupplier _sharingSupplier;
 
-        private IConcreteAStep1 _concreteAStep1;
-        private IConcreteAStep2 _concreteAStep2;
-        private IConcreteAStep3 _concreteAStep3;
-
         #region CONSTRUCTOR
 
         private CoreStore() { }
@@ -94,27 +90,5 @@ namespace Injector.Business
             get { return _sharingSupplier ?? (_sharingSupplier = SharingSupplier.Instance()); }
             set { _sharingSupplier = value; }
         }
-
-        #region FEATURES
-
-        public IConcreteAStep1 NewConcreteAStep1
-        {
-            get { return _concreteAStep1 ?? (_concreteAStep1 = new ConcreteAStep1()); }
-            set { _concreteAStep1 = value; }
-        }
-
-        public IConcreteAStep2 NewConcreteAStep2
-        {
-            get { return _concreteAStep2 ?? (_concreteAStep2 = new ConcreteAStep2()); }
-            set { _concreteAStep2 = value; }
-        }
-
-        public IConcreteAStep3 NewConcreteAStep3
-        {
-            get { return _concreteAStep3 ?? (_concreteAStep3 = new ConcreteAStep3()); }
-            set { _concreteAStep3 = value; }
-        }
-
-        #endregion
     }
 }
