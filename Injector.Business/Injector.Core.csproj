@@ -41,6 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ABaseCoreSupplier.cs" />
+    <Compile Include="Feature\ABaseFeatureModelA.cs" />
+    <Compile Include="Feature\ABaseStep.cs" />
+    <Compile Include="Feature\ConcreteAStep1.cs" />
+    <Compile Include="Feature\ConcreteAStep2.cs" />
+    <Compile Include="Feature\ConcreteAStep3.cs" />
+    <Compile Include="Feature\FeatureModelA.cs" />
     <Compile Include="Layer\ABaseLogic.cs" />
     <Compile Include="Layer\LogicB.cs" />
     <Compile Include="CoreSupplier.cs" />
