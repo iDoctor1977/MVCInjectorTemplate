@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Injector.Common.DTOModel;
-using Injector.Common.IEntity;
 
 namespace Injector.Common.IRepository
 {

@@ -2,7 +2,7 @@
 
 namespace Injector.Common.IFeature
 {
-    public interface IFeatureModelA
+    public interface IFeatureA
     {
         bool CreatePost(IVMCreateA vmCreateA);
         IVMDeleteA DeleteGet(IVMDeleteA vmDeleteA);

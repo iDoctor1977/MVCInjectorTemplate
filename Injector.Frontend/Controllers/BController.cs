@@ -35,7 +35,7 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
-                    ABaseStore.StoreCoreSupplier.GetLogicB.CreatePost(vmCreateB);
+                    ABaseStore.StoreCoreSupplier.GetFeatureB.CreatePost(vmCreateB);
                 }
                 catch (Exception exception)
                 {
@@ -51,7 +51,7 @@ namespace Injector.Frontend.Controllers
         {
             VMDeleteB vmDeleteB = ABaseStore.NewVMDeleteB as VMDeleteB;
             vmDeleteB.DTOModelB.Id = idB;
-            vmDeleteB = ABaseStore.StoreCoreSupplier.GetLogicB.DeleteGet(vmDeleteB) as VMDeleteB;
+            vmDeleteB = ABaseStore.StoreCoreSupplier.GetFeatureB.DeleteGet(vmDeleteB) as VMDeleteB;
 
             return View(vmDeleteB);
         }
@@ -64,7 +64,7 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
-                    ABaseStore.StoreCoreSupplier.GetLogicB.DeletePost(vmDeleteB);
+                    ABaseStore.StoreCoreSupplier.GetFeatureB.DeletePost(vmDeleteB);
                 }
                 catch (Exception exception)
                 {
@@ -80,7 +80,7 @@ namespace Injector.Frontend.Controllers
         {
             VMEditB vmEditB = ABaseStore.NewVMEditB as VMEditB;
             vmEditB.DTOModelB.Id = idB;
-            vmEditB = ABaseStore.StoreCoreSupplier.GetLogicB.EditGet(vmEditB) as VMEditB;
+            vmEditB = ABaseStore.StoreCoreSupplier.GetFeatureB.EditGet(vmEditB) as VMEditB;
 
             return View(vmEditB);
         }
@@ -93,7 +93,7 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
-                    ABaseStore.StoreCoreSupplier.GetLogicB.EditPost(vmEditB);
+                    ABaseStore.StoreCoreSupplier.GetFeatureB.EditPost(vmEditB);
                 }
                 catch (Exception exception)
                 {
@@ -109,7 +109,7 @@ namespace Injector.Frontend.Controllers
         {
             VMDetailsB vmDetailsB = ABaseStore.NewVMDetailsB as VMDetailsB;
             vmDetailsB.DTOModelB.Id = idB;
-            vmDetailsB = ABaseStore.StoreCoreSupplier.GetLogicB.DetailsGet(vmDetailsB) as VMDetailsB;
+            vmDetailsB = ABaseStore.StoreCoreSupplier.GetFeatureB.DetailsGet(vmDetailsB) as VMDetailsB;
 
             return View(vmDetailsB);
         }
@@ -118,7 +118,7 @@ namespace Injector.Frontend.Controllers
         public ActionResult List()
         {
             VMListB vmListB = ABaseStore.NewVMListB as VMListB;
-            vmListB = ABaseStore.StoreCoreSupplier.GetLogicB.ListGet(vmListB) as VMListB;
+            vmListB = ABaseStore.StoreCoreSupplier.GetFeatureB.ListGet(vmListB) as VMListB;
 
             return View(vmListB);
         }

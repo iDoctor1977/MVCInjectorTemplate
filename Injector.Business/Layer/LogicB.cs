@@ -1,4 +1,5 @@
 using System;
+using Injector.Common.IFeature;
 using Injector.Common.ILogic;
 using Injector.Common.IStore;
 using Injector.Common.IVModel;
@@ -14,6 +15,10 @@ namespace Injector.Business.Layer
         private LogicB() { }
 
         private LogicB(ICoreStore coreStore) : base(coreStore) { }
+
+        private LogicB(ICoreBond coreBond) : base(coreBond) { }
+
+        private LogicB(ICoreStore coreStore, ICoreBond coreBond) : base(coreStore, coreBond) { }
 
         #endregion
 
@@ -39,11 +44,31 @@ namespace Injector.Business.Layer
             return LogicBInstance;
         }
 
+        public static ILogicB Instance(ICoreBond coreBond)
+        {
+            if (LogicBInstance == null)
+            {
+                LogicBInstance = new LogicB(coreBond);
+            }
+
+            return LogicBInstance;
+        }
+
+        public static ILogicB Instance(ICoreStore coreStore, ICoreBond coreBond)
+        {
+            if (LogicBInstance == null)
+            {
+                LogicBInstance = new LogicB(coreStore, coreBond);
+            }
+
+            return LogicBInstance;
+        }
+
         #endregion
 
         public bool CreatePost(IVMCreateB vmCreateB)
         {
-            vmCreateB.DTOModelB.Id = ABaseStore.StoreDataSupplier.GetRepositoryB.CreateEntity(vmCreateB.DTOModelB);
+            vmCreateB.DTOModelB.Id = ABaseBond.BondDataSupplier.GetRepositoryB.CreateEntity(vmCreateB.DTOModelB);
 
             if (vmCreateB.DTOModelB.Id != Guid.Empty)
             {
@@ -55,7 +80,7 @@ namespace Injector.Business.Layer
 
         public IVMDeleteB DeleteGet(IVMDeleteB vmDeleteB)
         {
-            vmDeleteB.DTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryB.ReadEntityById(vmDeleteB.DTOModelB.Id);
+            vmDeleteB.DTOModelB = ABaseBond.BondDataSupplier.GetRepositoryB.ReadEntityById(vmDeleteB.DTOModelB.Id);
 
             return vmDeleteB;
 
@@ -63,31 +88,31 @@ namespace Injector.Business.Layer
 
         public bool DeletePost(IVMDeleteB vmDeleteB)
         {
-            return ABaseStore.StoreDataSupplier.GetRepositoryB.DeleteEntity(vmDeleteB.DTOModelB);
+            return ABaseBond.BondDataSupplier.GetRepositoryB.DeleteEntity(vmDeleteB.DTOModelB);
         }
 
         public IVMEditB EditGet(IVMEditB vmEditB)
         {
-            vmEditB.DTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryB.ReadEntityById(vmEditB.DTOModelB.Id);
+            vmEditB.DTOModelB = ABaseBond.BondDataSupplier.GetRepositoryB.ReadEntityById(vmEditB.DTOModelB.Id);
 
             return vmEditB;
         }
 
         public bool EditPost(IVMEditB vmEditB)
         {
-            return ABaseStore.StoreDataSupplier.GetRepositoryB.UpdateEntity(vmEditB.DTOModelB);
+            return ABaseBond.BondDataSupplier.GetRepositoryB.UpdateEntity(vmEditB.DTOModelB);
         }
 
         public IVMDetailsB DetailsGet(IVMDetailsB vmDetailsB)
         {
-            vmDetailsB.DTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryB.ReadEntityById(vmDetailsB.DTOModelB.Id);
+            vmDetailsB.DTOModelB = ABaseBond.BondDataSupplier.GetRepositoryB.ReadEntityById(vmDetailsB.DTOModelB.Id);
 
             return vmDetailsB;
         }
 
         public IVMListB ListGet(IVMListB vmListB)
         {
-            vmListB.ListDTOModelB = ABaseStore.StoreDataSupplier.GetRepositoryB.ReadEntities();
+            vmListB.ListDTOModelB = ABaseBond.BondDataSupplier.GetRepositoryB.ReadEntities();
 
             return vmListB;
         }

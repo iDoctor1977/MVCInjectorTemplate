@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Injector.Common.DTOModel;
 using Injector.Common.IABase;
+using Injector.Common.IBond;
 using Injector.Common.IEntity;
-using Injector.Common.ILogic;
+using Injector.Common.IFeature;
 using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
@@ -44,9 +45,9 @@ namespace InjectorUnitTest.Test
             IDataSupplier dataSupplierSubstitute = Substitute.For<IDataSupplier>();
             dataSupplierSubstitute.GetRepositoryA.Returns(repositoryASubstitute);
 
-            ICoreStore coreStoreSubstitute = Substitute.For<ICoreStore>();
-            coreStoreSubstitute.StoreDataSupplier.Returns(dataSupplierSubstitute);
-            coreStoreSubstitute.StoreSharingSupplier.GetModelA().Returns(new ModelA());
+            ICoreBond coreBondSubstitute = Substitute.For<ICoreBond>();
+            coreBondSubstitute.BondDataSupplier.Returns(dataSupplierSubstitute);
+            coreBondSubstitute.BondSharingSupplier.GetModelA().Returns(new ModelA());
 
             VMCreateAMock vmCreateAMock = new VMCreateAMock
             {
@@ -54,12 +55,12 @@ namespace InjectorUnitTest.Test
             };
             VMDetailsAMock vmDetailsAMock = new VMDetailsAMock();
 
-            LogicAMock logicA = new LogicAMock();
-            logicA.CreatePost(vmCreateAMock);
-            var result = logicA.DetailsGet(vmDetailsAMock);
+            //LogicAMock logicA = new LogicAMock();
+            //logicA.CreatePost(vmCreateAMock);
+            //var result = logicA.DetailsGet(vmDetailsAMock);
 
-            Assert.IsInstanceOf<IModelA>(result as ModelA);
-            Assert.AreEqual(modelA.Id, result.DTOModelA.Id);
+            //Assert.IsInstanceOf<IModelA>(result as ModelA);
+            //Assert.AreEqual(modelA.Id, result.DTOModelA.Id);
         }
 
         [Test]
@@ -82,14 +83,14 @@ namespace InjectorUnitTest.Test
             //modelASubstitute.Name = "Pluto";
             //modelASubstitute.Surname = "Paperino";
 
-            ILogicA logicASubstitute = Substitute.For<ILogicA>();
-            logicASubstitute.DetailsGet(Arg.Any<VMDetailsA>()).Returns(vmDetailsA);
+            IFeatureA featureASubstitute = Substitute.For<IFeatureA>();
+            featureASubstitute.DetailsGet(Arg.Any<VMDetailsA>()).Returns(vmDetailsA);
 
             //IBusinessStore businessStoreSubstitute = Substitute.For<IBusinessStore>();
             //businessStoreSubstitute.GetOperatorA().Returns(operatorASubstitute);
 
             ICoreSupplier coreSupplierSubstitute = Substitute.For<ICoreSupplier>();
-            coreSupplierSubstitute.GetLogicA.Returns(logicASubstitute);
+            coreSupplierSubstitute.GetFeatureA.Returns(featureASubstitute);
 
             IWebStore webStoreSubstitute = Substitute.For<IWebStore>();
             webStoreSubstitute.NewVMDetailsA.Returns(vmDetailsA);
@@ -132,52 +133,14 @@ namespace InjectorUnitTest.Test
 
     public class ABaseCoreSupplierMock : IABaseCoreSupplier
     {
-        public ICoreStore SupplierCoreStore { get; set; }
+        public ICoreBond ABaseBond { get; set; }
+        public ICoreStore ABaseStore { get; set; }
     }
 
     public class CoreSupplierMock : ICoreSupplier
     {
-        public ILogicA GetLogicA => new LogicAMock();
-
-        public ILogicB GetLogicB { get; }
-    }
-
-    public class LogicAMock : ILogicA
-    {
-        public bool CreatePost(IVMCreateA vmCreateA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IVMDeleteA DeleteGet(IVMDeleteA vmDeleteA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeletePost(IVMDeleteA vmDeleteA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IVMEditA EditGet(IVMEditA vmEditA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditPost(IVMEditA vmEditA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IVMDetailsA DetailsGet(IVMDetailsA vmDetailsA)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IVMListA ListGet(IVMListA vmListA)
-        {
-            throw new NotImplementedException();
-        }
+        public IFeatureA GetFeatureA { get; }
+        public IFeatureB GetFeatureB { get; }
     }
 
     public class ABaseDataSupplierMock : IABaseDataSupplier

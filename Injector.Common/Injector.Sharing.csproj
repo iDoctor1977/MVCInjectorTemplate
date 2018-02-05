@@ -56,9 +56,12 @@
     <Compile Include="IABase\IABaseLogic.cs" />
     <Compile Include="IABase\IABaseSharingSupplier.cs" />
     <Compile Include="IABase\IABaseRepository.cs" />
-    <Compile Include="IFeature\IABaseFeatureModelA.cs" />
-    <Compile Include="IFeature\IABaseStep.cs" />
-    <Compile Include="IFeature\IFeatureModelA.cs" />
+    <Compile Include="IABase\IABaseCoreStore.cs" />
+    <Compile Include="IABase\IABaseFeature.cs" />
+    <Compile Include="IABase\IABaseStep.cs" />
+    <Compile Include="IBond\ICoreBond.cs" />
+    <Compile Include="IFeature\IFeatureB.cs" />
+    <Compile Include="IFeature\IFeatureA.cs" />
     <Compile Include="IStore\IWebStore.cs" />
     <Compile Include="IVModel\IVMDeleteB.cs" />
     <Compile Include="IVModel\IVMDetailsB.cs" />
@@ -76,7 +79,6 @@
     <Compile Include="IEntity\IEntityB.cs" />
     <Compile Include="IEntity\IEntityA.cs" />
     <Compile Include="IModel\IModelB.cs" />
-    <Compile Include="ILogic\ILogicB.cs" />
     <Compile Include="IDbContext\IProjectDbContext.cs" />
     <Compile Include="IRepository\IRepositoryB.cs" />
     <Compile Include="IRepository\IRepositoryA.cs" />
@@ -86,7 +88,6 @@
     <Compile Include="ISupplier\IDataSupplier.cs" />
     <Compile Include="IModel\IModelA.cs" />
     <Compile Include="ISupplier\ICoreSupplier.cs" />
-    <Compile Include="ILogic\ILogicA.cs" />
     <Compile Include="IVModel\IVMCreateA.cs" />
     <Compile Include="IVModel\IVMCreateB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

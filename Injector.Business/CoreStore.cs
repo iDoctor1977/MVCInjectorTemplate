@@ -1,36 +1,17 @@
-﻿using Injector.Business.Feature;
-using Injector.Common;
-using Injector.Common.IFeature;
+﻿using Injector.Business.Step;
+using Injector.Common.IABase;
+using Injector.Common.IBond;
 using Injector.Common.IStore;
-using Injector.Common.ISupplier;
-using Injector.Data;
 
 namespace Injector.Business
 {
-    internal class CoreStore : ICoreStore
+    internal class CoreStore : ABaseCoreStore, ICoreStore
     {
-        private IDataSupplier _dataSupplier;
-        private ISharingSupplier _sharingSupplier;
-
         #region CONSTRUCTOR
 
         private CoreStore() { }
 
-        private CoreStore(IDataSupplier dataSupplier)
-        {
-            StoreDataSupplier = dataSupplier;
-        }
-
-        private CoreStore(ISharingSupplier sharingSupplier)
-        {
-            StoreSharingSupplier = sharingSupplier;
-        }
-
-        private CoreStore(IDataSupplier dataSupplier, ISharingSupplier sharingSupplier)
-        {
-            StoreDataSupplier = dataSupplier;
-            StoreSharingSupplier = sharingSupplier;
-        }
+        private CoreStore(ICoreBond coreBond) : base(coreBond) { }
 
         #endregion
 
@@ -48,31 +29,11 @@ namespace Injector.Business
             return CoreStoreIstance;
         }
 
-        public static ICoreStore Instance(IDataSupplier dataSupplier)
+        public static ICoreStore Instance(ICoreBond coreBond)
         {
             if (CoreStoreIstance == null)
             {
-                CoreStoreIstance = new CoreStore(dataSupplier);
-            }
-
-            return CoreStoreIstance;
-        }
-
-        public static ICoreStore Instance(ISharingSupplier sharingSupplier)
-        {
-            if (CoreStoreIstance == null)
-            {
-                CoreStoreIstance = new CoreStore(sharingSupplier);
-            }
-
-            return CoreStoreIstance;
-        }
-
-        public static ICoreStore Instance(IDataSupplier dataSupplier, ISharingSupplier sharingSupplier)
-        {
-            if (CoreStoreIstance == null)
-            {
-                CoreStoreIstance = new CoreStore(dataSupplier, sharingSupplier);
+                CoreStoreIstance = new CoreStore(coreBond);
             }
 
             return CoreStoreIstance;
@@ -80,15 +41,11 @@ namespace Injector.Business
 
         #endregion
 
-        public IDataSupplier StoreDataSupplier
-        {
-            get { return _dataSupplier ?? (_dataSupplier = DataSupplier.Instance()); }
-            set { _dataSupplier = value; }
-        }
-        public ISharingSupplier StoreSharingSupplier
-        {
-            get { return _sharingSupplier ?? (_sharingSupplier = SharingSupplier.Instance()); }
-            set { _sharingSupplier = value; }
-        }
+        public IABaseStep NewCreateAConcreteStep1 => new CreateAConcreteStep1(ABaseCoreBond);
+        public IABaseStep NewCreateAConcreteStep2 => new CreateAConcreteStep2(ABaseCoreBond);
+        public IABaseStep NewCreateAConcreteStep3 => new CreateAConcreteStep3(ABaseCoreBond);
+
+        public IABaseStep NewDeleteAConcreteStep1 => new DeleteAConcreteStep1(ABaseCoreBond);
+        public IABaseStep NewDeleteAConcreteStep2 => new DeleteAConcreteStep2(ABaseCoreBond);
     }
 }

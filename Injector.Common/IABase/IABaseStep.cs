@@ -1,11 +1,11 @@
 ﻿using Injector.Common.DTOModel;
-using Injector.Common.IStore;
+using Injector.Common.IBond;
 
-namespace Injector.Common.IFeature
+namespace Injector.Common.IABase
 {
     public interface IABaseStep
     {
-        ICoreStore ABaseStore { get; set; }
+        ICoreBond ABaseBond { get; set; }
 
         void SetSuccessor(IABaseStep step);
         ModelA HandleStep(ModelA modelA);

@@ -11,7 +11,7 @@ namespace Injector.Common.IStore
         ISharingSupplier StoreSharingSupplier { get; set; }
 
         // Entities
-        IEntityA NewEntityA { get; set; }
-        IEntityB NewEntityB { get; set; }
+        IEntityA NewEntityA { get; }
+        IEntityB NewEntityB { get; }
     }
 }

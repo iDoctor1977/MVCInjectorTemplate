@@ -1,5 +1,5 @@
 ﻿using Injector.Business.Layer;
-using Injector.Common.ILogic;
+using Injector.Common.IFeature;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 
@@ -7,8 +7,8 @@ namespace Injector.Business
 {
     public class CoreSupplier : ABaseCoreSupplier, ICoreSupplier
     {
-        private ILogicA _logicA;
-        private ILogicB _logicB;
+        private IFeatureA _featureA;
+        private IFeatureB _featureB;
 
         #region CONSTRUCTOR
 
@@ -44,11 +44,10 @@ namespace Injector.Business
 
         #endregion
 
-        #region LOGICS
+        #region FEATURES
 
-        public ILogicA GetLogicA => _logicA ?? (_logicA = LogicA.Instance(SupplierCoreStore)); // new LogicA()
-
-        public ILogicB GetLogicB => _logicB ?? (_logicB = LogicB.Instance(SupplierCoreStore)); // new LogicB()
+        public IFeatureA GetFeatureA => _featureA ?? (_featureA = FeatureA.Instance(ABaseStore, ABaseBond)); // new FeatureA()
+        public IFeatureB GetFeatureB => _featureB ?? (_featureB = FeatureB.Instance(ABaseStore, ABaseBond)); // new FeatureB()
 
         #endregion
     }

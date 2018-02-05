@@ -1,29 +1,29 @@
-﻿using Injector.Common.IABase;
-using Injector.Common.IFeature;
+using Injector.Common.IABase;
+using Injector.Common.IBond;
 using Injector.Common.IStore;
 
 namespace Injector.Business.Layer
 {
-    public abstract class ABaseLogic : IABaseLogic
+    public class ABaseFeature : IABaseFeature
     {
         private ICoreBond _coreBond;
         private ICoreStore _coreStore;
 
         #region CONSTRUCTOR
 
-        internal ABaseLogic() { }
+        internal ABaseFeature() { }
 
-        internal ABaseLogic(ICoreStore coreStore)
+        internal ABaseFeature(ICoreStore coreStore)
         {
             ABaseStore = coreStore;
         }
 
-        internal ABaseLogic(ICoreBond coreBond)
+        internal ABaseFeature(ICoreBond coreBond)
         {
             ABaseBond = coreBond;
         }
 
-        internal ABaseLogic(ICoreStore coreStore, ICoreBond coreBond)
+        internal ABaseFeature(ICoreStore coreStore, ICoreBond coreBond)
         {
             ABaseStore = coreStore;
             ABaseBond = coreBond;

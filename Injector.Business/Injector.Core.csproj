@@ -40,19 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABaseCoreStore.cs" />
     <Compile Include="ABaseCoreSupplier.cs" />
-    <Compile Include="Feature\ABaseFeatureModelA.cs" />
-    <Compile Include="Feature\ABaseStep.cs" />
-    <Compile Include="Feature\CreateAConcreteStep1.cs" />
-    <Compile Include="Feature\CreateAConcreteStep2.cs" />
-    <Compile Include="Feature\CreateAConcreteStep3.cs" />
-    <Compile Include="Feature\DeleteAConcreteStep1.cs" />
-    <Compile Include="Feature\DeleteAConcreteStep2.cs" />
-    <Compile Include="Feature\FeatureModelA.cs" />
-    <Compile Include="Layer\ABaseLogic.cs" />
-    <Compile Include="Layer\LogicB.cs" />
+    <Compile Include="CoreBond.cs" />
+    <Compile Include="Layer\ABaseFeature.cs" />
+    <Compile Include="Step\ABaseStep.cs" />
+    <Compile Include="Step\CreateAConcreteStep1.cs" />
+    <Compile Include="Step\CreateAConcreteStep2.cs" />
+    <Compile Include="Step\CreateAConcreteStep3.cs" />
+    <Compile Include="Step\DeleteAConcreteStep1.cs" />
+    <Compile Include="Step\DeleteAConcreteStep2.cs" />
+    <Compile Include="Layer\FeatureB.cs" />
+    <Compile Include="Layer\FeatureA.cs" />
     <Compile Include="CoreSupplier.cs" />
-    <Compile Include="Layer\LogicA.cs" />
     <Compile Include="CoreStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -13,9 +13,6 @@ namespace Injector.Data
         private IProjectDbContext _projectDbContext;
         private ISharingSupplier _sharingSupplier;
 
-        private IEntityA _entityA;
-        private IEntityB _entityB;
-
         #region CONSTRUCTOR
 
         private DataStore() { }
@@ -137,17 +134,9 @@ namespace Injector.Data
 
         #region ENTITIES
 
-        public IEntityA NewEntityA
-        {
-            get { return _entityA ?? (_entityA = new EntityA()); }
-            set { _entityA = value as EntityA; }
-        }
+        public IEntityA NewEntityA => new EntityA();
 
-        public IEntityB NewEntityB
-        {
-            get { return _entityB ?? (_entityB = new EntityB()); }
-            set { _entityB = value as EntityB; }
-        }
+        public IEntityB NewEntityB => new EntityB();
 
         #endregion
     }
