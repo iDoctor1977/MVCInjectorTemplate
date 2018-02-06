@@ -10,7 +10,7 @@ namespace Injector.Data.ADOModel
         // relazione 1 * M
         public EntityA()
         {
-            colEntitiesB = new List<IEntityB>();
+            colEntitiesC = new List<IEntityC>();
         }
 
         [Key]
@@ -19,6 +19,6 @@ namespace Injector.Data.ADOModel
         public string Surname { get; set; }
 
         // collection navigation property
-        public virtual ICollection<IEntityB> colEntitiesB { get; set; }
+        public virtual ICollection<IEntityC> colEntitiesC { get; set; }
     }
 }

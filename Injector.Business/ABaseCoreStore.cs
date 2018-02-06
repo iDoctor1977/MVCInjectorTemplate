@@ -1,27 +1,27 @@
 ﻿using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 
 namespace Injector.Business
 {
     public class ABaseCoreStore : IABaseCoreStore
     {
-        private ICoreBond _coreBond;
+        private ICoreBind _coreBind;
 
         #region CONSTRUCTOR
 
         protected ABaseCoreStore() { }
 
-        protected ABaseCoreStore(ICoreBond coreBond)
+        protected ABaseCoreStore(ICoreBind coreBind)
         {
-            ABaseCoreBond = coreBond;
+            ABaseCoreBind = coreBind;
         }
 
         #endregion
 
-        public ICoreBond ABaseCoreBond
+        public ICoreBind ABaseCoreBind
         {
-            get { return _coreBond ?? (_coreBond = CoreBond.Instance()); }
-            set { _coreBond = value; }
+            get { return _coreBind ?? (_coreBind = CoreBind.Instance()); }
+            set { _coreBind = value; }
         }
     }
 }

@@ -59,7 +59,8 @@
     <Compile Include="IABase\IABaseCoreStore.cs" />
     <Compile Include="IABase\IABaseFeature.cs" />
     <Compile Include="IABase\IABaseStep.cs" />
-    <Compile Include="IBond\ICoreBond.cs" />
+    <Compile Include="IBind\ICoreBind.cs" />
+    <Compile Include="IEntity\IEntityC.cs" />
     <Compile Include="IFeature\IFeatureB.cs" />
     <Compile Include="IFeature\IFeatureA.cs" />
     <Compile Include="IStore\IWebStore.cs" />

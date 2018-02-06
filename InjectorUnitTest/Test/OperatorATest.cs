@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Injector.Common.DTOModel;
 using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 using Injector.Common.IEntity;
 using Injector.Common.IFeature;
 using Injector.Common.IModel;
@@ -45,9 +45,9 @@ namespace InjectorUnitTest.Test
             IDataSupplier dataSupplierSubstitute = Substitute.For<IDataSupplier>();
             dataSupplierSubstitute.GetRepositoryA.Returns(repositoryASubstitute);
 
-            ICoreBond coreBondSubstitute = Substitute.For<ICoreBond>();
-            coreBondSubstitute.BondDataSupplier.Returns(dataSupplierSubstitute);
-            coreBondSubstitute.BondSharingSupplier.GetModelA().Returns(new ModelA());
+            ICoreBind coreBondSubstitute = Substitute.For<ICoreBind>();
+            coreBondSubstitute.BindDataSupplier.Returns(dataSupplierSubstitute);
+            coreBondSubstitute.BindSharingSupplier.GetModelA().Returns(new ModelA());
 
             VMCreateAMock vmCreateAMock = new VMCreateAMock
             {
@@ -133,7 +133,7 @@ namespace InjectorUnitTest.Test
 
     public class ABaseCoreSupplierMock : IABaseCoreSupplier
     {
-        public ICoreBond ABaseBond { get; set; }
+        public ICoreBind ABaseBind { get; set; }
         public ICoreStore ABaseStore { get; set; }
     }
 

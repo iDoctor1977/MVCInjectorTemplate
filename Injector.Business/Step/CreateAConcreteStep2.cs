@@ -1,5 +1,5 @@
 ﻿using Injector.Common.DTOModel;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 
 namespace Injector.Business.Step
 {
@@ -9,7 +9,7 @@ namespace Injector.Business.Step
 
         public CreateAConcreteStep2() { }
 
-        public CreateAConcreteStep2(ICoreBond coreBond) : base(coreBond) { }
+        public CreateAConcreteStep2(ICoreBind coreBind) : base(coreBind) { }
 
         #endregion
 

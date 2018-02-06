@@ -1,5 +1,5 @@
 using Injector.Common.DTOModel;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 
 namespace Injector.Business.Step
 {
@@ -9,20 +9,20 @@ namespace Injector.Business.Step
 
         public CreateAConcreteStep1() { }
 
-        public CreateAConcreteStep1(ICoreBond coreBond) : base(coreBond) { }
+        public CreateAConcreteStep1(ICoreBind coreBind) : base(coreBind) { }
 
         #endregion
 
         public override ModelA HandleStep(ModelA modelA)
         {
             // Read
-            modelA = ABaseBond.BondDataSupplier.GetRepositoryA.ReadEntityById(modelA.Id);
+            modelA = ABaseBond.BindDataSupplier.GetRepositoryA.ReadEntityById(modelA.Id);
 
             // Do
             modelA.Name = "pippo";
 
             // Write
-            ABaseBond.BondDataSupplier.GetRepositoryA.CreateEntity(modelA);
+            ABaseBond.BindDataSupplier.GetRepositoryA.CreateEntity(modelA);
 
             if (Successor != null)
             {

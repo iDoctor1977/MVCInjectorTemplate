@@ -1,12 +1,12 @@
 using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 using Injector.Common.IStore;
 
 namespace Injector.Business.Layer
 {
     public class ABaseFeature : IABaseFeature
     {
-        private ICoreBond _coreBond;
+        private ICoreBind _coreBind;
         private ICoreStore _coreStore;
 
         #region CONSTRUCTOR
@@ -18,23 +18,23 @@ namespace Injector.Business.Layer
             ABaseStore = coreStore;
         }
 
-        internal ABaseFeature(ICoreBond coreBond)
+        internal ABaseFeature(ICoreBind coreBind)
         {
-            ABaseBond = coreBond;
+            ABaseBind = coreBind;
         }
 
-        internal ABaseFeature(ICoreStore coreStore, ICoreBond coreBond)
+        internal ABaseFeature(ICoreStore coreStore, ICoreBind coreBind)
         {
             ABaseStore = coreStore;
-            ABaseBond = coreBond;
+            ABaseBind = coreBind;
         }
 
         #endregion
 
-        public ICoreBond ABaseBond
+        public ICoreBind ABaseBind
         {
-            get { return _coreBond ?? (_coreBond = CoreBond.Instance()); }
-            set { _coreBond = value; }
+            get { return _coreBind ?? (_coreBind = CoreBind.Instance()); }
+            set { _coreBind = value; }
         }
 
         public ICoreStore ABaseStore

@@ -1,29 +1,29 @@
 ﻿using Injector.Common.DTOModel;
 using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 
 namespace Injector.Business.Step
 {
     public abstract class ABaseStep : IABaseStep
     {
-        private ICoreBond _coreBond;
+        private ICoreBind _coreBind;
         protected IABaseStep Successor { get; private set; }
 
         #region CONSTRUCTOR
 
         internal ABaseStep() { }
 
-        internal ABaseStep(ICoreBond coreBond)
+        internal ABaseStep(ICoreBind coreBind)
         {
-            ABaseBond = coreBond;
+            ABaseBond = coreBind;
         }
 
         #endregion
 
-        public ICoreBond ABaseBond
+        public ICoreBind ABaseBond
         {
-            get { return _coreBond ?? (_coreBond = CoreBond.Instance()); }
-            set { _coreBond = value; }
+            get { return _coreBind ?? (_coreBind = CoreBind.Instance()); }
+            set { _coreBind = value; }
         }
 
         public void SetSuccessor(IABaseStep step)

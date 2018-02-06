@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="ABaseCoreStore.cs" />
     <Compile Include="ABaseCoreSupplier.cs" />
-    <Compile Include="CoreBond.cs" />
+    <Compile Include="CoreBind.cs" />
     <Compile Include="Layer\ABaseFeature.cs" />
     <Compile Include="Step\ABaseStep.cs" />
     <Compile Include="Step\CreateAConcreteStep1.cs" />

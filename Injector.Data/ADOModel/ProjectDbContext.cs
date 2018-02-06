@@ -15,6 +15,7 @@ namespace Injector.Data.ADOModel
 
         public virtual DbSet<EntityA> EntitiesA { get; set; }
         public virtual DbSet<EntityB> EntitiesB { get; set; }
+        public virtual DbSet<EntityC> EntitiesC { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

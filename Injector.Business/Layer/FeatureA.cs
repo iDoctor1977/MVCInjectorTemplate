@@ -1,6 +1,6 @@
 ﻿using System;
 using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 using Injector.Common.IFeature;
 using Injector.Common.IStore;
 using Injector.Common.IVModel;
@@ -24,9 +24,9 @@ namespace Injector.Business.Layer
 
         private FeatureA(ICoreStore coreStore) : base(coreStore) { }
 
-        private FeatureA(ICoreBond coreBond) : base(coreBond) { }
+        private FeatureA(ICoreBind coreBind) : base(coreBind) { }
 
-        private FeatureA(ICoreStore coreStore, ICoreBond coreBond) : base(coreStore, coreBond) { }
+        private FeatureA(ICoreStore coreStore, ICoreBind coreBind) : base(coreStore, coreBind) { }
 
         #endregion
 
@@ -52,21 +52,21 @@ namespace Injector.Business.Layer
             return FeatureAInstance;
         }
 
-        public static IFeatureA Instance(ICoreBond coreBond)
+        public static IFeatureA Instance(ICoreBind coreBind)
         {
             if (FeatureAInstance == null)
             {
-                FeatureAInstance = new FeatureA(coreBond);
+                FeatureAInstance = new FeatureA(coreBind);
             }
 
             return FeatureAInstance;
         }
 
-        public static IFeatureA Instance(ICoreStore coreStore, ICoreBond coreBond)
+        public static IFeatureA Instance(ICoreStore coreStore, ICoreBind coreBind)
         {
             if (FeatureAInstance == null)
             {
-                FeatureAInstance = new FeatureA(coreStore, coreBond);
+                FeatureAInstance = new FeatureA(coreStore, coreBind);
             }
 
             return FeatureAInstance;

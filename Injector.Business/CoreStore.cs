@@ -1,6 +1,6 @@
 ﻿using Injector.Business.Step;
 using Injector.Common.IABase;
-using Injector.Common.IBond;
+using Injector.Common.IBind;
 using Injector.Common.IStore;
 
 namespace Injector.Business
@@ -11,7 +11,7 @@ namespace Injector.Business
 
         private CoreStore() { }
 
-        private CoreStore(ICoreBond coreBond) : base(coreBond) { }
+        private CoreStore(ICoreBind coreBind) : base(coreBind) { }
 
         #endregion
 
@@ -29,11 +29,11 @@ namespace Injector.Business
             return CoreStoreIstance;
         }
 
-        public static ICoreStore Instance(ICoreBond coreBond)
+        public static ICoreStore Instance(ICoreBind coreBind)
         {
             if (CoreStoreIstance == null)
             {
-                CoreStoreIstance = new CoreStore(coreBond);
+                CoreStoreIstance = new CoreStore(coreBind);
             }
 
             return CoreStoreIstance;
@@ -41,11 +41,11 @@ namespace Injector.Business
 
         #endregion
 
-        public IABaseStep NewCreateAConcreteStep1 => new CreateAConcreteStep1(ABaseCoreBond);
-        public IABaseStep NewCreateAConcreteStep2 => new CreateAConcreteStep2(ABaseCoreBond);
-        public IABaseStep NewCreateAConcreteStep3 => new CreateAConcreteStep3(ABaseCoreBond);
+        public IABaseStep NewCreateAConcreteStep1 => new CreateAConcreteStep1(ABaseCoreBind);
+        public IABaseStep NewCreateAConcreteStep2 => new CreateAConcreteStep2(ABaseCoreBind);
+        public IABaseStep NewCreateAConcreteStep3 => new CreateAConcreteStep3(ABaseCoreBind);
 
-        public IABaseStep NewDeleteAConcreteStep1 => new DeleteAConcreteStep1(ABaseCoreBond);
-        public IABaseStep NewDeleteAConcreteStep2 => new DeleteAConcreteStep2(ABaseCoreBond);
+        public IABaseStep NewDeleteAConcreteStep1 => new DeleteAConcreteStep1(ABaseCoreBind);
+        public IABaseStep NewDeleteAConcreteStep2 => new DeleteAConcreteStep2(ABaseCoreBind);
     }
 }

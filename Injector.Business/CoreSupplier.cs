@@ -46,8 +46,8 @@ namespace Injector.Business
 
         #region FEATURES
 
-        public IFeatureA GetFeatureA => _featureA ?? (_featureA = FeatureA.Instance(ABaseStore, ABaseBond)); // new FeatureA()
-        public IFeatureB GetFeatureB => _featureB ?? (_featureB = FeatureB.Instance(ABaseStore, ABaseBond)); // new FeatureB()
+        public IFeatureA GetFeatureA => _featureA ?? (_featureA = FeatureA.Instance(ABaseStore, ABaseBind)); // new FeatureA()
+        public IFeatureB GetFeatureB => _featureB ?? (_featureB = FeatureB.Instance(ABaseStore, ABaseBind)); // new FeatureB()
 
         #endregion
     }

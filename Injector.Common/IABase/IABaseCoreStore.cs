@@ -1,9 +1,9 @@
-﻿using Injector.Common.IBond;
+﻿using Injector.Common.IBind;
 
 namespace Injector.Common.IABase
 {
     public interface IABaseCoreStore
     {
-        ICoreBond ABaseCoreBond { get; set; }
+        ICoreBind ABaseCoreBind { get; set; }
     }
 }
