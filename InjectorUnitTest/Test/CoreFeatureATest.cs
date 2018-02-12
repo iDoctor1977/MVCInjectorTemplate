@@ -19,7 +19,7 @@ using NUnit.Framework;
 namespace InjectorUnitTest.Test
 {
     [TestFixture]
-    public class OperatorATest
+    public class CoreFeatureATest
     {
         [Test]
         public void CreateEntityWithValidInput()
@@ -38,14 +38,14 @@ namespace InjectorUnitTest.Test
                 Surname = "Poppi"
             };
 
-            IRepositoryA repositoryASubstitute = Substitute.For<IRepositoryA>();
+            IRepositoryA repositoryASubstitute = Substitute.For<RepositoryAMock>();
             repositoryASubstitute.CreateEntity(modelA);
             repositoryASubstitute.ReadEntityById(Arg.Any<Guid>()).Returns(entityA);
 
-            IDataSupplier dataSupplierSubstitute = Substitute.For<IDataSupplier>();
+            IDataSupplier dataSupplierSubstitute = Substitute.For<DataSupplierMock>();
             dataSupplierSubstitute.GetRepositoryA.Returns(repositoryASubstitute);
 
-            ICoreBind coreBondSubstitute = Substitute.For<ICoreBind>();
+            ICoreBind coreBondSubstitute = Substitute.For<CoreBindMock>();
             coreBondSubstitute.BindDataSupplier.Returns(dataSupplierSubstitute);
             coreBondSubstitute.BindSharingSupplier.GetModelA().Returns(new ModelA());
 
@@ -119,6 +119,17 @@ namespace InjectorUnitTest.Test
 
             //return viewModelA.Name;
         }
+    }
+
+    public class CoreBindMock : ICoreBind
+    {
+        public IDataSupplier BindDataSupplier
+        {
+            get { return new DataSupplierMock(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        public ISharingSupplier BindSharingSupplier { get; set; }
     }
 
     public class VMDetailsAMock : IVMDetailsA

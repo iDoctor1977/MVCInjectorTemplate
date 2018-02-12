@@ -5,7 +5,7 @@ namespace Injector.Common.IABase
 {
     public interface IABaseLogic
     {
-        ICoreBind ABaseBond { get; set; }
+        ICoreBind ABaseBind { get; set; }
         ICoreStore ABaseStore { get; set; }
     }
 }
