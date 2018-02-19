@@ -1,20 +1,21 @@
 ﻿using System;
+using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IFeature;
 using Injector.Common.IStore;
 using Injector.Common.IVModel;
 
-namespace Injector.Business.Layer
+namespace Injector.Business.Layers
 {
     public class FeatureA : ABaseFeature, IFeatureA
     {
-        private IABaseStep _createStep1;
-        private IABaseStep _createStep2;
-        private IABaseStep _createStep3;
+        private IABaseStep<ModelA> _createStep1;
+        private IABaseStep<ModelA> _createStep2;
+        private IABaseStep<ModelA> _createStep3;
 
-        private IABaseStep _deleteStep1;
-        private IABaseStep _deleteStep2;
+        private IABaseStep<ModelA> _deleteStep1;
+        private IABaseStep<ModelA> _deleteStep2;
 
         private static IFeatureA FeatureAInstance { get; set; }
 
@@ -81,10 +82,10 @@ namespace Injector.Business.Layer
             _createStep3 = ABaseStore.NewCreateAConcreteStep3;
 
             // chain definition
-            _createStep1.SetSuccessor(_createStep2);
-            _createStep2.SetSuccessor(_createStep3);
+            _createStep1.SetNextStep(_createStep2);
+            _createStep2.SetNextStep(_createStep3);
 
-            vmCreateA.DTOModelA = _createStep1.HandleStep(vmCreateA.DTOModelA);
+            vmCreateA.DTOModelA = _createStep1.Execute(vmCreateA.DTOModelA);
 
             if (vmCreateA.DTOModelA.Id != Guid.Empty)
             {
@@ -99,9 +100,9 @@ namespace Injector.Business.Layer
             _deleteStep1 = ABaseStore.NewDeleteAConcreteStep1;
             _deleteStep2 = ABaseStore.NewDeleteAConcreteStep2;
 
-            _deleteStep1.SetSuccessor(_deleteStep2);
+            _deleteStep1.SetNextStep(_deleteStep2);
 
-            vmDeleteA.DTOModelA = _deleteStep1.HandleStep(vmDeleteA.DTOModelA);
+            vmDeleteA.DTOModelA = _deleteStep1.Execute(vmDeleteA.DTOModelA);
 
             return vmDeleteA;
         }

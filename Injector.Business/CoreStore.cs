@@ -1,4 +1,7 @@
-﻿using Injector.Business.Step;
+﻿using Injector.Business.Steps;
+using Injector.Business.Steps.ASteps;
+using Injector.Business.Steps.BSteps;
+using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IStore;
@@ -41,11 +44,23 @@ namespace Injector.Business
 
         #endregion
 
-        public IABaseStep NewCreateAConcreteStep1 => new CreateAConcreteStep1(ABaseCoreBind);
-        public IABaseStep NewCreateAConcreteStep2 => new CreateAConcreteStep2(ABaseCoreBind);
-        public IABaseStep NewCreateAConcreteStep3 => new CreateAConcreteStep3(ABaseCoreBind);
+        #region STEPS A
 
-        public IABaseStep NewDeleteAConcreteStep1 => new DeleteAConcreteStep1(ABaseCoreBind);
-        public IABaseStep NewDeleteAConcreteStep2 => new DeleteAConcreteStep2(ABaseCoreBind);
+        public IABaseStep<ModelA> NewCreateAConcreteStep1 => new CreateAConcreteStep1(ABaseCoreBind);
+        public IABaseStep<ModelA> NewCreateAConcreteStep2 => new CreateAConcreteStep2(ABaseCoreBind);
+        public IABaseStep<ModelA> NewCreateAConcreteStep3 => new CreateAConcreteStep3(ABaseCoreBind);
+
+        public IABaseStep<ModelA> NewDeleteAConcreteStep1 => new DeleteAConcreteStep1(ABaseCoreBind);
+        public IABaseStep<ModelA> NewDeleteAConcreteStep2 => new DeleteAConcreteStep2(ABaseCoreBind);
+
+        #endregion
+
+        #region STEPS B
+
+        public IABaseStep<ModelB> NewCreateBConcreteStep1 => new CreateBConcreteStep1(ABaseCoreBind);
+        public IABaseStep<ModelB> NewCreateBConcreteStep2 => new CreateBConcreteStep2(ABaseCoreBind);
+        public IABaseStep<ModelB> NewCreateBConcreteStep3 => new CreateBConcreteStep3(ABaseCoreBind);
+
+        #endregion
     }
 }

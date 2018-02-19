@@ -1,9 +1,9 @@
 ﻿using Injector.Common.DTOModel;
 using Injector.Common.IBind;
 
-namespace Injector.Business.Step
+namespace Injector.Business.Steps.ASteps
 {
-    public class CreateAConcreteStep2 : ABaseStep
+    public class CreateAConcreteStep2 : ABaseStepA
     {
         #region CONSTRUCTOR
 
@@ -13,7 +13,7 @@ namespace Injector.Business.Step
 
         #endregion
 
-        public override ModelA HandleStep(ModelA modelA)
+        public override ModelA Execute(ModelA modelA)
         {
             // Read
 
@@ -21,9 +21,9 @@ namespace Injector.Business.Step
 
             // Write
 
-            if (Successor != null)
+            if (NextStep != null)
             {
-                Successor.HandleStep(modelA);
+                NextStep.Execute(modelA);
             }
 
             return modelA;

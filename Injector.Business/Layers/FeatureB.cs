@@ -1,20 +1,21 @@
 ﻿using System;
+using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IFeature;
 using Injector.Common.IStore;
 using Injector.Common.IVModel;
 
-namespace Injector.Business.Layer
+namespace Injector.Business.Layers
 {
     public class FeatureB : ABaseFeature, IFeatureB
     {
-        private IABaseStep _createStep1;
-        private IABaseStep _createStep2;
-        private IABaseStep _createStep3;
+        private IABaseStep<ModelB> _createStep1;
+        private IABaseStep<ModelB> _createStep2;
+        private IABaseStep<ModelB> _createStep3;
 
-        private IABaseStep _deleteStep1;
-        private IABaseStep _deleteStep2;
+        private IABaseStep<ModelB> _deleteStep1;
+        private IABaseStep<ModelB> _deleteStep2;
 
         private static IFeatureB FeatureBInstance { get; set; }
 
@@ -76,7 +77,15 @@ namespace Injector.Business.Layer
 
         public bool CreatePost(IVMCreateB vmCreateB)
         {
+            _createStep1 = ABaseStore.NewCreateBConcreteStep1;
+            _createStep2 = ABaseStore.NewCreateBConcreteStep2;
+            _createStep3 = ABaseStore.NewCreateBConcreteStep3;
+
             // chain definition
+            _createStep1.SetNextStep(_createStep2);
+            _createStep2.SetNextStep(_createStep3);
+
+            _createStep1.Execute(vmCreateB.DTOModelB);
 
             if (vmCreateB.DTOModelB.Id != Guid.Empty)
             {

@@ -2,7 +2,7 @@ using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IStore;
 
-namespace Injector.Business.Layer
+namespace Injector.Business.Layers
 {
     public class ABaseFeature : IABaseFeature
     {

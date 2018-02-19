@@ -1,13 +1,12 @@
-﻿using Injector.Common.DTOModel;
-using Injector.Common.IBind;
+﻿using Injector.Common.IBind;
 
 namespace Injector.Common.IABase
 {
-    public interface IABaseStep
+    public interface IABaseStep<T>
     {
-        ICoreBind ABaseBond { get; set; }
+        ICoreBind ABaseBind { get; set; }
 
-        void SetSuccessor(IABaseStep step);
-        ModelA HandleStep(ModelA modelA);
+        void SetNextStep(IABaseStep<T> step);
+        T Execute(T modelA);
     }
 }
