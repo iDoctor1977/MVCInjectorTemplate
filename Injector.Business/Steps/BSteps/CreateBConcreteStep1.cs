@@ -1,9 +1,9 @@
-using Injector.Common.DTOModel;
 using Injector.Common.IBind;
+using Injector.Common.IVModel;
 
 namespace Injector.Business.Steps.BSteps
 {
-    public class CreateBConcreteStep1 : ABaseStepB
+    public class CreateBConcreteStep1 : ABaseStepB<IVMCreateB>
     {
         #region CONSTRUCTOR
 
@@ -13,23 +13,23 @@ namespace Injector.Business.Steps.BSteps
 
         #endregion
 
-        public override ModelB Execute(ModelB modelB)
+        public override IVMCreateB Execute(IVMCreateB viewModelB)
         {
             // Read
-            modelB = ABaseBind.BindDataSupplier.GetRepositoryB.ReadEntityById(modelB.Id);
+            viewModelB.DTOModelB = ABaseBind.BindDataSupplier.GetRepositoryB.ReadEntityById(viewModelB.DTOModelB.Id);
 
             // Do
-            modelB.Email = "pippo@gmail.com";
+            viewModelB.DTOModelB.Email = "pippo@gmail.com";
 
             // Write
-            ABaseBind.BindDataSupplier.GetRepositoryB.CreateEntity(modelB);
+            ABaseBind.BindDataSupplier.GetRepositoryB.CreateEntity(viewModelB.DTOModelB);
 
             if (NextStep != null)
             {
-                modelB = NextStep.Execute(modelB);
+                viewModelB = NextStep.Execute(viewModelB);
             }
 
-            return modelB;
+            return viewModelB;
         }
     }
 }

@@ -6,6 +6,7 @@ using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IEntity;
 using Injector.Common.IFeature;
+using Injector.Common.ILogic;
 using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
@@ -152,6 +153,7 @@ namespace InjectorUnitTest.Test
     {
         public IFeatureA GetFeatureA { get; }
         public IFeatureB GetFeatureB { get; }
+        public ILogicA GetLogicA { get; }
     }
 
     public class ABaseDataSupplierMock : IABaseDataSupplier

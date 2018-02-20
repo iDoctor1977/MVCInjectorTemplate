@@ -4,10 +4,10 @@ using Injector.Common.IBind;
 
 namespace Injector.Business.Steps.BSteps
 {
-    public abstract class ABaseStepB : IABaseStep<ModelB>
+    public abstract class ABaseStepB<T> : IABaseStep<T>
     {
         private ICoreBind _coreBind;
-        protected IABaseStep<ModelB> NextStep { get; private set; }
+        protected IABaseStep<T> NextStep { get; private set; }
 
         #region CONSTRUCTOR
 
@@ -26,11 +26,11 @@ namespace Injector.Business.Steps.BSteps
             set { _coreBind = value; }
         }
 
-        public void SetNextStep(IABaseStep<ModelB> nextStep)
+        public void SetNextStep(IABaseStep<T> nextStep)
         {
             NextStep = nextStep;
         }
 
-        public abstract ModelB Execute(ModelB modelA);
+        public abstract T Execute(T viewModelB);
     }
 }

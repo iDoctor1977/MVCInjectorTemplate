@@ -63,6 +63,7 @@
     <Compile Include="IEntity\IEntityC.cs" />
     <Compile Include="IFeature\IFeatureB.cs" />
     <Compile Include="IFeature\IFeatureA.cs" />
+    <Compile Include="ILogic\ILogicA.cs" />
     <Compile Include="IStore\IWebStore.cs" />
     <Compile Include="IVModel\IVMDeleteB.cs" />
     <Compile Include="IVModel\IVMDetailsB.cs" />

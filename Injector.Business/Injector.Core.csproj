@@ -44,6 +44,8 @@
     <Compile Include="ABaseCoreSupplier.cs" />
     <Compile Include="CoreBind.cs" />
     <Compile Include="Layers\ABaseFeature.cs" />
+    <Compile Include="Layers\ABaseLogic.cs" />
+    <Compile Include="Layers\LogicA.cs" />
     <Compile Include="Steps\BSteps\ABaseStepB.cs" />
     <Compile Include="Steps\ASteps\ABaseStepA.cs" />
     <Compile Include="Steps\BSteps\CreateBConcreteStep2.cs" />

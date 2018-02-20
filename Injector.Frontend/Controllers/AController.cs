@@ -35,6 +35,10 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
+                    // ex. with LOGIC
+                    ABaseStore.StoreCoreSupplier.GetLogicA.CreatePost(vmCreateA);
+
+                    // ex. with FEATURE
                     ABaseStore.StoreCoreSupplier.GetFeatureA.CreatePost(vmCreateA);
                 }
                 catch (Exception exception)
@@ -51,6 +55,11 @@ namespace Injector.Frontend.Controllers
         {
             VMDeleteA vmDeleteA = ABaseStore.NewVMDeleteA as VMDeleteA;
             vmDeleteA.DTOModelA.Id = idA;
+
+            // ex. with LOGIC
+            vmDeleteA = ABaseStore.StoreCoreSupplier.GetLogicA.DeleteGet(vmDeleteA) as VMDeleteA;
+
+            // ex. with FEATURE
             vmDeleteA = ABaseStore.StoreCoreSupplier.GetFeatureA.DeleteGet(vmDeleteA) as VMDeleteA;
 
             return View(vmDeleteA);
@@ -64,6 +73,10 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
+                    // ex. with LOGIC
+                    ABaseStore.StoreCoreSupplier.GetLogicA.DeletePost(vmDeleteA);
+
+                    // ex. with FEATURE
                     ABaseStore.StoreCoreSupplier.GetFeatureA.DeletePost(vmDeleteA);
                 }
                 catch (Exception exception)
@@ -80,6 +93,11 @@ namespace Injector.Frontend.Controllers
         {
             VMEditA vmEditA = ABaseStore.NewVMEditA as VMEditA;
             vmEditA.DTOModelA.Id = idA;
+
+            // ex. with LOGIC
+            vmEditA = ABaseStore.StoreCoreSupplier.GetLogicA.EditGet(vmEditA) as VMEditA;
+
+            // ex. with FEATURE
             vmEditA = ABaseStore.StoreCoreSupplier.GetFeatureA.EditGet(vmEditA) as VMEditA;
 
             return View(vmEditA);
@@ -93,6 +111,10 @@ namespace Injector.Frontend.Controllers
             {
                 try
                 {
+                    // ex. with LOGIC
+                    ABaseStore.StoreCoreSupplier.GetLogicA.EditPost(vmEditA);
+
+                    // ex. with FEATURE
                     ABaseStore.StoreCoreSupplier.GetFeatureA.EditPost(vmEditA);
                 }
                 catch (Exception exception)
@@ -109,6 +131,11 @@ namespace Injector.Frontend.Controllers
         {
             VMDetailsA vmDetailsA = ABaseStore.NewVMDetailsA as VMDetailsA;
             vmDetailsA.DTOModelA.Id = idA;
+
+            // ex. with LOGIC
+            vmDetailsA = ABaseStore.StoreCoreSupplier.GetLogicA.DetailsGet(vmDetailsA) as VMDetailsA;
+
+            // ex. with FEATURE
             vmDetailsA = ABaseStore.StoreCoreSupplier.GetFeatureA.DetailsGet(vmDetailsA) as VMDetailsA;
 
             return View(vmDetailsA);
@@ -118,6 +145,11 @@ namespace Injector.Frontend.Controllers
         public ActionResult List()
         {
             VMListA vmListA = ABaseStore.NewVMListA as VMListA;
+
+            // ex. with FEATURE
+            vmListA = ABaseStore.StoreCoreSupplier.GetLogicA.ListGet(vmListA) as VMListA;
+
+            // ex. with FEATURE
             vmListA = ABaseStore.StoreCoreSupplier.GetFeatureA.ListGet(vmListA) as VMListA;
 
             return View(vmListA);
