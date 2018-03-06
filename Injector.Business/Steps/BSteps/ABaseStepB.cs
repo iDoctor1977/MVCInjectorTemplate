@@ -1,6 +1,7 @@
 ﻿using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
+using Injector.Common.IVModel;
 
 namespace Injector.Business.Steps.BSteps
 {

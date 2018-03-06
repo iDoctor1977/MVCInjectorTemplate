@@ -13,23 +13,23 @@ namespace Injector.Business.Steps.BSteps
 
         #endregion
 
-        public override IVMCreateB Execute(IVMCreateB viewModelB)
+        public override IVMCreateB Execute(IVMCreateB vmCreateB)
         {
             // Read
-            viewModelB.DTOModelB = ABaseBind.BindDataSupplier.GetRepositoryB.ReadEntityById(viewModelB.DTOModelB.Id);
+            vmCreateB.DTOModelB = ABaseBind.BindDataSupplier.GetRepositoryB.ReadEntityById(vmCreateB.DTOModelB.Id);
 
             // Do
-            viewModelB.DTOModelB.Email = "pippo@gmail.com";
+            vmCreateB.DTOModelB.Email = "pippo@gmail.com";
 
             // Write
-            ABaseBind.BindDataSupplier.GetRepositoryB.CreateEntity(viewModelB.DTOModelB);
+            ABaseBind.BindDataSupplier.GetRepositoryB.CreateEntity(vmCreateB.DTOModelB);
 
             if (NextStep != null)
             {
-                viewModelB = NextStep.Execute(viewModelB);
+                vmCreateB = NextStep.Execute(vmCreateB);
             }
 
-            return viewModelB;
+            return vmCreateB;
         }
     }
 }

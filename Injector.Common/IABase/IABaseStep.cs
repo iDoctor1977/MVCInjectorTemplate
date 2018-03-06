@@ -1,4 +1,5 @@
 ﻿using Injector.Common.IBind;
+using Injector.Common.IVModel;
 
 namespace Injector.Common.IABase
 {
@@ -7,6 +8,6 @@ namespace Injector.Common.IABase
         ICoreBind ABaseBind { get; set; }
 
         void SetNextStep(IABaseStep<T> step);
-        T Execute(T modelA);
+        T Execute(T vmCreateB);
     }
 }
