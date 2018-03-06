@@ -6,7 +6,6 @@ using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IEntity;
 using Injector.Common.IFeature;
-using Injector.Common.IModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
@@ -102,7 +101,7 @@ namespace InjectorUnitTest.Test
 
             // ASSERT
             Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsInstanceOf<IModelA>((result as ViewResult).Model);
+            Assert.IsInstanceOf<IEntityA>((result as ViewResult).Model);
             Assert.AreEqual(vmDetailsA, ((VMCreateA)(result as ViewResult).Model));
 
             //OperatorA operatorA = new OperatorA(new DataSupplierMock());
@@ -156,7 +155,8 @@ namespace InjectorUnitTest.Test
 
     public class ABaseDataSupplierMock : IABaseDataSupplier
     {
-        public IDataStore SupplierDataStore { get; set; }
+        public IDataBind ABaseBind { get; set; }
+        public IDataStore ABaseStore { get; set; }
     }
 
     public class DataSupplierMock : IDataSupplier
@@ -164,6 +164,10 @@ namespace InjectorUnitTest.Test
         public IRepositoryA GetRepositoryA => new RepositoryAMock();
 
         public IRepositoryB GetRepositoryB { get; }
+        public void Commit()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ABaseRepositoryMock : IABaseRepository
@@ -236,5 +240,8 @@ namespace InjectorUnitTest.Test
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public bool IsDeleted { get; set; }
+        public string DeleteBy { get; set; }
+        public DateTime? DeleteDate { get; set; }
     }
 }

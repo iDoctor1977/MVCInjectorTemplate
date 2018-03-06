@@ -89,6 +89,8 @@ namespace Injector.Business.Layers
 
             if (vmCreateA.DTOModelA.Id != Guid.Empty)
             {
+                ABaseBind.BindDataSupplier.Commit();
+
                 return true;
             }
 

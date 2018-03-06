@@ -1,5 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 using Injector.Common.IDbContext;
+using Injector.Common.IEntity;
 
 namespace Injector.Data.ADOModel
 {
@@ -26,6 +30,23 @@ namespace Injector.Data.ADOModel
             //modelBuilder.Entity<EntityB>().ToTable("EntitiesB");
             base.OnModelCreating(modelBuilder);
         }
+
+        #region SOFT DELETE METHOD
+
+        public override int SaveChanges()
+        {
+            foreach (DbEntityEntry entry in ChangeTracker.Entries<ISoftDelete>().Where(es => es.State == EntityState.Deleted))
+            {
+                ((ISoftDelete)entry.Entity).IsDeleted = true;
+                ((ISoftDelete)entry.Entity).DeleteDate = DateTime.Now;
+
+                entry.State = EntityState.Modified;
+            }
+
+            return base.SaveChanges();
+        }
+
+        #endregion
     }
 
     public class DebugInitializer : DropCreateDatabaseAlways<ProjectDbContext>

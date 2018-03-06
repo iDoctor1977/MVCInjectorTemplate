@@ -1,4 +1,4 @@
-﻿using Injector.Common.IModel;
+﻿using Injector.Common.IEntity;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 
@@ -40,12 +40,12 @@ namespace Injector.Common
 
         #endregion
 
-        public IModelA GetModelA()
+        public IEntityA GetModelA()
         {
             return SupplierSharingStore.NewModelA;
         }
 
-        public IModelB GetModelB()
+        public IEntityB GetModelB()
         {
             return SupplierSharingStore.NewModelB;
         }

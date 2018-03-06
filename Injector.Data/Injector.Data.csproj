@@ -54,6 +54,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -71,6 +72,7 @@
     <Compile Include="ADOModel\ProjectDbContext.cs" />
     <Compile Include="ADOModel\EntityB.cs" />
     <Compile Include="ADOModel\EntityA.cs" />
+    <Compile Include="DataBind.cs" />
     <Compile Include="DataStore.cs" />
     <Compile Include="Layer\ABaseRepository.cs" />
     <Compile Include="Layer\RepositoryB.cs" />

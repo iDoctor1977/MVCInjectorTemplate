@@ -1,5 +1,5 @@
 ﻿using Injector.Common.DTOModel;
-using Injector.Common.IModel;
+using Injector.Common.IEntity;
 using Injector.Common.IStore;
 
 namespace Injector.Common
@@ -30,7 +30,7 @@ namespace Injector.Common
 
         #endregion
 
-        public IModelA NewModelA => new ModelA();
-        public IModelB NewModelB => new ModelB();
+        public IEntityA NewModelA => new ModelA();
+        public IEntityB NewModelB => new ModelB();
     }
 }

@@ -32,11 +32,6 @@ namespace Injector.Data.Layer
             return ABaseStore.StoreProjectDbContext as ProjectDbContext;
         }
 
-        protected void Commit()
-        {
-            ABaseDbContext().SaveChanges();
-        }
-
         #region CONVERTER A
 
         public ModelA ConvertAEntityToModel(IEntityA entityA)

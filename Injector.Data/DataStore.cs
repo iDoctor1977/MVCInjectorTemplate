@@ -1,4 +1,5 @@
 ﻿using Injector.Common;
+using Injector.Common.IBind;
 using Injector.Common.IDbContext;
 using Injector.Common.IEntity;
 using Injector.Common.IStore;
@@ -9,6 +10,7 @@ namespace Injector.Data
 {
     internal class DataStore : IDataStore
     {
+        private IDataBind _dataBind;
         private string _connectionString;
         private IProjectDbContext _projectDbContext;
         private ISharingSupplier _sharingSupplier;
@@ -17,9 +19,25 @@ namespace Injector.Data
 
         private DataStore() { }
 
+        private DataStore(IDataBind dataBind)
+        {
+            StoreDataBind = dataBind;
+        }
+
         private DataStore(string connectionString)
         {
             StoreConnectionStringName = connectionString;
+        }
+
+        private DataStore(string connectionString, IDataBind dataBind)
+        {
+            StoreConnectionStringName = connectionString;
+            StoreDataBind = dataBind;
+        }
+
+        private DataStore(IProjectDbContext dbContext)
+        {
+            StoreProjectDbContext = dbContext;
         }
 
         private DataStore(IProjectDbContext dbContext, string connectionString)
@@ -28,9 +46,28 @@ namespace Injector.Data
             StoreConnectionStringName = connectionString;
         }
 
+        private DataStore(IProjectDbContext dbContext, IDataBind dataBind)
+        {
+            StoreProjectDbContext = dbContext;
+            StoreDataBind = dataBind;
+        }
+
+        private DataStore(IProjectDbContext dbContext, IDataBind dataBind, string connectionString)
+        {
+            StoreProjectDbContext = dbContext;
+            StoreDataBind = dataBind;
+            StoreConnectionStringName = connectionString;
+        }
+
         private DataStore(ISharingSupplier commonSupplier)
         {
             StoreSharingSupplier = commonSupplier;
+        }
+
+        private DataStore(ISharingSupplier commonSupplier, IDataBind dataBind)
+        {
+            StoreSharingSupplier = commonSupplier;
+            StoreDataBind = dataBind;
         }
 
         private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext)
@@ -39,11 +76,39 @@ namespace Injector.Data
             StoreProjectDbContext = dbContext;
         }
 
+        private DataStore(ISharingSupplier commonSupplier, string connectionString)
+        {
+            StoreSharingSupplier = commonSupplier;
+            StoreConnectionStringName = connectionString;
+        }
+
+        private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext, IDataBind dataBind)
+        {
+            StoreSharingSupplier = commonSupplier;
+            StoreProjectDbContext = dbContext;
+            StoreDataBind = dataBind;
+        }
+
         private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext, string connectionString)
         {
             StoreSharingSupplier = commonSupplier;
             StoreProjectDbContext = dbContext;
             StoreConnectionStringName = connectionString;
+        }
+
+        private DataStore(ISharingSupplier commonSupplier, IDataBind dataBind, string connectionString)
+        {
+            StoreSharingSupplier = commonSupplier;
+            StoreDataBind = dataBind;
+            StoreConnectionStringName = connectionString;
+        }
+
+        private DataStore(ISharingSupplier commonSupplier, IProjectDbContext dbContext, string connectionString, IDataBind dataBind)
+        {
+            StoreSharingSupplier = commonSupplier;
+            StoreProjectDbContext = dbContext;
+            StoreConnectionStringName = connectionString;
+            StoreDataBind = dataBind;
         }
 
         #endregion
@@ -62,11 +127,51 @@ namespace Injector.Data
             return DataStoreInstance;
         }
 
+        public static IDataStore Instance(IDataBind dataBind)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(dataBind);
+            }
+
+            return DataStoreInstance;
+        }
+
         public static IDataStore Instance(string connectionString)
         {
             if (DataStoreInstance == null)
             {
                 DataStoreInstance = new DataStore(connectionString);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(string connectionString, IDataBind dataBind)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(connectionString, dataBind);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(IProjectDbContext dbContext)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(dbContext);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(IProjectDbContext dbContext, IDataBind dataBind)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(dbContext, dataBind);
             }
 
             return DataStoreInstance;
@@ -82,11 +187,31 @@ namespace Injector.Data
             return DataStoreInstance;
         }
 
+        public static IDataStore Instance(IProjectDbContext dbContext, IDataBind dataBind, string connectionString)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(dbContext, dataBind, connectionString);
+            }
+
+            return DataStoreInstance;
+        }
+
         public static IDataStore Instance(ISharingSupplier commonSupplier)
         {
             if (DataStoreInstance == null)
             {
                 DataStoreInstance = new DataStore(commonSupplier);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(ISharingSupplier commonSupplier, IDataBind dataBind)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(commonSupplier, dataBind);
             }
 
             return DataStoreInstance;
@@ -102,6 +227,26 @@ namespace Injector.Data
             return DataStoreInstance;
         }
 
+        public static IDataStore Instance(ISharingSupplier commonSupplier, string connectionString)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(commonSupplier, connectionString);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(ISharingSupplier commonSupplier, IDataBind dataBind, string connectionString)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(commonSupplier, dataBind, connectionString);
+            }
+
+            return DataStoreInstance;
+        }
+
         public static IDataStore Instance(ISharingSupplier commonSupplier, IProjectDbContext dbContext, string connectionString)
         {
             if (DataStoreInstance == null)
@@ -112,7 +257,33 @@ namespace Injector.Data
             return DataStoreInstance;
         }
 
+        public static IDataStore Instance(ISharingSupplier commonSupplier, IProjectDbContext dbContext, IDataBind dataBind)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(commonSupplier, dbContext, dataBind);
+            }
+
+            return DataStoreInstance;
+        }
+
+        public static IDataStore Instance(ISharingSupplier commonSupplier, IProjectDbContext dbContext, IDataBind dataBind, string connectionString)
+        {
+            if (DataStoreInstance == null)
+            {
+                DataStoreInstance = new DataStore(commonSupplier, dbContext, connectionString, dataBind);
+            }
+
+            return DataStoreInstance;
+        }
+
         #endregion
+
+        public IDataBind StoreDataBind
+        {
+            get { return _dataBind ?? (_dataBind = DataBind.Instance()); }
+            set { _dataBind = value; }
+        }
 
         public string StoreConnectionStringName
         {

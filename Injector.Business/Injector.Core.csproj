@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABaseCoreStore.cs" />
     <Compile Include="ABaseCoreSupplier.cs" />
     <Compile Include="CoreBind.cs" />
     <Compile Include="Layers\ABaseFeature.cs" />

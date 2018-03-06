@@ -6,5 +6,7 @@ namespace Injector.Common.ISupplier
     {
         IRepositoryA GetRepositoryA { get; }
         IRepositoryB GetRepositoryB { get; }
+
+        void Commit();
     }
 }

@@ -1,10 +1,13 @@
 using Injector.Common.DTOModel;
 using Injector.Common.IABase;
+using Injector.Common.IBind;
 
 namespace Injector.Common.IStore
 {
     public interface ICoreStore
     {
+        ICoreBind StoreBind { get; set; }
+
         #region FEATURE STEPS A
 
         IABaseStep<ModelA> NewCreateAConcreteStep1 { get; }

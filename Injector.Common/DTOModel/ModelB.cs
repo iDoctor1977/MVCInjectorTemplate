@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Injector.Common.IModel;
+using Injector.Common.IEntity;
 
 namespace Injector.Common.DTOModel
 {
-    public class ModelB : IModelB
+    public class ModelB : IEntityB
     {
         public Guid Id { get; set; }
 
@@ -19,5 +19,14 @@ namespace Injector.Common.DTOModel
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [ScaffoldColumn(false)]
+        public bool IsDeleted { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string DeleteBy { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime? DeleteDate { get; set; }
     }
 }

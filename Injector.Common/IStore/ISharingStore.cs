@@ -1,10 +1,10 @@
-﻿using Injector.Common.IModel;
+﻿using Injector.Common.IEntity;
 
 namespace Injector.Common.IStore
 {
     public interface ISharingStore
     {
-        IModelA NewModelA { get; }
-        IModelB NewModelB { get; }
+        IEntityA NewModelA { get; }
+        IEntityB NewModelB { get; }
     }
 }

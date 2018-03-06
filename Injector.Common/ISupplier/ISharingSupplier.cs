@@ -1,10 +1,10 @@
-﻿using Injector.Common.IModel;
+﻿using Injector.Common.IEntity;
 
 namespace Injector.Common.ISupplier
 {
     public interface ISharingSupplier
     {
-        IModelA GetModelA();
-        IModelB GetModelB();
+        IEntityA GetModelA();
+        IEntityB GetModelB();
     }
 }

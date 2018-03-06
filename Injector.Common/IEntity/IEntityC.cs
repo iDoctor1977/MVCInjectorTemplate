@@ -2,7 +2,7 @@
 
 namespace Injector.Common.IEntity
 {
-    public interface IEntityC
+    public interface IEntityC : ISoftDelete
     {
         Guid Id { get; set; }
         string Address { get; set; }

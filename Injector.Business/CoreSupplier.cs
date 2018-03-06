@@ -1,4 +1,5 @@
 ﻿using Injector.Business.Layers;
+using Injector.Common.IBind;
 using Injector.Common.IFeature;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
@@ -15,6 +16,10 @@ namespace Injector.Business
         public CoreSupplier() { }
 
         public CoreSupplier(ICoreStore coreStore) : base(coreStore) { }
+
+        public CoreSupplier(ICoreBind coreBind) : base(coreBind) { }
+
+        public CoreSupplier(ICoreStore coreStore, ICoreBind coreBind) : base(coreStore, coreBind) { }
 
         #endregion
 
@@ -37,6 +42,26 @@ namespace Injector.Business
             if (CoreSupplierInstance == null)
             {
                 CoreSupplierInstance = new CoreSupplier(coreStore);
+            }
+
+            return CoreSupplierInstance;
+        }
+
+        public static ICoreSupplier Instance(ICoreBind coreBind)
+        {
+            if (CoreSupplierInstance == null)
+            {
+                CoreSupplierInstance = new CoreSupplier(coreBind);
+            }
+
+            return CoreSupplierInstance;
+        }
+
+        public static ICoreSupplier Instance(ICoreStore coreStore, ICoreBind coreBind)
+        {
+            if (CoreSupplierInstance == null)
+            {
+                CoreSupplierInstance = new CoreSupplier(coreStore, coreBind);
             }
 
             return CoreSupplierInstance;

@@ -17,6 +17,9 @@ namespace Injector.Data.ADOModel
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public bool IsDeleted { get; set; }
+        public string DeleteBy { get; set; }
+        public DateTime? DeleteDate { get; set; }
 
         // collection navigation property
         public virtual ICollection<IEntityC> colEntitiesC { get; set; }

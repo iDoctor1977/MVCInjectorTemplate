@@ -1,9 +1,11 @@
-﻿using Injector.Common.IStore;
+﻿using Injector.Common.IBind;
+using Injector.Common.IStore;
 
 namespace Injector.Common.IABase
 {
     public interface IABaseDataSupplier
     {
-        IDataStore SupplierDataStore { get; set; }
+        IDataBind ABaseBind { get; set; }
+        IDataStore ABaseStore { get; set; }
     }
 }

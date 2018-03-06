@@ -55,7 +55,8 @@ namespace Injector.Data.Layer
                 if (entityB != null)
                 {
                     entityB.Id = Guid.NewGuid();
-                    Commit();
+
+                    ABaseDbContext().EntitiesB.Add(entityB);
 
                     return entityB.Id;
                 }
@@ -78,7 +79,6 @@ namespace Injector.Data.Layer
                 {
                     entityB.Username = modelB.Username;
                     entityB.Email = modelB.Email;
-                    Commit();
 
                     return true;
                 }
@@ -158,7 +158,6 @@ namespace Injector.Data.Layer
                 if (entityB != null)
                 {
                     ABaseDbContext().EntitiesB.Remove(entityB);
-                    Commit();
 
                     return true;
                 }

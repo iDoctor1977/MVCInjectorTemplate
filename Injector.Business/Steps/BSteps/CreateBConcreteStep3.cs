@@ -1,5 +1,4 @@
-﻿using Injector.Business.Steps.ASteps;
-using Injector.Common.DTOModel;
+﻿using Injector.Common.DTOModel;
 using Injector.Common.IBind;
 
 namespace Injector.Business.Steps.BSteps
