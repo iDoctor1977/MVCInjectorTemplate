@@ -1,5 +1,4 @@
 ﻿using System;
-using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IFeature;
@@ -10,12 +9,9 @@ namespace Injector.Business.Layers
 {
     public class FeatureB : ABaseFeature, IFeatureB
     {
-        private IABaseStep<ModelB> _createStep1;
-        private IABaseStep<ModelB> _createStep2;
-        private IABaseStep<ModelB> _createStep3;
-
-        private IABaseStep<ModelB> _deleteStep1;
-        private IABaseStep<ModelB> _deleteStep2;
+        private IABaseStep<IVMCreateB> _createStep1;
+        private IABaseStep<IVMCreateB> _createStep2;
+        private IABaseStep<IVMCreateB> _createStep3;
 
         private static IFeatureB FeatureBInstance { get; set; }
 
@@ -85,7 +81,7 @@ namespace Injector.Business.Layers
             _createStep1.SetNextStep(_createStep2);
             _createStep2.SetNextStep(_createStep3);
 
-            _createStep1.Execute(vmCreateB.DTOModelB);
+            _createStep1.Execute(vmCreateB);
 
             if (vmCreateB.DTOModelB.Id != Guid.Empty)
             {

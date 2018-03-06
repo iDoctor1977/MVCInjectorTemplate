@@ -1,6 +1,7 @@
 ﻿using Injector.Business.Layers;
 using Injector.Common.IBind;
 using Injector.Common.IFeature;
+using Injector.Common.ILogic;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 
@@ -10,6 +11,8 @@ namespace Injector.Business
     {
         private IFeatureA _featureA;
         private IFeatureB _featureB;
+
+        private ILogicA _logicA;
 
         #region CONSTRUCTOR
 
@@ -73,6 +76,12 @@ namespace Injector.Business
 
         public IFeatureA GetFeatureA => _featureA ?? (_featureA = FeatureA.Instance(ABaseStore, ABaseBind)); // new FeatureA()
         public IFeatureB GetFeatureB => _featureB ?? (_featureB = FeatureB.Instance(ABaseStore, ABaseBind)); // new FeatureB()
+
+        #endregion
+
+        #region LOGICS
+
+        public ILogicA GetLogicA => _logicA ?? (_logicA = LogicA.Instance(ABaseStore, ABaseBind)); // new LogicC()
 
         #endregion
     }

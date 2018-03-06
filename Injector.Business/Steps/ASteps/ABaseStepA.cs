@@ -1,13 +1,12 @@
-﻿using Injector.Common.DTOModel;
-using Injector.Common.IABase;
+﻿using Injector.Common.IABase;
 using Injector.Common.IBind;
 
 namespace Injector.Business.Steps.ASteps
 {
-    public abstract class ABaseStepA : IABaseStep<ModelA>
+    public abstract class ABaseStepA<T> : IABaseStep<T>
     {
         private ICoreBind _coreBind;
-        protected IABaseStep<ModelA> NextStep { get; private set; }
+        protected IABaseStep<T> NextStep { get; private set; }
 
         #region CONSTRUCTOR
 
@@ -26,11 +25,11 @@ namespace Injector.Business.Steps.ASteps
             set { _coreBind = value; }
         }
 
-        public void SetNextStep(IABaseStep<ModelA> nextStep)
+        public void SetNextStep(IABaseStep<T> nextStep)
         {
             NextStep = nextStep;
         }
 
-        public abstract ModelA Execute(ModelA modelA);
+        public abstract T Execute(T viewModelA);
     }
 }

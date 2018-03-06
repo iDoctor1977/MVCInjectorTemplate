@@ -1,9 +1,10 @@
-﻿using Injector.Common.DTOModel;
+﻿using Injector.Business.Steps.ASteps;
 using Injector.Common.IBind;
+using Injector.Common.IVModel;
 
 namespace Injector.Business.Steps.BSteps
 {
-    public class CreateBConcreteStep2 : ABaseStepB
+    public class CreateBConcreteStep2 : ABaseStepB<IVMCreateB>
     {
         #region CONSTRUCTOR
 
@@ -13,7 +14,7 @@ namespace Injector.Business.Steps.BSteps
 
         #endregion
 
-        public override ModelB Execute(ModelB modelB)
+        public override IVMCreateB Execute(IVMCreateB viewModelB)
         {
             // Read
 
@@ -23,10 +24,10 @@ namespace Injector.Business.Steps.BSteps
 
             if (NextStep != null)
             {
-                NextStep.Execute(modelB);
+                NextStep.Execute(viewModelB);
             }
 
-            return modelB;
+            return viewModelB;
         }
     }
 }

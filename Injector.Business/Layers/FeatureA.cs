@@ -1,5 +1,4 @@
 ﻿using System;
-using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IFeature;
@@ -10,12 +9,12 @@ namespace Injector.Business.Layers
 {
     public class FeatureA : ABaseFeature, IFeatureA
     {
-        private IABaseStep<ModelA> _createStep1;
-        private IABaseStep<ModelA> _createStep2;
-        private IABaseStep<ModelA> _createStep3;
+        private IABaseStep<IVMCreateA> _createStep1;
+        private IABaseStep<IVMCreateA> _createStep2;
+        private IABaseStep<IVMCreateA> _createStep3;
 
-        private IABaseStep<ModelA> _deleteStep1;
-        private IABaseStep<ModelA> _deleteStep2;
+        private IABaseStep<IVMDeleteA> _deleteStep1;
+        private IABaseStep<IVMDeleteA> _deleteStep2;
 
         private static IFeatureA FeatureAInstance { get; set; }
 
@@ -85,7 +84,7 @@ namespace Injector.Business.Layers
             _createStep1.SetNextStep(_createStep2);
             _createStep2.SetNextStep(_createStep3);
 
-            vmCreateA.DTOModelA = _createStep1.Execute(vmCreateA.DTOModelA);
+            vmCreateA = _createStep1.Execute(vmCreateA);
 
             if (vmCreateA.DTOModelA.Id != Guid.Empty)
             {
@@ -104,7 +103,7 @@ namespace Injector.Business.Layers
 
             _deleteStep1.SetNextStep(_deleteStep2);
 
-            vmDeleteA.DTOModelA = _deleteStep1.Execute(vmDeleteA.DTOModelA);
+            vmDeleteA = _deleteStep1.Execute(vmDeleteA);
 
             return vmDeleteA;
         }
