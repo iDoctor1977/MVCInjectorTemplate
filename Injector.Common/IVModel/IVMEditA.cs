@@ -4,6 +4,6 @@ namespace Injector.Common.IVModel
 {
     public interface IVMEditA
     {
-        ModelA DTOModelA { get; set; }
+        EntityA DTOModelA { get; set; }
     }
 }

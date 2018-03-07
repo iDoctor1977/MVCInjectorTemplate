@@ -5,6 +5,6 @@ namespace Injector.Common.IVModel
 {
     public interface IVMListB
     {
-        IEnumerable<ModelB> ListDTOModelB { get; set; }
+        IEnumerable<EntityB> ListDTOModelB { get; set; }
     }
 }

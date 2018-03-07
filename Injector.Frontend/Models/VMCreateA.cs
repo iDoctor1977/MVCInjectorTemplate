@@ -10,6 +10,6 @@ namespace Injector.Frontend.Models
         [DataType(DataType.Text)]
         public string TelNumber { get; set; }
 
-        public ModelA DTOModelA { get; set; }
+        public EntityA DTOModelA { get; set; }
     }
 }

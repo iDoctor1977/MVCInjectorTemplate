@@ -6,6 +6,6 @@ namespace Injector.Frontend.Models
 {
     public class VMListA : IVMListA
     {
-        public IEnumerable<ModelA> ListDTOModelA { get; set; }
+        public IEnumerable<EntityA> ListDTOModelA { get; set; }
     }
 }

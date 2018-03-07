@@ -5,6 +5,6 @@ namespace Injector.Frontend.Models
 {
     public class VMDeleteA : IVMDeleteA
     {
-        public ModelA DTOModelA { get; set; }
+        public EntityA DTOModelA { get; set; }
     }
 }

@@ -4,6 +4,6 @@ namespace Injector.Common.IVModel
 {
     public interface IVMDeleteA
     {
-        ModelA DTOModelA { get; set; }
+        EntityA DTOModelA { get; set; }
     }
 }

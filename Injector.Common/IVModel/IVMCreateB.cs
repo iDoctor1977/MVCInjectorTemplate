@@ -4,6 +4,6 @@ namespace Injector.Common.IVModel
 {
     public interface IVMCreateB
     {
-        ModelB DTOModelB { get; set; }
+        EntityB DTOModelB { get; set; }
     }
 }

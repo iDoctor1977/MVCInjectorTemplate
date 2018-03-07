@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Injector.Common.IEntity;
 
 namespace Injector.Common.DTOModel
 {
-    public class ModelB : IEntityB
+    public class EntityB : IEntityB
     {
+        [Key]
+        [ScaffoldColumn(false)]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Username obbligatorio.")]
@@ -28,5 +31,10 @@ namespace Injector.Common.DTOModel
 
         [ScaffoldColumn(false)]
         public DateTime? DeleteDate { get; set; }
+
+        [ForeignKey("ExtModelsA")]
+        public Guid IdA { get; set; }
+
+        public virtual EntityA ExtEntitiesA { get; set; }
     }
 }

@@ -6,11 +6,11 @@ namespace Injector.Common.IRepository
 {
     public interface IRepositoryA
     {
-        Guid CreateEntity(ModelA modelA);
-        bool UpdateEntity(ModelA modelA);
-        ModelA ReadEntityById(Guid id);
-        ModelA ReadEntityByName(string name);
-        IEnumerable<ModelA> ReadEntities();
-        bool DeleteEntity(ModelA modelA);
+        Guid CreateEntity(EntityA entityA);
+        bool UpdateEntity(EntityA entityA);
+        EntityA ReadEntityById(Guid id);
+        EntityA ReadEntityByName(string name);
+        IEnumerable<EntityA> ReadEntities();
+        bool DeleteEntity(EntityA entityA);
     }
 }

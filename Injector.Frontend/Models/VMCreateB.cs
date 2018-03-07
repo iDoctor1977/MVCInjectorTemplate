@@ -10,6 +10,6 @@ namespace Injector.Frontend.Models
         [DataType(DataType.DateTime)]
         public string Birth { get; set; }
 
-        public ModelB DTOModelB { get; set; }
+        public EntityB DTOModelB { get; set; }
     }
 }

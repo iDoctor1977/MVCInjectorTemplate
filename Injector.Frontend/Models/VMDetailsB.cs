@@ -5,6 +5,6 @@ namespace Injector.Frontend.Models
 {
     public class VMDetailsB : IVMDetailsB
     {
-        public ModelB DTOModelB { get; set; }
+        public EntityB DTOModelB { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace InjectorUnitTest.Test
                 Surname = "Poppi"
             };
 
-            ModelA modelA = new ModelA
+            EntityA modelA = new EntityA
             {
                 Id = Guid.NewGuid(),
                 Name = "Pippo",
@@ -47,7 +47,7 @@ namespace InjectorUnitTest.Test
 
             ICoreBind coreBondSubstitute = Substitute.For<CoreBindMock>();
             coreBondSubstitute.BindDataSupplier.Returns(dataSupplierSubstitute);
-            coreBondSubstitute.BindSharingSupplier.GetModelA().Returns(new ModelA());
+            coreBondSubstitute.BindSharingSupplier.GetModelA().Returns(new EntityA());
 
             VMCreateAMock vmCreateAMock = new VMCreateAMock
             {
@@ -70,7 +70,7 @@ namespace InjectorUnitTest.Test
             // ARANGE
             VMDetailsA vmDetailsA = new VMDetailsA
             {
-                DTOModelA = new ModelA
+                DTOModelA = new EntityA
                 {
                     Id = Guid.NewGuid(),
                     Name = "Pippo",
@@ -134,12 +134,12 @@ namespace InjectorUnitTest.Test
 
     public class VMDetailsAMock : IVMDetailsA
     {
-        public ModelA DTOModelA { get; set; }
+        public EntityA DTOModelA { get; set; }
     }
 
     public class VMCreateAMock : IVMCreateA
     {
-        public ModelA DTOModelA { get; set; }
+        public EntityA DTOModelA { get; set; }
     }
 
     public class ABaseCoreSupplierMock : IABaseCoreSupplier
@@ -176,22 +176,22 @@ namespace InjectorUnitTest.Test
     {
         public IDataStore ABaseStore { get; set; }
 
-        public ModelA ConvertAEntityToModel(IEntityA entityA)
+        public EntityA ConvertAEntityToModel(IEntityA entityA)
         {
             throw new NotImplementedException();
         }
 
-        public IEntityA ConvertAModelToEntity(ModelA modelA)
+        public IEntityA ConvertAModelToEntity(EntityA modelA)
         {
             throw new NotImplementedException();
         }
 
-        public ModelB ConvertBEntityToModel(IEntityB entityB)
+        public EntityB ConvertBEntityToModel(IEntityB entityB)
         {
             throw new NotImplementedException();
         }
 
-        public IEntityB ConvertBModelToEntity(ModelB modelB)
+        public IEntityB ConvertBModelToEntity(EntityB modelB)
         {
             throw new NotImplementedException();
         }
@@ -199,17 +199,17 @@ namespace InjectorUnitTest.Test
 
     public class RepositoryAMock : ABaseRepositoryMock, IRepositoryA
     {
-        public Guid CreateEntity(ModelA modelA)
+        public Guid CreateEntity(EntityA modelA)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateEntity(ModelA modelA)
+        public bool UpdateEntity(EntityA modelA)
         {
             throw new NotImplementedException();
         }
 
-        public ModelA ReadEntityById(Guid id)
+        public EntityA ReadEntityById(Guid id)
         {
             EntityAMock entityA = new EntityAMock
             {
@@ -221,17 +221,17 @@ namespace InjectorUnitTest.Test
             return ConvertAEntityToModel(entityA);
         }
 
-        public ModelA ReadEntityByName(string name)
+        public EntityA ReadEntityByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ModelA> ReadEntities()
+        public IEnumerable<EntityA> ReadEntities()
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteEntity(ModelA modelA)
+        public bool DeleteEntity(EntityA modelA)
         {
             throw new NotImplementedException();
         }

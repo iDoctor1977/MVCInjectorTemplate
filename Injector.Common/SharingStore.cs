@@ -30,7 +30,7 @@ namespace Injector.Common
 
         #endregion
 
-        public IEntityA NewModelA => new ModelA();
-        public IEntityB NewModelB => new ModelB();
+        public IEntityA NewModelA => new EntityA();
+        public IEntityB NewModelB => new EntityB();
     }
 }

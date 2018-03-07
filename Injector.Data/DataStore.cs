@@ -1,7 +1,6 @@
 ﻿using Injector.Common;
 using Injector.Common.IBind;
 using Injector.Common.IDbContext;
-using Injector.Common.IEntity;
 using Injector.Common.IStore;
 using Injector.Common.ISupplier;
 using Injector.Data.ADOModel;
@@ -302,13 +301,5 @@ namespace Injector.Data
             get { return _sharingSupplier ?? (_sharingSupplier = SharingSupplier.Instance()); }
             set { _sharingSupplier = value; }
         }
-
-        #region ENTITIES
-
-        public IEntityA NewEntityA => new EntityA();
-
-        public IEntityB NewEntityB => new EntityB();
-
-        #endregion
     }
 }

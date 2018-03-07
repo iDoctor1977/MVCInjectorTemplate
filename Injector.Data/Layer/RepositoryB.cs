@@ -6,7 +6,6 @@ using System.Reflection;
 using Injector.Common.DTOModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
-using Injector.Data.ADOModel;
 
 namespace Injector.Data.Layer
 {
@@ -46,12 +45,10 @@ namespace Injector.Data.Layer
 
         #endregion
 
-        public Guid CreateEntity(ModelB modelB)
+        public Guid CreateEntity(EntityB entityB)
         {
             try
             {
-                EntityB entityB = ConvertBModelToEntity(modelB) as EntityB;
-
                 if (entityB != null)
                 {
                     entityB.Id = Guid.NewGuid();
@@ -69,16 +66,16 @@ namespace Injector.Data.Layer
             return Guid.Empty;
         }
 
-        public bool UpdateEntity(ModelB modelB)
+        public bool UpdateEntity(EntityB entityB)
         {
-            EntityB entityB = ABaseDbContext().EntitiesB.Find(modelB.Id);
+            EntityB original = ABaseDbContext().EntitiesB.Find(entityB.Id);
 
             try
             {
-                if (entityB != null)
+                if (original != null)
                 {
-                    entityB.Username = modelB.Username;
-                    entityB.Email = modelB.Email;
+                    original.Username = entityB.Username;
+                    original.Email = entityB.Email;
 
                     return true;
                 }
@@ -91,15 +88,15 @@ namespace Injector.Data.Layer
             return false;
         }
 
-        public ModelB ReadEntityById(Guid id)
+        public EntityB ReadEntityById(Guid id)
         {
             try
             {
-                EntityB entityB = ABaseDbContext().EntitiesB.Find(id);
+                EntityB original = ABaseDbContext().EntitiesB.Find(id);
 
-                if (entityB != null)
+                if (original != null)
                 {
-                    return ConvertBEntityToModel(entityB);
+                    return original;
                 }
             }
             catch (Exception exception)
@@ -110,15 +107,15 @@ namespace Injector.Data.Layer
             return null;
         }
 
-        public ModelB ReadEntityByUsername(string username)
+        public EntityB ReadEntityByUsername(string username)
         {
             try
             {
-                EntityB entityB = ABaseDbContext().EntitiesB.SingleOrDefault(eB => eB.Username == username);
+                EntityB original = ABaseDbContext().EntitiesB.SingleOrDefault(eB => eB.Username == username);
 
-                if (entityB != null)
+                if (original != null)
                 {
-                    return ConvertBEntityToModel(entityB);
+                    return original;
                 }
             }
             catch (Exception exception)
@@ -129,7 +126,7 @@ namespace Injector.Data.Layer
             return null;
         }
 
-        public IEnumerable<ModelB> ReadEntities()
+        public IEnumerable<EntityB> ReadEntities()
         {
             try
             {
@@ -137,7 +134,7 @@ namespace Injector.Data.Layer
 
                 if (entitiesB.Any())
                 {
-                    return entitiesB.Select(ConvertBEntityToModel);
+                    return entitiesB;
                 }
             }
             catch (Exception exception)
@@ -145,19 +142,18 @@ namespace Injector.Data.Layer
                 throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
             }
 
-            return Enumerable.Empty<ModelB>();
-
+            return Enumerable.Empty<EntityB>();
         }
 
-        public bool DeleteEntity(ModelB modelB)
+        public bool DeleteEntity(EntityB entityB)
         {
             try
             {
-                EntityB entityB = ABaseDbContext().EntitiesB.Find(modelB.Id);
+                EntityB original = ABaseDbContext().EntitiesB.Find(entityB.Id);
 
-                if (entityB != null)
+                if (original != null)
                 {
-                    ABaseDbContext().EntitiesB.Remove(entityB);
+                    ABaseDbContext().EntitiesB.Remove(original);
 
                     return true;
                 }

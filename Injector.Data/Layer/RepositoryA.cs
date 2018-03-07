@@ -6,7 +6,6 @@ using System.Reflection;
 using Injector.Common.DTOModel;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
-using Injector.Data.ADOModel;
 
 namespace Injector.Data.Layer
 {
@@ -46,12 +45,10 @@ namespace Injector.Data.Layer
 
         #endregion
 
-        public Guid CreateEntity(ModelA modelA)
+        public Guid CreateEntity(EntityA entityA)
         {
             try
             {
-                EntityA entityA = ConvertAModelToEntity(modelA) as EntityA;
-
                 if (entityA != null)
                 {
                     entityA.Id = Guid.NewGuid();
@@ -69,16 +66,16 @@ namespace Injector.Data.Layer
             return Guid.Empty;
         }
 
-        public bool UpdateEntity(ModelA modelA)
+        public bool UpdateEntity(EntityA entityA)
         {
-            EntityA entityA = ABaseDbContext().EntitiesA.Find(modelA.Id);
+            EntityA original = ABaseDbContext().EntitiesA.Find(entityA.Id);
 
             try
             {
-                if (entityA != null)
+                if (original != null)
                 {
-                    entityA.Name = modelA.Name;
-                    entityA.Surname = modelA.Surname;
+                    original.Name = entityA.Name;
+                    original.Surname = entityA.Surname;
 
                     return true;
                 }
@@ -91,15 +88,15 @@ namespace Injector.Data.Layer
             return false;
         }
 
-        public ModelA ReadEntityById(Guid id)
+        public EntityA ReadEntityById(Guid id)
         {
             try
             {
-                EntityA entityA = ABaseDbContext().EntitiesA.Find(id);
+                EntityA original = ABaseDbContext().EntitiesA.Find(id);
 
-                if (entityA != null)
+                if (original != null)
                 {
-                    return ConvertAEntityToModel(entityA);
+                    return original;
                 }
             }
             catch (Exception exception)
@@ -110,15 +107,15 @@ namespace Injector.Data.Layer
             return null;
         }
 
-        public ModelA ReadEntityByName(string name)
+        public EntityA ReadEntityByName(string name)
         {
             try
             {
-                EntityA entityA = ABaseDbContext().EntitiesA.SingleOrDefault(eA => eA.Name == name);
+                EntityA original = ABaseDbContext().EntitiesA.SingleOrDefault(eA => eA.Name == name);
 
-                if (entityA != null)
+                if (original != null)
                 {
-                    return ConvertAEntityToModel(entityA);
+                    return original;
                 }
             }
             catch (Exception exception)
@@ -129,7 +126,7 @@ namespace Injector.Data.Layer
             return null;
         }
 
-        public IEnumerable<ModelA> ReadEntities()
+        public IEnumerable<EntityA> ReadEntities()
         {
             try
             {
@@ -137,7 +134,7 @@ namespace Injector.Data.Layer
 
                 if (entitiesA.Any())
                 {
-                    return entitiesA.Select(ConvertAEntityToModel);
+                    return entitiesA;
                 }
             }
             catch (Exception exception)
@@ -145,18 +142,18 @@ namespace Injector.Data.Layer
                 throw new DbUpdateException(GetType().FullName + " - " + MethodBase.GetCurrentMethod().Name, exception);
             }
 
-            return Enumerable.Empty<ModelA>();
+            return Enumerable.Empty<EntityA>();
         }
 
-        public bool DeleteEntity(ModelA modelA)
+        public bool DeleteEntity(EntityA entityA)
         {
             try
             {
-                EntityA entityA = ABaseDbContext().EntitiesA.Find(modelA.Id);
+                EntityA original = ABaseDbContext().EntitiesA.Find(entityA.Id);
 
-                if (entityA != null)
+                if (original != null)
                 {
-                    ABaseDbContext().EntitiesA.Remove(entityA);
+                    ABaseDbContext().EntitiesA.Remove(original);
 
                     return true;
                 }

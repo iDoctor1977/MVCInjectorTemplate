@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using Injector.Common.DTOModel;
 using Injector.Common.IDbContext;
 using Injector.Common.IEntity;
 
@@ -19,7 +20,6 @@ namespace Injector.Data.ADOModel
 
         public virtual DbSet<EntityA> EntitiesA { get; set; }
         public virtual DbSet<EntityB> EntitiesB { get; set; }
-        public virtual DbSet<EntityC> EntitiesC { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace Injector.Data.ADOModel
     {
         protected override void Seed(ProjectDbContext context)
         {
-            context.EntitiesA.Add(new EntityA {Name = "Gianni", Surname = "Fantoni"});
+            context.EntitiesA.Add(new EntityA { Name = "Gianni", Surname = "Fantoni"});
             base.Seed(context);
         }
     }
@@ -62,7 +62,7 @@ namespace Injector.Data.ADOModel
     {
         protected override void Seed(ProjectDbContext context)
         {
-            context.EntitiesA.Add(new EntityA {Name = "Gianni", Surname = "Fantoni"});
+            context.EntitiesA.Add(new EntityA { Name = "Gianni", Surname = "Fantoni"});
             base.Seed(context);
         }
     }
