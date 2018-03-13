@@ -1,4 +1,3 @@
-using Injector.Common.DTOModel;
 using Injector.Common.IABase;
 using Injector.Common.IVModel;
 

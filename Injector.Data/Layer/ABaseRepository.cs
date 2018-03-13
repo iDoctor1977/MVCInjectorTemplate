@@ -1,5 +1,4 @@
-﻿using Injector.Common.DTOModel;
-using Injector.Common.IABase;
+﻿using Injector.Common.IABase;
 using Injector.Common.IStore;
 using Injector.Data.ADOModel;
 

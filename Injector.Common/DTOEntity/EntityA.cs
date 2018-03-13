@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Injector.Common.IEntity;
 
-namespace Injector.Common.DTOModel
+namespace Injector.Common.DTOEntity
 {
     public class EntityA : IEntityA
     {

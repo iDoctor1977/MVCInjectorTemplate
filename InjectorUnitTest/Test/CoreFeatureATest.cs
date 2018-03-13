@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Injector.Common.DTOModel;
+using Injector.Common.DTOEntity;
 using Injector.Common.IABase;
 using Injector.Common.IBind;
 using Injector.Common.IEntity;

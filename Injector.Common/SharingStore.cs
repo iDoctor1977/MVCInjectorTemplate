@@ -1,4 +1,4 @@
-﻿using Injector.Common.DTOModel;
+﻿using Injector.Common.DTOEntity;
 using Injector.Common.IEntity;
 using Injector.Common.IStore;
 

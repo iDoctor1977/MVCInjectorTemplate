@@ -77,8 +77,8 @@
     <Compile Include="IStore\ICoreStore.cs" />
     <Compile Include="SharingStore.cs" />
     <Compile Include="SharingSupplier.cs" />
-    <Compile Include="DTOModel\EntityA.cs" />
-    <Compile Include="DTOModel\EntityB.cs" />
+    <Compile Include="DTOEntity\EntityA.cs" />
+    <Compile Include="DTOEntity\EntityB.cs" />
     <Compile Include="IEntity\IEntityB.cs" />
     <Compile Include="IEntity\IEntityA.cs" />
     <Compile Include="IDbContext\IProjectDbContext.cs" />

@@ -1,4 +1,4 @@
-using Injector.Common.DTOModel;
+using Injector.Common.DTOEntity;
 
 namespace Injector.Common.IVModel
 {

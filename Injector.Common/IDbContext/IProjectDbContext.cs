@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Injector.Common.DTOModel;
+using Injector.Common.DTOEntity;
 
 namespace Injector.Common.IDbContext
 {

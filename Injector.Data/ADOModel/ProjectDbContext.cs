@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Injector.Common.DTOModel;
+using Injector.Common.DTOEntity;
 using Injector.Common.IDbContext;
 using Injector.Common.IEntity;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
-using Injector.Common.DTOModel;
+using Injector.Common.DTOEntity;
 using Injector.Common.IRepository;
 using Injector.Common.IStore;
 
